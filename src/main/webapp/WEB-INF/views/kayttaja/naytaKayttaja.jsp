@@ -15,6 +15,7 @@
 	</h1>
 	<p><c:out value="${henkilo.etunimi}" default="-----"/></p>
 	<p><c:out value="${henkilo.sukunimi}" default="-----"/></p>
+	
 	<p><a href="uusi">Takaisin</a>
 </body>
 </html>
