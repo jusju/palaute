@@ -72,7 +72,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 	}
 
 	public Henkilo etsi(int id) {
-		String sql = "select etunimi, sukunimi, id from henkilo where id = ?";
+		String sql = "select kaytID,etunimi,sukunimi,sahkoposti,salasana from kayttaja where kaytID = ?";
 		Object[] parametrit = new Object[] { id };
 		RowMapper<Henkilo> mapper = new HenkiloRowMapper();
 

@@ -11,10 +11,15 @@
 </head>	
 <body>
 <h2>Kaikki käyttäjät</h2>
-
+<table>
+<tr><td>
 	<c:forEach items="${henkilot}" var="henkilo">
-	<c:out value="${henkilo.etunimi}"></c:out>
-	<c:out value="${henkilo.sukunimi}"></c:out>
+	<table>
+	<tr><td>
+	<a href="<c:out value="${henkilo.id}"/>"><c:out value="${henkilo.etunimi}"></c:out> <c:out value="${henkilo.sukunimi}"></c:out></a>
+	
+</td></tr>
+</table>
 	</c:forEach>
 	
 
