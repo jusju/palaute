@@ -88,7 +88,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
 	public List<Henkilo> haeKaikki() {
 
-		String sql = "select id, etunimi, sukunimi from henkilo";
+		String sql = "select kaytID,etunimi,sukunimi,sahkoposti,salasana from kayttaja";
 		RowMapper<Henkilo> mapper = new HenkiloRowMapper();
 		List<Henkilo> henkilot = jdbcTemplate.query(sql, mapper);
 
