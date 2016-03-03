@@ -1,4 +1,4 @@
-package tunnit_lila.bean;
+package fi.tunnit_lila.bean;
 
 public interface Henkilo {
 

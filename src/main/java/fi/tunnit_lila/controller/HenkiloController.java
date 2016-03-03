@@ -1,4 +1,4 @@
-package tunnit_lila.controller;
+package fi.tunnit_lila.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import tunnit_lila.bean.Henkilo;
-import tunnit_lila.bean.HenkiloImpl;
-import tunnit_lila.dao.HenkiloDAO;
-
 import com.sun.javafx.collections.MappingChange.Map;
+
+import fi.tunnit_lila.bean.Henkilo;
+import fi.tunnit_lila.bean.HenkiloImpl;
+import fi.tunnit_lila.dao.HenkiloDAO;
 
 
 

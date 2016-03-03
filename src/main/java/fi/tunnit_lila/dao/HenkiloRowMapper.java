@@ -1,12 +1,12 @@
-package tunnit_lila.dao;
+package fi.tunnit_lila.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import tunnit_lila.bean.Henkilo;
-import tunnit_lila.bean.HenkiloImpl;
+import fi.tunnit_lila.bean.Henkilo;
+import fi.tunnit_lila.bean.HenkiloImpl;
 
 
 

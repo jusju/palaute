@@ -1,4 +1,4 @@
-package tunnit_lila.dao;
+package fi.tunnit_lila.dao;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

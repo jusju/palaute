@@ -9,10 +9,6 @@
 </head>
 <body>
 
-
-
 		<h3>Etusivu</h3>
-	
-
 </body>
 </html>
