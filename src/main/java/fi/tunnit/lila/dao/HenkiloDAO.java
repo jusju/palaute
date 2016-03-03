@@ -1,8 +1,8 @@
-package fi.tunnit_lila.dao;
+package fi.tunnit.lila.dao;
 
 import java.util.List;
 
-import fi.tunnit_lila.bean.Henkilo;
+import fi.tunnit.lila.bean.Henkilo;
 
 
 

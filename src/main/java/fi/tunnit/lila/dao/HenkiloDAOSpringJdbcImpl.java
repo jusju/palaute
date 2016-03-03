@@ -1,4 +1,4 @@
-package fi.tunnit_lila.dao;
+package fi.tunnit.lila.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import fi.tunnit_lila.bean.Henkilo;
+import fi.tunnit.lila.bean.Henkilo;
 
 
 

@@ -1,4 +1,4 @@
-package fi.tunnit_lila.bean;
+package fi.tunnit.lila.bean;
 
 public class HenkiloImpl implements Henkilo {
 
