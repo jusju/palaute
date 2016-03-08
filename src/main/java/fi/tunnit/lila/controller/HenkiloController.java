@@ -21,6 +21,10 @@ import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.dao.HenkiloDAO;
 
+import fi.tunnit.lila.bean.Tunnit;
+import fi.tunnit.lila.bean.TunnitImpl;
+import fi.tunnit.lila.dao.TunnitDAO;
+
 
 
 
@@ -36,6 +40,7 @@ public class HenkiloController {
 
 	@Inject
 	private HenkiloDAO dao;
+	private TunnitDAO tdao;
 	
 	public HenkiloDAO getDao() {
 		return dao;
@@ -45,6 +50,16 @@ public class HenkiloController {
 
 	public void setDao(HenkiloDAO dao) {
 		this.dao = dao;
+	}
+	
+	public TunnitDAO getTdao() {
+		return tdao;
+	}
+	
+
+
+	public void setTdao(TunnitDAO dao) {
+		this.tdao = tdao;
 	}
 	
 	//FORMIN TEKEMINEN
@@ -73,6 +88,9 @@ public class HenkiloController {
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
+		int kaytID = id;
+		List<Tunnit> tunnit = tdao.etsi(kaytID);
+		model.addAttribute("tunnit", tunnit);
 		model.addAttribute("henkilo", henkilo);
 		return "kayttaja/naytaKayttaja";
 	}
