@@ -15,16 +15,23 @@
 	</h1>
 	<p><c:out value="${henkilo.etunimi}" default="-----"/></p>
 	<p><c:out value="${henkilo.sukunimi}" default="-----"/></p>
-	<tr><td>
+	
+	<table border="0">
+	<tr>
+	<td>Tunti ID</td>
+	<td>Projekti ID</td>
+	<td>Päivämäärä</td>
+	</tr>
 	<c:forEach items="${tunnit}" var="tunti">
-	<table>
-	<tr><td>
-	<a href="<c:out value="/tunnit_lila/tunnit/ttunti/${tunti.tuntiID}"/>"><c:out value="${tunti.kuvaus}"></c:out> <c:out value="${tunti.date}"></c:out></a>
+	<td><c:out value="${tunti.tuntiID}"></c:out></td>
+	<td><c:out value="${tunti.projID}"></c:out></td>
+	<td><c:out value="${tunti.date}"></c:out></a></td>
+	<td><a href="<c:out value="/tunnit_lila/tunnit/ttunti/${tunti.tuntiID}"/>">Valitse</a></td>
 
+</tr>
 
-</td></tr>
-</table>
 	</c:forEach>
+	</table>
 	<a href="#" onclick="history.go(-1)">Takaisin</a>
 </body>
 </html>
