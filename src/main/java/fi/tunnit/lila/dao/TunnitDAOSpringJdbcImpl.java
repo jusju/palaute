@@ -77,7 +77,7 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 	}
 
 	public List<Tunnit> etsi(int kaytID) {
-		String sql = "select kaytID,projID,date, aloitusaika, lopetusaika, kuvaus from tunnit where kaytID = ?";
+		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit where kaytID = ?";
 		Object[] parametrit = new Object[] { kaytID };
 		RowMapper<Tunnit> mapper = new TunnitRowMapper();
 		List<Tunnit> tunnit = jdbcTemplate.query(sql,parametrit, mapper);
@@ -88,12 +88,10 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 
 	
 	public Tunnit etsiTunnit(int id) {
-		System.out.println(id);
 		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit where kaytID = ?";
 		Object[] parametrit = new Object[] { id };
 		RowMapper<Tunnit> mapper = new TunnitRowMapper();
-		List<Tunnit> tunnit = jdbcTemplate.query(sql, mapper);
-
+		
 		Tunnit t;
 		try {
 			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);

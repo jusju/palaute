@@ -94,11 +94,13 @@ public class HenkiloController {
 		model.addAttribute("henkilo", henkilo);
 		
 		List <Tunnit> tunnit = new ArrayList<Tunnit>();
-		tunnit = tdao.haeTunnit();
+		tunnit = tdao.etsi(id);
 		
 		model.addAttribute("tunnit", tunnit);
 		return "kayttaja/naytaKayttaja";
 	}
+	
+	
 	
 	//HAE KAIKKI OIKEA
 	@RequestMapping(value="lista", method=RequestMethod.GET)
