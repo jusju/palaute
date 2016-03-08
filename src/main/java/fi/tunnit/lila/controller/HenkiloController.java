@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.swing.tree.RowMapper;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.dao.HenkiloDAO;
-
 import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.bean.TunnitImpl;
 import fi.tunnit.lila.dao.TunnitDAO;
@@ -89,18 +91,7 @@ public class HenkiloController {
 		return "redirect:/tunnit/" + henkilo.getId();
 	}
 	
-	//HENKILÖN TIETOJEN NÄYTTÄMINEN
-	@RequestMapping(value="ktunti/{id}", method=RequestMethod.GET)
-	public String getView(@PathVariable Integer id, Model model) {
-		Henkilo henkilo = dao.etsi(id);
-		model.addAttribute("henkilo", henkilo);
-		
-		List <Tunnit> tunnit = new ArrayList<Tunnit>();
-		tunnit = tdao.etsi(id);
-		
-		model.addAttribute("tunnit", tunnit);
-		return "kayttaja/naytaKayttaja";
-	}
+	
 
 	
 	//TUNNIN TIETOJEN NÄYTTÄMINEN
@@ -137,8 +128,35 @@ public class HenkiloController {
 			modelAll.addAttribute("tunnit", tunnit);
 			return "kayttaja/listaaTunnit";
 		}
-	
+		
+		//HENKILÖN TIETOJEN NÄYTTÄMINEN
+		@RequestMapping(value="ktunti/{id}", method=RequestMethod.GET)
+		public String getView(@PathVariable Integer id, Model model) {
+			Henkilo henkilo = dao.etsi(id);
+			model.addAttribute("henkilo", henkilo);
+			
+			List <Tunnit> tunnit = new ArrayList<Tunnit>();
+			tunnit = tdao.etsi(id);
+			
+			model.addAttribute("tunnit", tunnit);
+			return "kayttaja/naytaKayttaja";
+		}
+		
+		/*
+	//POISTA KÄYTTÄJÄ
 
-	
+		 @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+		    public ResponseEntity<Henkilo> poistaKayttaja(@PathVariable("id") Integer id) {
+		        System.out.println("Fetching & Deleting User with id " + id);
+		 
+		        Henkilo henkilo = dao.etsi(id);
+		        if (henkilo == null) {
+		            System.out.println("Unable to delete. User with id " + id + " not found");
+		            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
+		        }
+		 
+		        dao.poistaHenkilo(id);
+		        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
+		    }*/
 
 }

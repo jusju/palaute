@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import fi.tunnit.lila.bean.Henkilo;
 
@@ -86,7 +87,16 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		return h;
 
 	}
+	
 
+	
+	/* DELETE RESTILLÄ 
+    private static void poistaHenkilo(int id) {
+        System.out.println("Testing delete User API----------");
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(REST_SERVICE_URI+"/user/3");
+    }
+    */
 	
 	public List<Henkilo> haeKaikki() {
 
