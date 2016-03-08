@@ -113,6 +113,21 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 		
 	}
 	
+	public Tunnit etsiTunti(int tuntiID) {
+		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit where tuntiID = ?";
+		Object[] parametrit = new Object[] { tuntiID };
+		RowMapper<Tunnit> mapper = new TunnitRowMapper();
+		
+		Tunnit t;
+		try {
+			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return t;
+
+	}
+	
 	
 	
 }

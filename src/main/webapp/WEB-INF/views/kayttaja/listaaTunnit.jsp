@@ -16,6 +16,8 @@
 	<c:forEach items="${tunnit}" var="tunti">
 	<table>
 	<tr><td>
+		<a href="<c:out value="${tunti.tuntiID}"/>"></a>
+	
 	<c:out value="${tunti.tuntiID}" default="-----"/></td>
 <td><c:out value="${tunti.kuvaus}" default="-----"/>
 </td></tr>

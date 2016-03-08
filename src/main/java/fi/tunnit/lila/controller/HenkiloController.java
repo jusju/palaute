@@ -36,9 +36,11 @@ import fi.tunnit.lila.dao.TunnitDAO;
 
 
 @RequestMapping (value="/tunnit")
+
 public class HenkiloController {
 
 	@Inject
+	
 	private TunnitDAO tdao;
 	
 	@Inject
@@ -88,7 +90,7 @@ public class HenkiloController {
 	}
 	
 	//HENKILÖN TIETOJEN NÄYTTÄMINEN
-	@RequestMapping(value="{id}", method=RequestMethod.GET)
+	@RequestMapping(value="ktunti/{id}", method=RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
 		model.addAttribute("henkilo", henkilo);
@@ -99,6 +101,17 @@ public class HenkiloController {
 		model.addAttribute("tunnit", tunnit);
 		return "kayttaja/naytaKayttaja";
 	}
+
+	
+	//TUNNIN TIETOJEN NÄYTTÄMINEN
+	
+		@RequestMapping(value="ttunti/{tuntiID}", method=RequestMethod.GET)
+		public String getTunti(@PathVariable Integer tuntiID, Model model) {
+			Tunnit tunnit = tdao.etsiTunti(tuntiID);
+			model.addAttribute("tunnit", tunnit);
+
+			return "tunti/tunninTiedot";
+		}
 	
 	
 	

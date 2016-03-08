@@ -15,17 +15,16 @@
 	</h1>
 	<p><c:out value="${henkilo.etunimi}" default="-----"/></p>
 	<p><c:out value="${henkilo.sukunimi}" default="-----"/></p>
-
-<table>
 	<tr><td>
 	<c:forEach items="${tunnit}" var="tunti">
 	<table>
 	<tr><td>
-	<c:out value="${tunti.tuntiID}" default="-----"/></td>
-<td><c:out value="${tunti.kuvaus}" default="-----"/>
+	<a href="<c:out value="/tunnit_lila/tunnit/ttunti/${tunti.tuntiID}"/>"><c:out value="${tunti.kuvaus}"></c:out> <c:out value="${tunti.date}"></c:out></a>
+
+
 </td></tr>
 </table>
 	</c:forEach>
-	<p><a href="lista">Takaisin</a>
+	<a href="#" onclick="history.go(-1)">Takaisin</a>
 </body>
 </html>

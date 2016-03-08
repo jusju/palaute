@@ -16,7 +16,7 @@
 	<c:forEach items="${henkilot}" var="henkilo">
 	<table>
 	<tr><td>
-	<a href="<c:out value="${henkilo.id}"/>"><c:out value="${henkilo.etunimi}"></c:out> <c:out value="${henkilo.sukunimi}"></c:out></a>
+	<a href="<c:out value="ktunti/${henkilo.id}"/>"><c:out value="${henkilo.etunimi}"></c:out> <c:out value="${henkilo.sukunimi}"></c:out></a>
 	
 </td></tr>
 </table>
