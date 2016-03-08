@@ -39,8 +39,11 @@ import fi.tunnit.lila.dao.TunnitDAO;
 public class HenkiloController {
 
 	@Inject
-	private HenkiloDAO dao;
 	private TunnitDAO tdao;
+	
+	@Inject
+	private HenkiloDAO dao;
+
 	
 	public HenkiloDAO getDao() {
 		return dao;
@@ -58,7 +61,7 @@ public class HenkiloController {
 	
 
 
-	public void setTdao(TunnitDAO dao) {
+	public void setTdao(TunnitDAO tdao) {
 		this.tdao = tdao;
 	}
 	
@@ -84,14 +87,16 @@ public class HenkiloController {
 		return "redirect:/tunnit/" + henkilo.getId();
 	}
 	
-	//HENKILÃ–N TIETOJEN NÃ„YTTÃ„MINEN
+	//HENKILÖN TIETOJEN NÄYTTÄMINEN
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
-		int kaytID = id;
-		List<Tunnit> tunnit = tdao.etsi(kaytID);
-		model.addAttribute("tunnit", tunnit);
 		model.addAttribute("henkilo", henkilo);
+		
+		List <Tunnit> tunnit = new ArrayList<Tunnit>();
+		tunnit = tdao.haeTunnit();
+		
+		model.addAttribute("tunnit", tunnit);
 		return "kayttaja/naytaKayttaja";
 	}
 	
@@ -107,7 +112,16 @@ public class HenkiloController {
 	}
 
 
+	//HAE KAIKKI TUNNIT
+		@RequestMapping(value="listaus", method=RequestMethod.GET)
+		public String showLista(Model modelAll) {
 		
+			List <Tunnit> tunnit = new ArrayList<Tunnit>();
+			tunnit = tdao.haeTunnit();
+			
+			modelAll.addAttribute("tunnit", tunnit);
+			return "kayttaja/listaaTunnit";
+		}
 	
 
 	

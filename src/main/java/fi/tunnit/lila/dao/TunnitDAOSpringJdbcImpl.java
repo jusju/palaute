@@ -15,6 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+
 import fi.tunnit.lila.bean.Tunnit;
 
 
@@ -85,9 +86,27 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 
 	}
 
+	
+	public Tunnit etsiTunnit(int id) {
+		System.out.println(id);
+		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit where kaytID = ?";
+		Object[] parametrit = new Object[] { id };
+		RowMapper<Tunnit> mapper = new TunnitRowMapper();
+		List<Tunnit> tunnit = jdbcTemplate.query(sql, mapper);
+
+		Tunnit t;
+		try {
+			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return t;
+
+	}
+	
 	public List<Tunnit> haeTunnit() {
 
-		String sql = "select kaytID,projID,date, aloitusaika, lopetusaika, kuvaus from tunnit";
+		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit";
 		RowMapper<Tunnit> mapper = new TunnitRowMapper();
 		List<Tunnit> tunnit = jdbcTemplate.query(sql, mapper);
 
@@ -95,4 +114,7 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 		
 		
 	}
+	
+	
+	
 }

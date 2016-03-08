@@ -19,6 +19,7 @@ import fi.tunnit.lila.bean.Henkilo;
 
 
 
+
 @Repository
 public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
@@ -86,6 +87,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
 	}
 
+	
 	public List<Henkilo> haeKaikki() {
 
 		String sql = "select kaytID,etunimi,sukunimi,sahkoposti,salasana from kayttaja";
@@ -96,4 +98,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		
 		
 	}
+	
+	
+
 }

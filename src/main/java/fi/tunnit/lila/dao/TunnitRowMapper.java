@@ -18,8 +18,11 @@ import fi.tunnit.lila.bean.TunnitImpl;
 			t.setDate(rs.getString("date"));
 			t.setAloitusaika(rs.getString("aloitusaika"));
 			t.setLopetusaika(rs.getString("lopetusaika"));
-			t.setKaytID(rs.getInt("kaytID"));
+			t.setKuvaus(rs.getString("kuvaus"));
 			t.setTuntiID(rs.getInt("tuntiID"));
+			t.setKaytID(rs.getInt("kaytID"));
+			t.setProjID(rs.getInt("projID"));
+			
 			return t;
 		}
 	

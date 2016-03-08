@@ -6,7 +6,7 @@ public interface TunnitDAO {
 
 	public abstract List<Tunnit> haeTunnit();
 	
-	public abstract List<Tunnit> etsi(int kaytID);
+	//public abstract List<Tunnit> etsi(int kaytID);
 	
 	public abstract void talleta(Tunnit tunnit);
 	
