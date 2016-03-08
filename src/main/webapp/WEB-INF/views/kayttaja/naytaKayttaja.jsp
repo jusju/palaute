@@ -26,6 +26,6 @@
 </td></tr>
 </table>
 	</c:forEach>
-	<p><a href="uusi">Takaisin</a>
+	<p><a href="lista">Takaisin</a>
 </body>
 </html>
