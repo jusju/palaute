@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
@@ -90,8 +93,20 @@ public class HenkiloController {
 		dao.talleta(henkilo);
 		return "redirect:/tunnit/" + henkilo.getId();
 	}
-	
-	
+	//POISTA KÄYTTÄJÄ
+	 @RequestMapping(value = "lista/{id}", method = RequestMethod.DELETE)
+	    public ResponseEntity<Henkilo> poistaKayt(@PathVariable("id") int id) {
+	        System.out.println("Poistetaan käyttäjä " + id);
+	 
+	        Henkilo henkilo = dao.etsi(id);
+	        if (henkilo == null) {
+	            System.out.println("Tyhjä ID " + id + " ei löydy");
+	            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
+	        }
+	 
+	        dao.poistaHenkilo(id);
+	        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
+	    }
 
 	
 	//TUNNIN TIETOJEN NÄYTTÄMINEN

@@ -87,16 +87,26 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		return h;
 
 	}
+	public Henkilo poistaHenkilo(int id){
+		final String sql = "DELETE FROM kayttaja WHERE kaytID = ?";
+		Object[] parametrit = new Object[] { id };
+		RowMapper<Henkilo> mapper = new HenkiloRowMapper();
+
+		Henkilo h;
+		try {
+			h = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return h;
+
+
+		
+	}
 	
 
 	
-	/* DELETE RESTILLÄ 
-    private static void poistaHenkilo(int id) {
-        System.out.println("Testing delete User API----------");
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(REST_SERVICE_URI+"/user/3");
-    }
-    */
+
 	
 	public List<Henkilo> haeKaikki() {
 
@@ -108,6 +118,8 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		
 		
 	}
+
+	
 	
 	
 
