@@ -25,7 +25,9 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
+import fi.tunnit.lila.bean.Projekti;
 import fi.tunnit.lila.dao.HenkiloDAO;
+import fi.tunnit.lila.dao.ProjektiDAO;
 import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.bean.TunnitImpl;
 import fi.tunnit.lila.dao.TunnitDAO;
@@ -45,12 +47,13 @@ import fi.tunnit.lila.dao.TunnitDAO;
 public class HenkiloController {
 
 	@Inject
-	
 	private TunnitDAO tdao;
 	
 	@Inject
 	private HenkiloDAO dao;
 
+	@Inject
+	private ProjektiDAO pdao;
 	
 	public HenkiloDAO getDao() {
 		return dao;
@@ -70,6 +73,16 @@ public class HenkiloController {
 
 	public void setTdao(TunnitDAO tdao) {
 		this.tdao = tdao;
+	}
+	
+	public ProjektiDAO getPdao() {
+		return pdao;
+	}
+	
+
+
+	public void setPdao(ProjektiDAO pdao) {
+		this.pdao = pdao;
 	}
 	
 	//FORMIN TEKEMINEN
@@ -93,31 +106,6 @@ public class HenkiloController {
 		dao.talleta(henkilo);
 		return "redirect:/tunnit/" + henkilo.getId();
 	}
-	//POISTA KÄYTTÄJÄ
-	 @RequestMapping(value = "lista/{id}", method = RequestMethod.DELETE)
-	    public ResponseEntity<Henkilo> poistaKayt(@PathVariable("id") int id) {
-	        System.out.println("Poistetaan käyttäjä " + id);
-	 
-	        Henkilo henkilo = dao.etsi(id);
-	        if (henkilo == null) {
-	            System.out.println("Tyhjä ID " + id + " ei löydy");
-	            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
-	        }
-	 
-	        dao.poistaHenkilo(id);
-	        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
-	    }
-
-	
-	//TUNNIN TIETOJEN NÄYTTÄMINEN
-	
-		@RequestMapping(value="ttunti/{tuntiID}", method=RequestMethod.GET)
-		public String getTunti(@PathVariable Integer tuntiID, Model model) {
-			Tunnit tunnit = tdao.etsiTunti(tuntiID);
-			model.addAttribute("tunnit", tunnit);
-
-			return "tunti/tunninTiedot";
-		}
 	
 	
 	
@@ -154,9 +142,48 @@ public class HenkiloController {
 			tunnit = tdao.etsi(id);
 			
 			model.addAttribute("tunnit", tunnit);
+			
+			List <Projekti> projektit = new ArrayList<Projekti>();
+			projektit = pdao.haeKaikki();
+			
+			model.addAttribute("projektit", projektit);
+			
+			
+			
 			return "kayttaja/naytaKayttaja";
 		}
 		
+		//TUNNIN TIETOJEN NÄYTTÄMINEN
+		
+			@RequestMapping(value="ttunti/{tuntiID}", method=RequestMethod.GET)
+			public String getTunti(@PathVariable Integer tuntiID, Model model) {
+				Tunnit tunnit = tdao.etsiTunti(tuntiID);
+				model.addAttribute("tunnit", tunnit);
+
+				return "tunti/tunninTiedot";
+			}
+		
+		//PROJEKTIN TIETOJEN LÖYTÄMINEN
+		@RequestMapping(value="ptunti/{projID}", method=RequestMethod.GET)
+		public String getProj(@PathVariable Integer projID, Model model) {
+			Projekti projekti = pdao.etsi(projID);
+			model.addAttribute("projekti", projekti);
+			
+	
+			return "projekti/projektinTiedot";
+		}
+		
+		//HAE KAIKKI PROJEKTIT
+
+				@RequestMapping(value="projlista", method=RequestMethod.GET)
+				public String showPlista(Model modelAll) {
+				
+					List <Projekti> projektit = new ArrayList<Projekti>();
+					projektit = pdao.haeKaikki();
+					
+					modelAll.addAttribute("projektit", projektit);
+					return "kayttaja/listaaTunnit";
+				}
 		/*
 	//POISTA KÄYTTÄJÄ
 
@@ -173,5 +200,19 @@ public class HenkiloController {
 		        dao.poistaHenkilo(id);
 		        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
 		    }*/
-
+		
+		//POISTA KÄYTTÄJÄ
+		 @RequestMapping(value = "lista/{id}", method = RequestMethod.DELETE)
+		    public ResponseEntity<Henkilo> poistaKayt(@PathVariable("id") int id) {
+		        System.out.println("Poistetaan käyttäjä " + id);
+		 
+		        Henkilo henkilo = dao.etsi(id);
+		        if (henkilo == null) {
+		            System.out.println("Tyhjä ID " + id + " ei löydy");
+		            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
+		        }
+		 
+		        dao.poistaHenkilo(id);
+		        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
+		    }
 }
