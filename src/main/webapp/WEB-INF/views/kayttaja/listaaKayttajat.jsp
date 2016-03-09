@@ -18,11 +18,11 @@
 	<tr><td>
 	<a href="<c:out value="ktunti/${henkilo.id}"/>"><c:out value="${henkilo.etunimi}"></c:out> <c:out value="${henkilo.sukunimi}"></c:out></a> <a href="delete/${henkilo.id}">poista</a>
 	</td></tr>
-
+	
 	</table>
 
 	</c:forEach>
-		
+		<tr><td><a href="<c:out value="uusi"/>">Lisää</td></tr>
 
 
 
