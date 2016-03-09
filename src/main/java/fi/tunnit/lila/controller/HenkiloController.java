@@ -104,7 +104,7 @@ public class HenkiloController {
 	@RequestMapping(value="uusi", method=RequestMethod.POST)
 	public String create( @ModelAttribute(value="henkilo") HenkiloImpl henkilo) {
 		dao.talleta(henkilo);
-		return "redirect:/tunnit/" + henkilo.getId();
+		return "redirect:/tunnit/lista";
 	}
 	
 	
@@ -188,15 +188,10 @@ public class HenkiloController {
 	//POISTA KÄYTTÄJÄ
 
 		 @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-		    public ResponseEntity<Henkilo> poistaKayttaja(@PathVariable("id") Integer id) {
-		       		 
-		        Henkilo henkilo = dao.etsi(id);
-		        if (henkilo == null) {
-		            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
-		        }
-		 
-		        dao.poistaHenkilo(id);
-		        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
+		    public String showDelete(@PathVariable("id") Integer id) {
+			dao.poistaHenkilo(id);
+			return "redirect:/tunnit/lista";
+		        
 		    }
 		
 		

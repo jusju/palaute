@@ -40,7 +40,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 	 * generoima id asetetaan parametrina annettuun olioon.
 	 */
 	public void talleta(Henkilo h) {
-		final String sql = "insert into henkilo(etunimi, sukunimi, sahkoposti, salasana) values(?,?,?,?)";
+		final String sql = "insert into kayttaja(etunimi, sukunimi, sahkoposti, salasana) values(?,?,?,?)";
 
 		// anonyymi sisäluokka tarvitsee vakioina välitettävät arvot,
 		// jotta roskien keruu onnistuu tämän metodin suorituksen päättyessä.
@@ -87,6 +87,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		return h;
 
 	}
+	
 	public Henkilo poistaHenkilo(int id){
 		final String sql = "DELETE FROM kayttaja WHERE kaytID = ?";
 		Object[] parametrit = new Object[] { id };
