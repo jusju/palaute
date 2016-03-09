@@ -31,15 +31,12 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 	<body>
 		<div class="container">
 			<!-- Top Navigation -->
-			<div class="codrops-top clearfix">
-				<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/CreativeLinkEffects/"><span>Previous Demo</span></a>
-				<span class="right"><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=16114"><span>Back to the Codrops Article</span></a></span>
-			</div>
+			
 			<header>
 				
 			</header>
 			<div class="component">
-				<h2>Celery swiss chard melon</h2>
+				<h2>Tuntien kirjaus</h2>
 				<!-- Start Nav Structure -->
 				<button class="cn-button" id="cn-button">Menu</button>
 				<div class="cn-wrapper" id="cn-wrapper">
