@@ -13,16 +13,14 @@
 <h2>Kaikki käyttäjät</h2>
 <table>
 <tr><td>
-	<c:forEach items="${henkilot}" var="henkilo">
+<c:forEach items="${henkilot}" var="henkilo">
 	<table>
 	<tr><td>
-	<a href="<c:out value="ktunti/${henkilo.id}"/>"><c:out value="${henkilo.etunimi}"></c:out> <c:out value="${henkilo.sukunimi}"></c:out></a>
-	
-	</td><td>
-	<form:form modelAttribute="henkilo" method="get">
-	<button type="submit"name="delete"onclick="return confirm('Haluatko varmasti poistaa henkilön ${henkilo.etunimi}?')">Poista</button></td></tr>
+	<a href="<c:out value="ktunti/${henkilo.id}"/>"><c:out value="${henkilo.etunimi}"></c:out> <c:out value="${henkilo.sukunimi}"></c:out></a> <a href="delete/${henkilo.id}">poista</a>
+	</td></tr>
+
 	</table>
-	</form:form>
+
 	</c:forEach>
 		
 

@@ -184,35 +184,20 @@ public class HenkiloController {
 					modelAll.addAttribute("projektit", projektit);
 					return "kayttaja/listaaTunnit";
 				}
-		/*
+	
 	//POISTA KÄYTTÄJÄ
 
-		 @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+		 @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 		    public ResponseEntity<Henkilo> poistaKayttaja(@PathVariable("id") Integer id) {
-		        System.out.println("Fetching & Deleting User with id " + id);
-		 
+		       		 
 		        Henkilo henkilo = dao.etsi(id);
 		        if (henkilo == null) {
-		            System.out.println("Unable to delete. User with id " + id + " not found");
-		            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
-		        }
-		 
-		        dao.poistaHenkilo(id);
-		        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
-		    }*/
-		
-		//POISTA KÄYTTÄJÄ
-		 @RequestMapping(value = "lista/{id}", method = RequestMethod.DELETE)
-		    public ResponseEntity<Henkilo> poistaKayt(@PathVariable("id") int id) {
-		        System.out.println("Poistetaan käyttäjä " + id);
-		 
-		        Henkilo henkilo = dao.etsi(id);
-		        if (henkilo == null) {
-		            System.out.println("Tyhjä ID " + id + " ei löydy");
 		            return new ResponseEntity<Henkilo>(HttpStatus.NOT_FOUND);
 		        }
 		 
 		        dao.poistaHenkilo(id);
 		        return new ResponseEntity<Henkilo>(HttpStatus.NO_CONTENT);
 		    }
+		
+		
 }
