@@ -9,11 +9,11 @@
 
 	function handler(){
 	  if(!open){
-	    this.innerHTML = "Close";
+	    this.innerHTML = "Sulje";
 	    classie.add(wrapper, 'opened-nav');
 	  }
 	  else{
-	    this.innerHTML = "Menu";
+	    this.innerHTML = "Valikko";
 		classie.remove(wrapper, 'opened-nav');
 	  }
 	  open = !open;

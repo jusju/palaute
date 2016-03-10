@@ -38,7 +38,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 			<div class="component">
 				<h2>Tuntien kirjaus</h2>
 				<!-- Start Nav Structure -->
-				<button class="cn-button" id="cn-button">Menu</button>
+				<button class="cn-button" id="cn-button">Valikko</button>
 				<div class="cn-wrapper" id="cn-wrapper">
 					<ul>
 						<li><a href="#"><span></span></a></li>
