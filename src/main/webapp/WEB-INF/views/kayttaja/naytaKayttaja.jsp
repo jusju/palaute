@@ -29,8 +29,8 @@
 	<td><c:out value="${tunti.tuntiID}"></c:out></td>
 	<td><c:out value="${tunti.date}"></c:out></a></td>
 	<td><c:out value="${tunti.projID}"></c:out></a></td>
-	<td><a href="<c:out value="/tunnit_lila/tunnit/ttunti/${tunti.tuntiID}"/>">Tunnin tiedot</a></td>
-	<td><a href="<c:out value="/tunnit_lila/tunnit/ptunti/${tunti.projID}"/>">Projektin tiedot</a></td>
+	<td><a href="<c:out value="/tunnit_lila/henkilo/ttunti/${tunti.tuntiID}"/>">Tunnin tiedot</a></td>
+	<td><a href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>">Projektin tiedot</a></td>
 	</tr>
 	</c:forEach>
 	</table>

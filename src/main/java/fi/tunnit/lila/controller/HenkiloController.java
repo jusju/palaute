@@ -160,7 +160,7 @@ public class HenkiloController {
 				Tunnit tunnit = tdao.etsiTunti(tuntiID);
 				model.addAttribute("tunnit", tunnit);
 
-				return "tunti/tunninTiedot";
+				return "tunnit/tunninTiedot";
 			}
 		
 		//PROJEKTIN TIETOJEN LÖYTÄMINEN
