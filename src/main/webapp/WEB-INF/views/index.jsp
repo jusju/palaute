@@ -41,13 +41,13 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 				<button class="cn-button" id="cn-button">Menu</button>
 				<div class="cn-wrapper" id="cn-wrapper">
 					<ul>
-						<li><a href="#"><span>Tunnit</span></a></li>
-						<li><a href="#"><span>Projektit</span></a></li>
-						<li><a href="tunnit/lista"><span>K‰ytt‰j‰t</span></a></li>
-						<li><a href="#"><span>Lis‰‰ k‰ytt‰j‰</span></a></li>
-						<li><a href="#"><span>Plugins</span></a></li>
-						<li><a href="#"><span>Contact</span></a></li>
-						<li><a href="#"><span>Follow</span></a></li>
+						<li><a href="#"><span></span></a></li>
+						<li><a href="#"><span></span></a></li>
+						<li><a href="henkilo/lista"><span>K‰ytt‰j‰t</span></a></li>
+						<li><a href="tunnit/lista"><span>Tunnit</span></a></li>
+						<li><a href="projekti/lista"><span>Projektit</span></a></li>
+						<li><a href="#"><span></span></a></li>
+						<li><a href="#"><span></span></a></li>
 					 </ul>
 				</div>
 				<!-- End of Nav Structure -->
