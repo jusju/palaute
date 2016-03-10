@@ -64,8 +64,8 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 				ps.setInt(2, projID);
 				ps.setString(3, date);
 				ps.setString(4, aloitusaika);
-				ps.setString(4, lopetusaika);
-				ps.setString(4, kuvaus);
+				ps.setString(5, lopetusaika);
+				ps.setString(6, kuvaus);
 				return ps;
 			}
 		}, idHolder);

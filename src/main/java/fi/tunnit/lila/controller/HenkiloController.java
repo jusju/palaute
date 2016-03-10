@@ -42,7 +42,7 @@ import fi.tunnit.lila.dao.TunnitDAO;
 
 
 
-@RequestMapping (value="/tunnit")
+@RequestMapping (value="/henkilo")
 
 public class HenkiloController {
 
