@@ -190,7 +190,7 @@ public class HenkiloController {
 		 @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 		    public String showDelete(@PathVariable("id") Integer id) {
 			dao.poistaHenkilo(id);
-			return "tunnit/lista";
+			return "henkilo/lista";
 		        
 		    }
 		

@@ -117,5 +117,14 @@ public class TuntiController {
 					modelAll.addAttribute("tunnit", tunnit);
 					return "kayttaja/listaaTunnit";
 				}
+				
+				//POISTA KÄYTTÄJÄ
+
+				 @RequestMapping(value = "delete/{tuntiID}", method = RequestMethod.GET)
+				    public String showDelete(@PathVariable("tuntiID") Integer tuntiID) {
+					tdao.poistaTunti(tuntiID);
+					return "tunnit/lista";
+				        
+				    }
 		
 }

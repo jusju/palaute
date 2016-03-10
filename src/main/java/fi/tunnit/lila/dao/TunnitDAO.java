@@ -14,4 +14,6 @@ public interface TunnitDAO {
 	
 	public abstract void talleta(Tunnit tunnit);
 	
+	public Tunnit poistaTunti(int tuntiID);
+	
 }
