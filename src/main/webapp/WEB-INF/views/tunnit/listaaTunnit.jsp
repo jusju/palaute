@@ -20,6 +20,7 @@
 	
 	<c:out value="${tunti.tuntiID}" default="-----"/></td>
 <td><c:out value="${tunti.kuvaus}" default="-----"/></td>
+<td><a href="delete/${tunti.tuntiID}">muokkaa</a>
 <td><a href="delete/${tunti.tuntiID}">poista</a>
 </td></tr>
 

@@ -32,167 +32,162 @@ import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.bean.TunnitImpl;
 import fi.tunnit.lila.dao.TunnitDAO;
 
-
-
-
 @Controller
-
-
-
-
-
-
-@RequestMapping (value="/henkilo")
-
+@RequestMapping(value = "/henkilo")
 public class HenkiloController {
 
 	@Inject
 	private TunnitDAO tdao;
-	
+
 	@Inject
 	private HenkiloDAO dao;
 
 	@Inject
 	private ProjektiDAO pdao;
-	
+
 	public HenkiloDAO getDao() {
 		return dao;
 	}
-	
-
 
 	public void setDao(HenkiloDAO dao) {
 		this.dao = dao;
 	}
-	
+
 	public TunnitDAO getTdao() {
 		return tdao;
 	}
-	
-
 
 	public void setTdao(TunnitDAO tdao) {
 		this.tdao = tdao;
 	}
-	
+
 	public ProjektiDAO getPdao() {
 		return pdao;
 	}
-	
-
 
 	public void setPdao(ProjektiDAO pdao) {
 		this.pdao = pdao;
 	}
-	
-	//FORMIN TEKEMINEN
-	@RequestMapping(value="uusi", method=RequestMethod.GET)
+
+	// FORMIN TEKEMINEN
+	@RequestMapping(value = "uusi", method = RequestMethod.GET)
 	public String getCreateForm(Model model) {
 		Henkilo tyhjaHenkilo = new HenkiloImpl();
 		tyhjaHenkilo.setEtunimi("oletusetunimi");
-		
+
 		model.addAttribute("henkilo", tyhjaHenkilo);
 		return "kayttaja/lisaaKayttaja";
 	}
-	
-	
-	
-	
-	
-	
-	//FORMIN TIETOJEN VASTAANOTTO
-	@RequestMapping(value="uusi", method=RequestMethod.POST)
-	public String create( @ModelAttribute(value="henkilo") HenkiloImpl henkilo) {
+
+	// FORMIN TIETOJEN VASTAANOTTO
+	@RequestMapping(value = "uusi", method = RequestMethod.POST)
+	public String muokkaa(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
 		dao.talleta(henkilo);
 		return "redirect:/tunnit/lista";
 	}
 	
 	
-	
-	//HAE KAIKKI OIKEA
-	@RequestMapping(value="lista", method=RequestMethod.GET)
-	public String showList(Model modelAll) {
-	
-		List <Henkilo> henkilot = new ArrayList<Henkilo>();
-		henkilot = dao.haeKaikki();
+
+	// KÄYTTÄJÄN MUOKKAUS TEKEMINEN
+	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.GET)
+	public String getMuokkaaForm(@PathVariable Integer id,Model model) 
+	{
+		Henkilo henkilo = dao.etsi(id);
+		model.addAttribute("henkilo", henkilo);
 		
+		Henkilo henkiloa = new HenkiloImpl();
+		henkiloa.setEtunimi("oletusetunimi");
+
+		model.addAttribute("henkilo", henkiloa);
+		return "kayttaja/muokkaaKayttaja";
+	}
+	
+	// KÄYTTÄJÄN MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
+	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
+	public String create(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
+		dao.muokkaa(henkilo);
+		return "redirect:/tunnit/lista";
+	}
+
+	// HAE KAIKKI OIKEA
+	@RequestMapping(value = "lista", method = RequestMethod.GET)
+	public String showList(Model modelAll) {
+
+		List<Henkilo> henkilot = new ArrayList<Henkilo>();
+		henkilot = dao.haeKaikki();
+
 		modelAll.addAttribute("henkilot", henkilot);
 		return "kayttaja/listaaKayttajat";
 	}
 
+	// HAE KAIKKI TUNNIT
+	@RequestMapping(value = "listaus", method = RequestMethod.GET)
+	public String showLista(Model modelAll) {
 
-	//HAE KAIKKI TUNNIT
-		@RequestMapping(value="listaus", method=RequestMethod.GET)
-		public String showLista(Model modelAll) {
-		
-			List <Tunnit> tunnit = new ArrayList<Tunnit>();
-			tunnit = tdao.haeTunnit();
-			
-			modelAll.addAttribute("tunnit", tunnit);
-			return "kayttaja/listaaTunnit";
-		}
-		
-		//HENKILÖN TIETOJEN NÄYTTÄMINEN
-		@RequestMapping(value="ktunti/{id}", method=RequestMethod.GET)
-		public String getView(@PathVariable Integer id, Model model) {
-			Henkilo henkilo = dao.etsi(id);
-			model.addAttribute("henkilo", henkilo);
-			
-			List <Tunnit> tunnit = new ArrayList<Tunnit>();
-			tunnit = tdao.etsi(id);
-			
-			model.addAttribute("tunnit", tunnit);
-			
-			List <Projekti> projektit = new ArrayList<Projekti>();
-			projektit = pdao.haeKaikki();
-			
-			model.addAttribute("projektit", projektit);
-			
-			
-			
-			return "kayttaja/naytaKayttaja";
-		}
-		
-		//TUNNIN TIETOJEN NÄYTTÄMINEN
-		
-			@RequestMapping(value="ttunti/{tuntiID}", method=RequestMethod.GET)
-			public String getTunti(@PathVariable Integer tuntiID, Model model) {
-				Tunnit tunnit = tdao.etsiTunti(tuntiID);
-				model.addAttribute("tunnit", tunnit);
+		List<Tunnit> tunnit = new ArrayList<Tunnit>();
+		tunnit = tdao.haeTunnit();
 
-				return "tunnit/tunninTiedot";
-			}
-		
-		//PROJEKTIN TIETOJEN LÖYTÄMINEN
-		@RequestMapping(value="ptunti/{projID}", method=RequestMethod.GET)
-		public String getProj(@PathVariable Integer projID, Model model) {
-			Projekti projekti = pdao.etsi(projID);
-			model.addAttribute("projekti", projekti);
-			
-	
-			return "projekti/projektinTiedot";
-		}
-		
-		//HAE KAIKKI PROJEKTIT
+		modelAll.addAttribute("tunnit", tunnit);
+		return "kayttaja/listaaTunnit";
+	}
 
-				@RequestMapping(value="projlista", method=RequestMethod.GET)
-				public String showPlista(Model modelAll) {
-				
-					List <Projekti> projektit = new ArrayList<Projekti>();
-					projektit = pdao.haeKaikki();
-					
-					modelAll.addAttribute("projektit", projektit);
-					return "kayttaja/listaaTunnit";
-				}
-	
-	//POISTA KÄYTTÄJÄ
+	// HENKILÖN TIETOJEN NÄYTTÄMINEN
+	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
+	public String getView(@PathVariable Integer id, Model model) {
+		Henkilo henkilo = dao.etsi(id);
+		model.addAttribute("henkilo", henkilo);
 
-		 @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-		    public String showDelete(@PathVariable("id") Integer id) {
-			dao.poistaHenkilo(id);
-			return "henkilo/lista";
-		        
-		    }
-		
-		
+		List<Tunnit> tunnit = new ArrayList<Tunnit>();
+		tunnit = tdao.etsi(id);
+
+		model.addAttribute("tunnit", tunnit);
+
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		projektit = pdao.haeKaikki();
+
+		model.addAttribute("projektit", projektit);
+
+		return "kayttaja/naytaKayttaja";
+	}
+
+	// TUNNIN TIETOJEN NÄYTTÄMINEN
+
+	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
+	public String getTunti(@PathVariable Integer tuntiID, Model model) {
+		Tunnit tunnit = tdao.etsiTunti(tuntiID);
+		model.addAttribute("tunnit", tunnit);
+
+		return "tunnit/tunninTiedot";
+	}
+
+	// PROJEKTIN TIETOJEN LÖYTÄMINEN
+	@RequestMapping(value = "ptunti/{projID}", method = RequestMethod.GET)
+	public String getProj(@PathVariable Integer projID, Model model) {
+		Projekti projekti = pdao.etsi(projID);
+		model.addAttribute("projekti", projekti);
+
+		return "projekti/projektinTiedot";
+	}
+
+	// HAE KAIKKI PROJEKTIT
+
+	@RequestMapping(value = "projlista", method = RequestMethod.GET)
+	public String showPlista(Model modelAll) {
+
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		projektit = pdao.haeKaikki();
+
+		modelAll.addAttribute("projektit", projektit);
+		return "kayttaja/listaaTunnit";
+	}
+
+	// POISTA KÄYTTÄJÄ
+
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+	public String showDelete(@PathVariable("id") Integer id) {
+		dao.poistaHenkilo(id);
+		return "henkilo/lista";
+
+	}
+
 }

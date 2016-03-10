@@ -18,9 +18,6 @@ import org.springframework.web.client.RestTemplate;
 
 import fi.tunnit.lila.bean.Henkilo;
 
-
-
-
 @Repository
 public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
@@ -43,7 +40,8 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		final String sql = "insert into kayttaja(etunimi, sukunimi, sahkoposti, salasana) values(?,?,?,?)";
 
 		// anonyymi sisäluokka tarvitsee vakioina välitettävät arvot,
-		// jotta roskien keruu onnistuu tämän metodin suorituksen päättyessä.
+		// jotta roskien keruu onnistuu tämän metodin suorituksen
+		// päättyessä.
 		final String etunimi = h.getEtunimi();
 		final String sukunimi = h.getSukunimi();
 		final String sposti = h.getSposti();
@@ -52,7 +50,8 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		// jdbc pistää generoidun id:n tänne talteen
 		KeyHolder idHolder = new GeneratedKeyHolder();
 
-		// suoritetaan päivitys itse määritellyllä PreparedStatementCreatorilla
+		// suoritetaan päivitys itse määritellyllä
+		// PreparedStatementCreatorilla
 		// ja KeyHolderilla
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(
@@ -63,6 +62,45 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 				ps.setString(2, sukunimi);
 				ps.setString(3, sposti);
 				ps.setString(4, salasana);
+				return ps;
+			}
+		}, idHolder);
+
+		// tallennetaan id takaisin beaniin, koska
+		// kutsujalla pitäisi olla viittaus samaiseen olioon
+		h.setId(idHolder.getKey().intValue());
+
+	}
+
+	public void muokkaa(Henkilo h) {
+		final String sql = "update kayttaja set etunimi=?, sukunimi=?, sahkoposti=?, salasana=? where kaytID=?";
+	
+
+		// anonyymi sisäluokka tarvitsee vakioina välitettävät arvot,
+		// jotta roskien keruu onnistuu tämän metodin suorituksen
+		// päättyessä.
+		final String etunimi = h.getEtunimi();
+		final String sukunimi = h.getSukunimi();
+		final String sposti = h.getSposti();
+		final String salasana = h.getSalasana();
+		final int id = h.getId();
+		
+		// jdbc pistää generoidun id:n tänne talteen
+		KeyHolder idHolder = new GeneratedKeyHolder();
+
+		// suoritetaan päivitys itse määritellyllä
+		// PreparedStatementCreatorilla
+		// ja KeyHolderilla
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(sql,
+						new String[] { "id" });
+				ps.setString(1, etunimi);
+				ps.setString(2, sukunimi);
+				ps.setString(3, sposti);
+				ps.setString(4, salasana);
+				ps.setInt(5, id);
 				return ps;
 			}
 		}, idHolder);
@@ -87,8 +125,8 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		return h;
 
 	}
-	
-	public Henkilo poistaHenkilo(int id){
+
+	public Henkilo poistaHenkilo(int id) {
 		final String sql = "DELETE FROM kayttaja WHERE kaytID = ?";
 		Object[] parametrit = new Object[] { id };
 		RowMapper<Henkilo> mapper = new HenkiloRowMapper();
@@ -101,14 +139,8 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		}
 		return h;
 
-
-		
 	}
-	
 
-	
-
-	
 	public List<Henkilo> haeKaikki() {
 
 		String sql = "select kaytID,etunimi,sukunimi,sahkoposti,salasana from kayttaja";
@@ -116,12 +148,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		List<Henkilo> henkilot = jdbcTemplate.query(sql, mapper);
 
 		return henkilot;
-		
-		
-	}
 
-	
-	
-	
+	}
 
 }

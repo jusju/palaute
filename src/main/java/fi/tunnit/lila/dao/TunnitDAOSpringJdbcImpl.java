@@ -44,8 +44,7 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 	public void talleta(Tunnit t) {
 		final String sql = "insert into tunnit(kaytID, projID, date, aloitusaika, lopetusaika, kuvaus) values(?,?,?,?,?,?)";
 
-		// anonyymi sisäluokka tarvitsee vakioina välitettävät arvot,
-		// jotta roskien keruu onnistuu tämän metodin suorituksen päättyessä.
+		
 		final int kaytID = t.getKaytID();
 		final int projID = t.getProjID();
 		final String date = t.getDate();
@@ -53,11 +52,10 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 		final String lopetusaika = t.getLopetusaika();
 		final String kuvaus = t.getKuvaus();
 
-		// jdbc pistää generoidun id:n tänne talteen
+		
 		KeyHolder idHolder = new GeneratedKeyHolder();
 
-		// suoritetaan päivitys itse määritellyllä PreparedStatementCreatorilla
-		// ja KeyHolderilla
+		
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(
 					Connection connection) throws SQLException {
@@ -73,11 +71,12 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 			}
 		}, idHolder);
 
-		// tallennetaan id takaisin beaniin, koska
-		// kutsujalla pitäisi olla viittaus samaiseen olioon
+
 		t.setTuntiID(idHolder.getKey().intValue());
 
 	}
+	
+	
 
 	public List<Tunnit> etsi(int kaytID) {
 		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit where kaytID = ?";

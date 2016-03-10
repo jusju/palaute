@@ -36,7 +36,7 @@
 				<form:input path="salasana" />
 			</p>
 			<p>
-				<button type="submit">Lisää</button>
+				<button type="submit">tallenna</button>
 			</p>
 		</fieldset>
 	</form:form>
