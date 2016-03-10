@@ -16,6 +16,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 
+
+
+import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.Tunnit;
 
 
@@ -126,6 +129,23 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 		}
 		return t;
 
+	}
+	
+	public Tunnit poistaTunti(int id){
+		final String sql = "DELETE FROM tunnit WHERE tuntiID = ?";
+		Object[] parametrit = new Object[] { id };
+		RowMapper<Tunnit> mapper = new TunnitRowMapper();
+
+		Tunnit t;
+		try {
+			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return t;
+
+
+		
 	}
 	
 	
