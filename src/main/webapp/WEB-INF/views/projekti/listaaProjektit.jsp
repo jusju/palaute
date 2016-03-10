@@ -12,23 +12,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>Kaikki Tunnit</h2>
+<h2>Kaikki Projektit</h2>
 	<table>
 		<tr>
-			<td><c:forEach items="${tunnit}" var="tunti">
-					<table>
+			<td><c:forEach items="${projektit}" var="projekti">
+					<table border="0">
 						<tr>
-							<td><a href="<c:out value="${tunti.tuntiID}"/>"></a> <c:out
-									value="${tunti.tuntiID}" default="-----" /></td>
-							<td><c:out value="${tunti.kuvaus}" default="-----" /></td>
-							<td><a href="delete/${tunti.tuntiID}">poista</a></td>
+							<td><a href="<c:out value="${projekti.projID}"/>"></a></td>
+							<td><c:out value="${projekti.projID}" default="-----" /></td>
+							<td><c:out value="${projekti.projnimi}" default="-----" /></td>
+							<td><a href="delete/${projekti.projID}">poista</a></td>
 						</tr>
 
 					</table>
 				</c:forEach>
 		<tr>
-			<td><a href="<c:out value="uusi"/>">Lisää</a></td>
+			<td><a href="<c:out value="uusi"/>">Lisää</td>
 		</tr>
-		</table>
 </body>
 </html>

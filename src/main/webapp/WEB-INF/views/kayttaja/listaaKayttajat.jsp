@@ -11,23 +11,30 @@
 </head>
 <body>
 	<h2>Kaikki käyttäjät</h2>
-	<table>
+	<table border="0">
 		<tr>
-			<td><c:forEach items="${henkilot}" var="henkilo">
-					<table>
+ 		<td>Käyttäjän ID</td> 
+		<td>Etunimi</td> 
+		<td>Sukunimi</td> 
+		<td></td> 
+		<td></td> 
+		</tr>
+			<c:forEach items="${henkilot}" var="henkilo">
 						<tr>
-							<td><a href="<c:out value="ktunti/${henkilo.id}"/>"> <c:out
-										value="${henkilo.etunimi}"></c:out> <c:out
-										value="${henkilo.sukunimi}"></c:out></a> <a
-								href="muokkaa/${henkilo.id}">muokkaa</a> <a
-								href="delete/${henkilo.id}">poista</a></td>
+							
+							<td><a href="ktunti/${henkilo.id}">${henkilo.id}</a></td> 
+							<td><c:out value="${henkilo.etunimi}"></c:out></td> 
+							<td><c:out value="${henkilo.sukunimi}"></c:out></td> 
+						
+								<td><a href="muokkaa/${henkilo.id}">muokkaa</a></td>
+								<td><a href="delete/${henkilo.id}">poista</a></td>
 						</tr>
 
-					</table>
-
 				</c:forEach>
-		<tr>
-			<td><a href="<c:out value="uusi"/>">Lisää</td>
-		</tr>
+		
+
+		</table>
+	<a href="<c:out value="uusi"/>">Lisää</a>
+		
 </body>
 </html>

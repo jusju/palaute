@@ -85,23 +85,20 @@ public class HenkiloController {
 		dao.talleta(henkilo);
 		return "redirect:/henkilo/lista";
 	}
-	
-	
 
 	// KÄYTTÄJÄN MUOKKAUS TEKEMINEN
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.GET)
-	public String getMuokkaaForm(@PathVariable Integer id,Model model) 
-	{
+	public String getMuokkaaForm(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
 		model.addAttribute("henkilo", henkilo);
-		
+
 		Henkilo henkiloa = new HenkiloImpl();
 		henkiloa.setEtunimi("oletusetunimi");
 
 		model.addAttribute("henkilo", henkiloa);
 		return "kayttaja/muokkaaKayttaja";
 	}
-	
+
 	// KÄYTTÄJÄN MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
@@ -181,15 +178,18 @@ public class HenkiloController {
 		return "kayttaja/listaaTunnit";
 	}
 
-	// POISTA KÄYTTÄJÄ
+	// POISTA KÄYTTÄJÄ 
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-	public String showDelete(@PathVariable("id") Integer id) {
-		
-	
-		dao.poistaHenkilo(id);
-		return "henkilo/lista";
+	public String showDelete(@PathVariable("id") Integer id) {	
 
+		
+			tdao.poistaHTunnit(id);
+			dao.poistaHenkilo(id);
+
+			return "kayttaja/poistoApu";
 	}
+	
+	
 
 }

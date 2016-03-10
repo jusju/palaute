@@ -1,4 +1,8 @@
 INSERT INTO projektit
 	(projnimi)
 values
-	('softaprojekti2');
+	('softaprojekti3'),
+	('Kauppa'),
+	('Raksa'),
+	('BangBus'),
+	('Automaatio');

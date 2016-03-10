@@ -103,6 +103,7 @@ public class TuntiController {
 	public String showDelete(@PathVariable("tuntiID") Integer tuntiID) {
 		tdao.poistaTunti(tuntiID);
 		return "tunnit/lista";
+ 
 
 	}
 

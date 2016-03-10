@@ -42,7 +42,7 @@ import fi.tunnit.lila.dao.TunnitDAO;
 
 
 
-@RequestMapping (value="/tunnit")
+@RequestMapping (value="/projektit")
 
 public class ProjektiController {
 
@@ -85,7 +85,17 @@ public class ProjektiController {
 		this.pdao = pdao;
 	}
 	
-	
+	// HAE KAIKKI PROJEKTIT
+		@RequestMapping(value = "lista", method = RequestMethod.GET)
+		public String showLista(Model modelAll) {
+
+			List<Projekti> projektit = new ArrayList<Projekti>();
+			projektit = pdao.haeKaikki();
+
+			modelAll.addAttribute("projektit", projektit);
+			return "projekti/listaaProjektit";
+		}
+		
 		
 		
 }

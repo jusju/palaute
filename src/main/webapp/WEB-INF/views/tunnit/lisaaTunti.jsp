@@ -7,8 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <title>Tuntien lisääminen</title>
-
+ <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 </head>	
 <body>
 	<h1>
@@ -26,8 +33,9 @@
 					<form:input path="projID" />
 				</p>
 				<p>	
+					
 					<form:label path="date">Päivämäärä</form:label><br/>
-					<form:input path="date" />
+					<form:input type="text" id="datepicker" name="datepicker" path="date" />
 				</p>
 				<p>	
 					<form:label path="aloitusaika">Aloitusaika</form:label><br/>
@@ -47,5 +55,7 @@
 				</p>
 			</fieldset>
 		</form:form>
+		
+		
 </body>
 </html>
