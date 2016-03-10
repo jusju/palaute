@@ -131,9 +131,9 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 
 	}
 	
-	public Tunnit poistaTunti(int id){
+	public Tunnit poistaTunti(int tuntiID){
 		final String sql = "DELETE FROM tunnit WHERE tuntiID = ?";
-		Object[] parametrit = new Object[] { id };
+		Object[] parametrit = new Object[] { tuntiID };
 		RowMapper<Tunnit> mapper = new TunnitRowMapper();
 
 		Tunnit t;

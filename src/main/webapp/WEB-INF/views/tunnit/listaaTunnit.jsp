@@ -19,11 +19,13 @@
 		<a href="<c:out value="${tunti.tuntiID}"/>"></a>
 	
 	<c:out value="${tunti.tuntiID}" default="-----"/></td>
-<td><c:out value="${tunti.kuvaus}" default="-----"/>
+<td><c:out value="${tunti.kuvaus}" default="-----"/></td>
+<td><a href="delete/${tunti.tuntiID}">poista</a>
 </td></tr>
+
 </table>
 	</c:forEach>
-	
+	<tr><td><a href="<c:out value="uusi"/>">Lisää</td></tr>
 
 
 

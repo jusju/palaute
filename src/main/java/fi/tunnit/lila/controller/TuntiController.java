@@ -115,7 +115,7 @@ public class TuntiController {
 					tunnit = tdao.haeTunnit();
 					
 					modelAll.addAttribute("tunnit", tunnit);
-					return "kayttaja/listaaTunnit";
+					return "tunnit/listaaTunnit";
 				}
 				
 				//POISTA KÄYTTÄJÄ
