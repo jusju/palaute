@@ -83,7 +83,7 @@ public class HenkiloController {
 	@RequestMapping(value = "uusi", method = RequestMethod.POST)
 	public String muokkaa(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
 		dao.talleta(henkilo);
-		return "redirect:/tunnit/lista";
+		return "redirect:/henkilo/lista";
 	}
 	
 	

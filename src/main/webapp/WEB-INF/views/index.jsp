@@ -57,6 +57,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 		<script src="resources/js/polyfills.js"></script>
 		<script src="resources/js/demo2.js"></script>
 		<!-- For the demo ad only -->   
-<script src="http://tympanus.net/codrops/adpacks/demoad.js"></script>
+
 	</body>
 </html>

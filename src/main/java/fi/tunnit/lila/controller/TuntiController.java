@@ -83,7 +83,7 @@ public class TuntiController {
 	@RequestMapping(value = "uusi", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "tunti") TunnitImpl tunti) {
 		tdao.talleta(tunti);
-		return "tunnit/lisaaTunti";
+		return "redirect:/tunnit/lista";
 	}
 
 	// HAE KAIKKI TUNNIT
