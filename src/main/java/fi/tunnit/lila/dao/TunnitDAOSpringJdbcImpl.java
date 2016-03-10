@@ -147,6 +147,22 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 		
 	}
 	
+	public Tunnit poistaHTunnit(int kaytID){
+		final String sql = "DELETE FROM tunnit WHERE kaytID = ?";
+		Object[] parametrit = new Object[] { kaytID };
+		RowMapper<Tunnit> mapper = new TunnitRowMapper();
+
+		Tunnit t;
+		try {
+			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return t;
+
+
+		
+	}
 	
 	
 }

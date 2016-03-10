@@ -97,7 +97,7 @@ public class TuntiController {
 		return "tunnit/listaaTunnit";
 	}
 
-	// POISTA KÄYTTÄJÄ
+	// POISTA TUNTI
 
 	@RequestMapping(value = "delete/{tuntiID}", method = RequestMethod.GET)
 	public String showDelete(@PathVariable("tuntiID") Integer tuntiID) {

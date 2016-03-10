@@ -16,4 +16,6 @@ public interface TunnitDAO {
 	
 	public Tunnit poistaTunti(int tuntiID);
 	
+	public Tunnit poistaHTunnit(int kaytID);
+	
 }
