@@ -26,6 +26,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.bean.Projekti;
+import fi.tunnit.lila.bean.ProjektiImpl;
 import fi.tunnit.lila.dao.HenkiloDAO;
 import fi.tunnit.lila.dao.ProjektiDAO;
 import fi.tunnit.lila.bean.Tunnit;
@@ -85,6 +86,24 @@ public class ProjektiController {
 		this.pdao = pdao;
 	}
 	
+	// FORMIN TEKEMINEN
+		@RequestMapping(value = "uusi", method = RequestMethod.GET)
+		public String getCreateForm(Model model) {
+			Projekti uusiProjekti = new ProjektiImpl();
+			
+
+			model.addAttribute("projekti", uusiProjekti);
+			return "projekti/lisaaProjekti";
+		}
+
+		// FORMIN TIETOJEN VASTAANOTTO
+		@RequestMapping(value = "uusi", method = RequestMethod.POST)
+		public String create(@ModelAttribute(value = "projekti") ProjektiImpl projekti) {
+			pdao.talleta(projekti);
+			return "redirect:/projekti/lista";
+		}
+		
+	
 	// HAE KAIKKI PROJEKTIT
 		@RequestMapping(value = "lista", method = RequestMethod.GET)
 		public String showLista(Model modelAll) {
@@ -94,6 +113,16 @@ public class ProjektiController {
 
 			modelAll.addAttribute("projektit", projektit);
 			return "projekti/listaaProjektit";
+		}
+		
+		// POISTA PROJEKTI
+
+		@RequestMapping(value = "delete/{projID}", method = RequestMethod.GET)
+		public String showDelete(@PathVariable("projID") Integer projID) {
+			pdao.poistaProjekti(projID);
+			return "projekti/lista";
+	 
+
 		}
 		
 		

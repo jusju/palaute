@@ -45,7 +45,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 						<li><a href="#"><span></span></a></li>
 						<li><a href="henkilo/lista"><span>Käyttäjät</span></a></li>
 						<li><a href="tunnit/lista"><span>Tunnit</span></a></li>
-						<li><a href="projekti/lista"><span>Projektit</span></a></li>
+						<li><a href="projektit/lista"><span>Projektit</span></a></li>
 						<li><a href="#"><span></span></a></li>
 						<li><a href="#"><span></span></a></li>
 					 </ul>

@@ -27,7 +27,8 @@
 					</table>
 				</c:forEach>
 		<tr>
-			<td><a href="<c:out value="uusi"/>">Lisää</td>
+			<td><a href="<c:out value="uusi"/>">Lisää</a></td>
 		</tr>
+		</table>
 </body>
 </html>
