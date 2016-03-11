@@ -18,4 +18,6 @@ public interface TunnitDAO {
 	
 	public Tunnit poistaHTunnit(int kaytID);
 	
+	public Tunnit poistaPTunnit(int projID);
+	
 }

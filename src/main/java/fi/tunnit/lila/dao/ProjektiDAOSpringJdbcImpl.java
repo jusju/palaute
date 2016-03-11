@@ -99,8 +99,8 @@ import fi.tunnit.lila.bean.Tunnit;
 				throw new HenkiloaEiLoydyPoikkeus(e);
 			}
 			return p;
-
-
 			
 		}
+		
+
 }

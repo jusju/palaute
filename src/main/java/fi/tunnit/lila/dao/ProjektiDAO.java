@@ -11,7 +11,11 @@ import fi.tunnit.lila.bean.Tunnit;
 public interface ProjektiDAO {
 
 	public abstract List<Projekti> haeKaikki();
+	
 	public abstract Projekti etsi(int projID);
+	
 	public abstract void talleta(Projekti projektit);
+	
 	public Projekti poistaProjekti(int projID);
+	
 }
