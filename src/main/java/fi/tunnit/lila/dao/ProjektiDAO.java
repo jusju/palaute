@@ -16,6 +16,6 @@ public interface ProjektiDAO {
 	
 	public abstract void talleta(Projekti projektit);
 	
-	public Projekti poistaProjekti(int projID);
+	public void poistaProjekti(int projID);
 	
 }

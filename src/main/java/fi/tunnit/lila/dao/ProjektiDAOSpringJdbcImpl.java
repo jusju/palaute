@@ -87,18 +87,14 @@ import fi.tunnit.lila.bean.Tunnit;
 			
 		}
 		
-		public Projekti poistaProjekti(int projID){
+		public void poistaProjekti(int projID){
 			final String sql = "DELETE FROM projektit WHERE projID = ?";
-			Object[] parametrit = new Object[] { projID };
-			RowMapper<Projekti> mapper = new ProjektiRowMapper();
 
-			Projekti p;
 			try {
-				p = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+			jdbcTemplate.update(sql, projID);
 			} catch (IncorrectResultSizeDataAccessException e) {
 				throw new HenkiloaEiLoydyPoikkeus(e);
 			}
-			return p;
 			
 		}
 		

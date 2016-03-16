@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import fi.tunnit.lila.bean.Henkilo;
+import fi.tunnit.lila.bean.Tunnit;
 
 @Repository
 public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
@@ -107,7 +108,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
 		// tallennetaan id takaisin beaniin, koska
 		// kutsujalla pitäisi olla viittaus samaiseen olioon
-		h.setId(idHolder.getKey().intValue());
+		//h.setId(idHolder.getKey().intValue()); - Evgenyn korjaus, käyttäjän muokkaus ei toiminut ilman tätä.
 
 	}
 
@@ -126,18 +127,16 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
 	}
 
-	public Henkilo poistaHenkilo(int id) {
+	public void poistaHenkilo(int id) {
 		final String sql = "DELETE FROM kayttaja WHERE kaytID = ?";
-		Object[] parametrit = new Object[] { id };
-		RowMapper<Henkilo> mapper = new HenkiloRowMapper();
 
-		Henkilo h;
 		try {
-			h = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		jdbcTemplate.update(sql, id);
+				
 		} catch (IncorrectResultSizeDataAccessException e) {
 			throw new HenkiloaEiLoydyPoikkeus(e);
 		}
-		return h;
+
 
 	}
 

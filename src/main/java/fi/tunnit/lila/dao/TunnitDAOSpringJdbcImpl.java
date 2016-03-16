@@ -130,52 +130,38 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 
 	}
 	
-	public Tunnit poistaTunti(int tuntiID){
+	public void poistaTunti(int tuntiID){
 		final String sql = "DELETE FROM tunnit WHERE tuntiID = ?";
-		Object[] parametrit = new Object[] { tuntiID };
-		RowMapper<Tunnit> mapper = new TunnitRowMapper();
 
-		Tunnit t;
 		try {
-			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		jdbcTemplate.update(sql, tuntiID);
 		} catch (IncorrectResultSizeDataAccessException e) {
 			throw new HenkiloaEiLoydyPoikkeus(e);
 		}
-		return t;
-
-
-		
+	
 	}
 	
-	public Tunnit poistaHTunnit(int kaytID){
+	public void poistaHTunnit(int kaytID){
+
 		final String sql = "DELETE FROM tunnit WHERE kaytID = ?";
-		Object[] parametrit = new Object[] { kaytID };
-		RowMapper<Tunnit> mapper = new TunnitRowMapper();
 
-		Tunnit t;
 		try {
-			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		jdbcTemplate.update(sql,kaytID);
+				
 		} catch (IncorrectResultSizeDataAccessException e) {
 			throw new HenkiloaEiLoydyPoikkeus(e);
 		}
-		return t;
 
-
-		
 	}
 	
-	public Tunnit poistaPTunnit(int projID){
+	public void poistaPTunnit(int projID){
 		final String sql = "DELETE FROM tunnit WHERE projID = ?";
-		Object[] parametrit = new Object[] { projID };
-		RowMapper<Tunnit> mapper = new TunnitRowMapper();
 
-		Tunnit t;
 		try {
-			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		jdbcTemplate.update(sql, projID);
 		} catch (IncorrectResultSizeDataAccessException e) {
 			throw new HenkiloaEiLoydyPoikkeus(e);
 		}
-		return t;
 
 
 		

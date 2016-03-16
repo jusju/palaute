@@ -100,7 +100,7 @@ public class ProjektiController {
 		@RequestMapping(value = "uusi", method = RequestMethod.POST)
 		public String create(@ModelAttribute(value = "projekti") ProjektiImpl projekti) {
 			pdao.talleta(projekti);
-			return "redirect:/projekti/lista";
+			return "redirect:/projektit/lista";
 		}
 		
 	
