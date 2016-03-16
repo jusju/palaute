@@ -14,10 +14,10 @@ public interface TunnitDAO {
 	
 	public abstract void talleta(Tunnit tunnit);
 	
-	public Tunnit poistaTunti(int tuntiID);
+	public void poistaTunti(int tuntiID);
 	
-	public Tunnit poistaHTunnit(int kaytID);
+	public void poistaHTunnit(int kaytID);
 	
-	public Tunnit poistaPTunnit(int projID);
+	public void poistaPTunnit(int projID);
 	
 }

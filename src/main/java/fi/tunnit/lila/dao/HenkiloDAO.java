@@ -16,6 +16,5 @@ public interface HenkiloDAO {
 
 	public abstract List<Henkilo> haeKaikki();
 
-	
-	 public Henkilo poistaHenkilo(int id);
+	public void poistaHenkilo(int id);
 }
