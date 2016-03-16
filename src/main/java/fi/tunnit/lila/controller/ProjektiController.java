@@ -100,7 +100,7 @@ public class ProjektiController {
 		@RequestMapping(value = "uusi", method = RequestMethod.POST)
 		public String create(@ModelAttribute(value = "projekti") ProjektiImpl projekti) {
 			pdao.talleta(projekti);
-			return "redirect:/projekti/lista";
+			return "redirect:/projektit/lista";
 		}
 		
 	
@@ -114,6 +114,24 @@ public class ProjektiController {
 			modelAll.addAttribute("projektit", projektit);
 			return "projekti/listaaProjektit";
 		}
+		/*
+		// FORMIN TEKEMINEN
+				@RequestMapping(value = "delete", method = RequestMethod.GET)
+				public String getLuoForm(Model model) {
+					Projekti uusiProjekti = new ProjektiImpl();
+					
+
+					model.addAttribute("projekti", uusiProjekti);
+					return "projekti/lisaaProjekti";
+				}
+
+				// FORMIN TIETOJEN VASTAANOTTO
+				@RequestMapping(value = "delete", method = RequestMethod.POST)
+				public String Poista(@ModelAttribute(value = "projekti") ProjektiImpl projekti) {
+					pdao.talleta(projekti);
+					return "redirect:/projektit/lista";
+				}
+		*/
 		
 		// POISTA PROJEKTI
 
