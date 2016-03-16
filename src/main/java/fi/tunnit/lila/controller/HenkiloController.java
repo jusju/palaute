@@ -93,8 +93,10 @@ public class HenkiloController {
 		model.addAttribute("henkilo", henkilo);
 
 		Henkilo henkiloa = new HenkiloImpl();
-		henkiloa.setEtunimi("oletusetunimi");
-
+		henkiloa.setEtunimi(henkilo.getEtunimi());
+		henkiloa.setSukunimi(henkilo.getSukunimi());
+		henkiloa.setSposti(henkilo.getSposti());
+		henkiloa.setSalasana(henkilo.getSalasana());
 		model.addAttribute("henkilo", henkiloa);
 		return "kayttaja/muokkaaKayttaja";
 	}
@@ -103,7 +105,7 @@ public class HenkiloController {
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
 		dao.muokkaa(henkilo);
-		return "redirect:/tunnit/lista";
+		return "redirect:/henkilo/lista";
 	}
 
 	// HAE KAIKKI OIKEA
