@@ -58,5 +58,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 		<script src="resources/js/demo2.js"></script>
 		<!-- For the demo ad only -->   
 
+		<jsp:include page="navigointi.jsp"></jsp:include>
 	</body>
 </html>
