@@ -121,7 +121,7 @@ public class ProjektiController {
 		public String showDelete(@PathVariable("projID") Integer projID) {
 			tdao.poistaPTunnit(projID);
 			pdao.poistaProjekti(projID);
-			return "projekti/lista";
+			return "projektit/lista";
 	 
 
 		}
