@@ -13,6 +13,8 @@ public interface HenkiloDAO {
 	public abstract void muokkaa(Henkilo henkilo);
 
 	public abstract Henkilo etsi(int id);
+	
+	public abstract Henkilo etsiSposti(String sposti);
 
 	public abstract List<Henkilo> haeKaikki();
 

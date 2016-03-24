@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.swing.tree.RowMapper;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,12 +82,16 @@ public class HenkiloController {
 
 	// FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "uusi", method = RequestMethod.POST)
-	public String muokkaa(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
+	public String muokkaa(@ModelAttribute(value = "henkilo") @Valid HenkiloImpl henkilo, BindingResult result) {
+		if(result.hasErrors()){
+			return "kayttaja/lisaaKayttaja";
+		}else{
 		dao.talleta(henkilo);
 		return "redirect:/henkilo/lista";
+		}
 	}
 
-	// KÄYTTÄJÄN MUOKKAUS TEKEMINEN
+	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS TEKEMINEN
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.GET)
 	public String getMuokkaaForm(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
@@ -101,7 +106,7 @@ public class HenkiloController {
 		return "kayttaja/muokkaaKayttaja";
 	}
 
-	// KÄYTTÄJÄN MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
+	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
 		dao.muokkaa(henkilo);
@@ -130,7 +135,7 @@ public class HenkiloController {
 		return "kayttaja/listaaTunnit";
 	}
 
-	// HENKILÖN TIETOJEN NÄYTTÄMINEN
+	// HENKILï¿½N TIETOJEN Nï¿½YTTï¿½MINEN
 	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
@@ -149,7 +154,7 @@ public class HenkiloController {
 		return "kayttaja/naytaKayttaja";
 	}
 
-	// TUNNIN TIETOJEN NÄYTTÄMINEN
+	// TUNNIN TIETOJEN Nï¿½YTTï¿½MINEN
 
 	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
 	public String getTunti(@PathVariable Integer tuntiID, Model model) {
@@ -159,7 +164,7 @@ public class HenkiloController {
 		return "tunnit/tunninTiedot";
 	}
 
-	// PROJEKTIN TIETOJEN LÖYTÄMINEN
+	// PROJEKTIN TIETOJEN Lï¿½YTï¿½MINEN
 	@RequestMapping(value = "ptunti/{projID}", method = RequestMethod.GET)
 	public String getProj(@PathVariable Integer projID, Model model) {
 		Projekti projekti = pdao.etsi(projID);
@@ -180,7 +185,7 @@ public class HenkiloController {
 		return "kayttaja/listaaTunnit";
 	}
 
-	// POISTA KÄYTTÄJÄ 
+	// POISTA Kï¿½YTTï¿½Jï¿½ 
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String showDelete(@PathVariable("id") Integer id) {	

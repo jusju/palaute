@@ -14,10 +14,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.RestTemplate;
+
 
 import fi.tunnit.lila.bean.Henkilo;
-import fi.tunnit.lila.bean.Tunnit;
+
 
 @Repository
 public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
@@ -122,6 +122,21 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 			h = jdbcTemplate.queryForObject(sql, parametrit, mapper);
 		} catch (IncorrectResultSizeDataAccessException e) {
 			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return h;
+
+	}
+	
+	public Henkilo etsiSposti(String sposti) {
+		String sql = "select kaytID,etunimi,sukunimi,sahkoposti,salasana from kayttaja where sahkoposti = ?";
+		Object[] parametrit = new Object[] { sposti };
+		RowMapper<Henkilo> mapper = new HenkiloRowMapper();
+
+		Henkilo h;
+		try {
+			h = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			return null;
 		}
 		return h;
 

@@ -25,6 +25,7 @@
 							<td><a href="ktunti/${henkilo.id}">${henkilo.id}</a></td> 
 							<td><c:out value="${henkilo.etunimi}"></c:out></td> 
 							<td><c:out value="${henkilo.sukunimi}"></c:out></td> 
+							<td><c:out value="${henkilo.sposti}"></c:out></td> 
 						
 								<td><a href="muokkaa/${henkilo.id}">muokkaa</a></td>
 								<td><a href="delete/${henkilo.id}">poista</a></td>

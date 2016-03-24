@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.tree.RowMapper;
 
 import org.springframework.http.HttpStatus;
@@ -98,13 +100,13 @@ public class TuntiController {
 	}
 
 	// POISTA TUNTI
+		@RequestMapping(value = "delete/{tuntiID}", method = RequestMethod.GET)
+		public String getCreateForm(@PathVariable("tuntiID") Integer tuntiID, Model model) {
+			tdao.poistaTunti(tuntiID);
+			return "tunnit/poistoApu";
+		}
 
-	@RequestMapping(value = "delete/{tuntiID}", method = RequestMethod.GET)
-	public String showDelete(@PathVariable("tuntiID") Integer tuntiID) {
-		tdao.poistaTunti(tuntiID);
-		return "tunnit/lista";
- 
-
-	}
+		
+	
 
 }
