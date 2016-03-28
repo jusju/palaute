@@ -20,6 +20,10 @@ public interface Henkilo {
 	
 	public abstract String getSalasana();
 
-	public abstract void setSalasana(String sukunimi);
+	public abstract void setSalasana(String salasana);
+	
+	public abstract String getVertailu();
+
+	public abstract void setVertailu(String vertailu);
 
 }

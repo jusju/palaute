@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.swing.tree.RowMapper;
 import javax.validation.Valid;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ import fi.tunnit.lila.dao.ProjektiDAO;
 import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.bean.TunnitImpl;
 import fi.tunnit.lila.dao.TunnitDAO;
+import fi.tunnit.lila.util.SalasananKryptaaja;
 
 @Controller
 @RequestMapping(value = "/henkilo")
@@ -45,7 +48,8 @@ public class HenkiloController {
 
 	@Inject
 	private ProjektiDAO pdao;
-
+	
+	
 	public HenkiloDAO getDao() {
 		return dao;
 	}
@@ -86,7 +90,9 @@ public class HenkiloController {
 		if(result.hasErrors()){
 			return "kayttaja/lisaaKayttaja";
 		}else{
-		dao.talleta(henkilo);
+			SalasananKryptaaja sk = new SalasananKryptaaja();
+			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
+			dao.talleta(henkilo);
 		return "redirect:/henkilo/lista";
 		}
 	}
@@ -108,9 +114,13 @@ public class HenkiloController {
 
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
-	public String create(@ModelAttribute(value = "henkilo") HenkiloImpl henkilo) {
+	public String create(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
+		if(result.hasErrors()){
+			return "kayttaja/muokkaaKayttaja";
+		}else{
 		dao.muokkaa(henkilo);
 		return "redirect:/henkilo/lista";
+		}
 	}
 
 	// HAE KAIKKI OIKEA

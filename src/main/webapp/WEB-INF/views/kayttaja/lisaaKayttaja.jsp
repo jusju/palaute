@@ -37,6 +37,11 @@
 				<form:input path="salasana" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
 			</p>
 			<p>
+				<form:label path="vertailu">Vertailu</form:label>
+				<br />
+				<form:input path="vertailu" cssErrorClass="VirheellinenKentta"/> <form:errors path="" cssClass="Virheteksti"/>
+			</p>
+			<p>
 				<button type="submit">Lisää</button>
 			</p>
 		</fieldset>

@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 
+
 import fi.tunnit.lila.bean.Henkilo;
 
 
@@ -37,9 +38,13 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 	 * Tallettaa parametrina annetun henkilön tietokantaan. Tietokannan
 	 * generoima id asetetaan parametrina annettuun olioon.
 	 */
+	@SuppressWarnings("deprecation")
 	public void talleta(Henkilo h) {
 		final String sql = "insert into kayttaja(etunimi, sukunimi, sahkoposti, salasana) values(?,?,?,?)";
+		final String auth = "insert into kayttajan_authority(kayttaja_id, authority_id) values(?, 1)";
+		final String maxidsql = "select MAX(kaytID) AS kaytID FROM kayttaja";
 
+		
 		// anonyymi sisäluokka tarvitsee vakioina välitettävät arvot,
 		// jotta roskien keruu onnistuu tämän metodin suorituksen
 		// päättyessä.
@@ -66,6 +71,20 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 				return ps;
 			}
 		}, idHolder);
+		
+		//etsimme viimmeinen id
+		final int i;
+		i = jdbcTemplate.queryForInt(maxidsql);
+		
+		//lisätään auth_rooli viimmeselle käyttäjälle
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(auth);
+				ps.setInt(1, i);
+				return ps;
+			}
+		});
 
 		// tallennetaan id takaisin beaniin, koska
 		// kutsujalla pitäisi olla viittaus samaiseen olioon

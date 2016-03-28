@@ -18,22 +18,22 @@
 			<p>
 				<form:label path="etunimi">Etunimi</form:label>
 				<br />
-				<form:input path="etunimi" />
+				<form:input path="etunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="etunimi" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<form:label path="sukunimi">Sukunimi</form:label>
 				<br />
-				<form:input path="sukunimi" />
+				<form:input path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<form:label path="sposti">Sähköposti</form:label>
 				<br />
-				<form:input path="sposti" />
+				<form:input path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<form:label path="salasana">Salasana</form:label>
 				<br />
-				<form:input path="salasana" />
+				<form:input path="salasana" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<button type="submit">tallenna</button>
