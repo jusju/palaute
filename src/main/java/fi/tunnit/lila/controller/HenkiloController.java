@@ -88,7 +88,7 @@ public class HenkiloController {
 	@RequestMapping(value = "uusi", method = RequestMethod.POST)
 	public String muokkaa(@ModelAttribute(value = "henkilo") @Valid HenkiloImpl henkilo, BindingResult result) {
 		if(result.hasErrors()){
-			return "kayttaja/lisaaKayttaja";
+			return "/lisaaKayttaja";
 		}else{
 			SalasananKryptaaja sk = new SalasananKryptaaja();
 			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));

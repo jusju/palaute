@@ -91,7 +91,71 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		h.setId(idHolder.getKey().intValue());
 
 	}
+	
+	/* TRANSAKTION
+	 * 
+    TransactionDefinition def = new DefaultTransactionDefinition();
+    TransactionStatus status = transactionManager.getTransaction(def);
+    
+	// anonyymi sisäluokka tarvitsee vakioina välitettävät arvot,
+	// jotta roskien keruu onnistuu tämän metodin suorituksen
+	// päättyessä.
+	final String etunimi = h.getEtunimi();
+	final String sukunimi = h.getSukunimi();
+	final String sposti = h.getSposti();
+	final String salasana = h.getSalasana();
 
+	// jdbc pistää generoidun id:n tänne talteen
+	KeyHolder idHolder = new GeneratedKeyHolder();
+	
+	try {
+		
+		final String sql = "insert into kayttaja(etunimi, sukunimi, sahkoposti, salasana) values(?,?,?,?)";
+		
+		// suoritetaan päivitys itse määritellyllä
+		// PreparedStatementCreatorilla
+		// ja KeyHolderilla
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(sql,
+						new String[] { "id" });
+				ps.setString(1, etunimi);
+				ps.setString(2, sukunimi);
+				ps.setString(3, sposti);
+				ps.setString(4, salasana);
+				return ps;
+			}
+		}, idHolder);
+		
+		//etsimme viimmeinen id
+		final String maxidsql = "select MAX(kaytID) AS kaytID FROM kayttaja";
+		final int i;
+		i = jdbcTemplate.queryForInt(maxidsql);
+		
+		//lisätään auth_rooli viimmeselle käyttäjälle
+		final String auth = "insert into kayttajan_authority(kayttaja_id, authority_id) values(?, 1)";
+		
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(auth);
+				ps.setInt(1, i);
+				return ps;
+			}
+		});
+		transactionManager.commit(status);
+	
+	} catch (Exception e) {
+         System.out.println("Error in creating record, rolling back");
+         transactionManager.rollback(status);
+         throw e;
+	}
+
+	// tallennetaan id takaisin beaniin, koska
+	// kutsujalla pitäisi olla viittaus samaiseen olioon
+	h.setId(idHolder.getKey().intValue());
+	 */
 	public void muokkaa(Henkilo h) {
 		final String sql = "update kayttaja set etunimi=?, sukunimi=?, sahkoposti=?, salasana=? where kaytID=?";
 	
