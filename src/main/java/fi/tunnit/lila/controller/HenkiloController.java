@@ -78,7 +78,7 @@ public class HenkiloController {
 	@RequestMapping(value = "uusi", method = RequestMethod.GET)
 	public String getCreateForm(Model model) {
 		Henkilo tyhjaHenkilo = new HenkiloImpl();
-		tyhjaHenkilo.setEtunimi("oletusetunimi");
+		
 
 		model.addAttribute("henkilo", tyhjaHenkilo);
 		return "kayttaja/lisaaKayttaja";
