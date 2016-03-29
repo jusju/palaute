@@ -93,7 +93,7 @@ public class HenkiloController {
 			SalasananKryptaaja sk = new SalasananKryptaaja();
 			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
 			dao.talleta(henkilo);
-		return "redirect:/henkilo/lista";
+		return "redirect:/";
 		}
 	}
 

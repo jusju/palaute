@@ -34,12 +34,12 @@
 			<p>
 				<form:label path="salasana">Salasana</form:label>
 				<br />
-				<form:input path="salasana" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
+				<form:input path="salasana" type="password" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<form:label path="vertailu">Salasana</form:label>
 				<br />
-				<form:input path="vertailu" cssErrorClass="VirheellinenKentta"/> <form:errors path="" cssClass="Virheteksti"/>
+				<form:input path="vertailu" type="password" cssErrorClass="VirheellinenKentta"/> <form:errors path="" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<button type="submit">Lisää</button>

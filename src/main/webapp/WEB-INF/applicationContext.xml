@@ -33,7 +33,10 @@
 	
 	<!-- DATA SOURCE -->
 	
-	<context:property-placeholder location="classpath*:/db_connection.properties" />
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+		
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -43,9 +46,7 @@
 		<property name="password" value="${db.password}" />
 	</bean>
 	
-		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-			<property name="dataSource" ref="dataSource"/>
-	</bean>
+	<context:property-placeholder location="classpath*:/db_connection.properties" />
 	
 	<!-- SPRING SECURITY -->
 
@@ -71,8 +72,8 @@
 		<sec:authentication-provider>
 			<sec:password-encoder ref="encoder" />
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select sahkoposti, salasana from kayttaja where sahkoposti=?"
-				authorities-by-username-query="select u.sahkoposti, a.role from kayttaja u JOIN kayttajan_authority ua ON (u.id = ua.kayttaja_id) JOIN authority a ON (a.id = ua.authority_id) WHERE u.sahkoposti = ?" />
+				users-by-username-query="select sahkoposti, salasana, 1 from kayttaja where sahkoposti=?"
+				authorities-by-username-query="select u.sahkoposti, a.role from kayttaja u JOIN kayttajan_authority ua ON (u.kaytID = ua.kayttaja_id) JOIN authority a ON (a.id = ua.authority_id) WHERE u.sahkoposti = ?" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
