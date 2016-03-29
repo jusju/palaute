@@ -29,6 +29,7 @@
 		<tr><td>&nbsp;</td><td><button type="submit">Kirjaudu</button></td></tr>
 		</table>
 	</fieldset>
+	<a href="henkilo/uusi">Rekisteröi</a>
 	</form>
 	</div>
 </body>

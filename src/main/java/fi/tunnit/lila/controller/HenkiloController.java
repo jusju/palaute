@@ -81,7 +81,7 @@ public class HenkiloController {
 		
 
 		model.addAttribute("henkilo", tyhjaHenkilo);
-		return "kayttaja/lisaaKayttaja";
+		return "lisaaKayttaja";
 	}
 
 	// FORMIN TIETOJEN VASTAANOTTO
