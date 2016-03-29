@@ -33,8 +33,8 @@
 		<sec:authentication-provider>
 			<sec:password-encoder ref="encoder" />
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select username, password_encrypted, enabled from webuser2 where username=? and enabled = 1"
-				authorities-by-username-query="select u.username, a.role from webuser2 u JOIN webuser2_authority ua ON (u.id = ua.webuser2_id) JOIN authority a ON (a.id = ua.authority_id) WHERE u.username = ?" />
+				users-by-username-query="select sahkoposti, salasana from kayttaja where sahkoposti=?"
+				authorities-by-username-query="select u.sahkoposti, a.role from kayttaja u JOIN kayttajan_authority ua ON (u.id = ua.kayttaja_id) JOIN authority a ON (a.id = ua.authority_id) WHERE u.sahkoposti = ?" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
