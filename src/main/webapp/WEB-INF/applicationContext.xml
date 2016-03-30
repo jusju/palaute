@@ -51,7 +51,7 @@
 	<!-- SPRING SECURITY -->
 
 	<sec:http auto-config="true" use-expressions="true">
-		
+		<!-- lisäämällä requires-channel="https" saadaan https toimimaan, kokeilemme torstaina -->
 		<sec:intercept-url pattern="/secure/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/secure/*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/*" access="permitAll" />
