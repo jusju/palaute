@@ -77,6 +77,11 @@ public class SecureController {
 
 		List<Tunnit> tunnit = new ArrayList<Tunnit>();
 		tunnit = tdao.etsi(id);
+		
+		for(int i=0; i<tunnit.size(); i++){
+			Projekti projekti = pdao.etsi(tunnit.get(i).getProjID());
+			model.addAttribute("projekti", projekti);
+		}
 
 		model.addAttribute("tunnit", tunnit);
 

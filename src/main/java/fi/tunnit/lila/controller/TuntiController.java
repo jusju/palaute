@@ -72,20 +72,22 @@ public class TuntiController {
 	}
 
 	// FORMIN TEKEMINEN
-	@RequestMapping(value = "uusi", method = RequestMethod.GET)
-	public String getCreateForm(Model model) {
+	@RequestMapping(value = "uusi/{id}", method = RequestMethod.GET)
+	public String getCreateFormTunnit(@PathVariable("id") Integer id, Model model) {
 		Tunnit uusiTunti = new TunnitImpl();
+		uusiTunti.setKaytID(id);
+		System.out.println(id);
 		uusiTunti.setDate("");
 
 		model.addAttribute("tunti", uusiTunti);
-		return "tunnit/lisaaTunti";
+		return "secure/tunnit/lisaaTunti";
 	}
 
 	// FORMIN TIETOJEN VASTAANOTTO
-	@RequestMapping(value = "uusi", method = RequestMethod.POST)
+	@RequestMapping(value = "uusi/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "tunti") TunnitImpl tunti) {
 		tdao.talleta(tunti);
-		return "redirect:/tunnit/lista";
+		return "redirect:/secure/oma";
 	}
 
 	// HAE KAIKKI TUNNIT

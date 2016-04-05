@@ -11,11 +11,10 @@
 </head>	
 <body>
 	<h1>
-		Henkilön tiedot
+		Tervetuloa!
 	</h1>
-	<p><c:out value="${henkilo.etunimi}" default="-----"/></p>
-	<p><c:out value="${henkilo.sukunimi}" default="-----"/></p>
-	
+	<p><c:out value="${henkilo.etunimi} ${henkilo.sukunimi}" default="-----"/></p>
+	<td><a href="<c:out value="/tunnit_lila/tunnit/uusi/${henkilo.id}"/>">Lisaa tuntti</a></td>
 	<table border="1">
 	<tr>
 	<td>Tunti ID</td>
@@ -25,10 +24,11 @@
 	<td></td>
 	</tr>
 
+
 <c:forEach items="${tunnit}" var="tunti">
 	<td><c:out value="${tunti.tuntiID}"></c:out></td>
 	<td><c:out value="${tunti.date}"></c:out></a></td>
-	<td><c:out value="${tunti.projID}"></c:out></a></td>
+	<td><c:out value="${projekti.projnimi}"></c:out></a></td>
 	<td><a href="<c:out value="/tunnit_lila/henkilo/ttunti/${tunti.tuntiID}"/>">Tunnin tiedot</a></td>
 	<td><a href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>">Projektin tiedot</a></td>
 	</tr>
