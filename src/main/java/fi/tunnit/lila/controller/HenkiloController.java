@@ -142,9 +142,9 @@ public class HenkiloController {
 		tunnit = tdao.haeTunnit();
 
 		modelAll.addAttribute("tunnit", tunnit);
-		return "kayttaja/listaaTunnit";
+		return "secure/kayttaja/listaaTunnit";
 	}
-
+/*
 	// HENKIL�N TIETOJEN N�YTT�MINEN
 	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
@@ -163,7 +163,7 @@ public class HenkiloController {
 
 		return "kayttaja/naytaKayttaja";
 	}
-
+*/
 	// TUNNIN TIETOJEN N�YTT�MINEN
 
 	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
@@ -171,7 +171,7 @@ public class HenkiloController {
 		Tunnit tunnit = tdao.etsiTunti(tuntiID);
 		model.addAttribute("tunnit", tunnit);
 
-		return "tunnit/tunninTiedot";
+		return "secure/tunnit/tunninTiedot";
 	}
 
 	// PROJEKTIN TIETOJEN L�YT�MINEN
@@ -180,7 +180,7 @@ public class HenkiloController {
 		Projekti projekti = pdao.etsi(projID);
 		model.addAttribute("projekti", projekti);
 
-		return "projekti/projektinTiedot";
+		return "secure/projekti/projektinTiedot";
 	}
 
 	// HAE KAIKKI PROJEKTIT
@@ -192,7 +192,7 @@ public class HenkiloController {
 		projektit = pdao.haeKaikki();
 
 		modelAll.addAttribute("projektit", projektit);
-		return "kayttaja/listaaTunnit";
+		return "secure/kayttaja/listaaTunnit";
 	}
 
 	// POISTA K�YTT�J� 
@@ -204,7 +204,7 @@ public class HenkiloController {
 			tdao.poistaHTunnit(id);
 			dao.poistaHenkilo(id);
 
-			return "kayttaja/poistoApu";
+			return "secure/kayttaja/poistoApu";
 	}
 	
 	

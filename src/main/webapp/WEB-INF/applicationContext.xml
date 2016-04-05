@@ -51,19 +51,35 @@
 	<!-- SPRING SECURITY -->
 
 	<sec:http auto-config="true" use-expressions="true">
+	<!--
+		<sec:port-mappings>
+		
+		<sec:port-mapping http="80" https="443"/>
+		
+		<sec:port-mapping http="9080" https="9443"/>
+		
+		<sec:port-mapping http="8080" https="8443"/>
+		
+		<sec:port-mapping http="7777" https="7443"/>
+		
+		</sec:port-mappings>
+		
+		requires-channel="https"
+	-->	
 		<!-- lisäämällä requires-channel="https" saadaan https toimimaan, kokeilemme torstaina -->
-		<sec:intercept-url pattern="/secure/admin/**" access="hasRole('ROLE_ADMIN')" />
-		<sec:intercept-url pattern="/secure/*" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/secure/admin/super/*" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/secure/**" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/*" access="permitAll" />
 
 		<sec:form-login
 			login-page="/loginpage"
-			default-target-url="/secure/main"
+			default-target-url="/secure/oma"
 			authentication-failure-url="/loginfail" />
 			
 		<sec:logout logout-success-url="/logout" />
 		
 	</sec:http>
+	
 	
 	<bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
