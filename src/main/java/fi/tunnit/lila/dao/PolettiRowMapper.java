@@ -16,7 +16,7 @@ public class PolettiRowMapper implements RowMapper <Poletti> {
 		p.setId(rs.getInt("polettiID"));
 		p.setKaytID(rs.getInt("kaytID"));
 		p.setSatunnainen(rs.getString("satunnainen"));
-		p.setPvm(rs.getDate("vanhenemispvm"));
+		p.setPvm(rs.getString("vanhenemispvm"));
 		
 		return p;
 	}

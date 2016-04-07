@@ -17,7 +17,7 @@ public interface Poletti {
 
 	public abstract void setSatunnainen(String satunnainen);
 	
-	public abstract Date getPvm();
+	public abstract String getPvm();
 
-	public abstract void setPvm(Date pvm);
+	public abstract void setPvm(String timeStamp);
 }

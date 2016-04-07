@@ -6,17 +6,10 @@ public class PolettiImpl implements Poletti{
 	
 	private int id, kaytID;
 	private String satunnainen;
-	private Date pvm;
+	private String pvm;
 	public PolettiImpl() {
 		super();
 		
-	}
-	public PolettiImpl(int id, int kaytID, String satunnainen, Date pvm) {
-		super();
-		this.id = id;
-		this.kaytID = kaytID;
-		this.satunnainen = satunnainen;
-		this.pvm = pvm;
 	}
 	public int getId() {
 		return id;
@@ -36,10 +29,10 @@ public class PolettiImpl implements Poletti{
 	public void setSatunnainen(String satunnainen) {
 		this.satunnainen = satunnainen;
 	}
-	public Date getPvm() {
+	public String getPvm() {
 		return pvm;
 	}
-	public void setPvm(Date pvm) {
+	public void setPvm(String pvm) {
 		this.pvm = pvm;
 	}
 	@Override
@@ -47,6 +40,8 @@ public class PolettiImpl implements Poletti{
 		return "PolettiImpl [id=" + id + ", kaytID=" + kaytID
 				+ ", satunnainen=" + satunnainen + ", pvm=" + pvm + "]";
 	}
+
+	
 
 	
 	
