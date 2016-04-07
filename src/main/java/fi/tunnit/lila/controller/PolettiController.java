@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fi.tunnit.lila.bean.Henkilo;
+import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.bean.Poletti;
 import fi.tunnit.lila.bean.PolettiImpl;
 import fi.tunnit.lila.dao.HenkiloDAO;
 import fi.tunnit.lila.dao.HenkiloaEiLoydyPoikkeus;
 import fi.tunnit.lila.dao.PolettiDAO;
-import fi.tunnit.lila.dao.ProjektiDAO;
+
 
 @Controller
 @RequestMapping(value="/nollaus")
@@ -50,25 +51,35 @@ public class PolettiController {
 		this.pdao = pdao;
 	}
 	
-	@RequestMapping(value = "resetPassword", method = RequestMethod.POST)
+	// FORMIN TEKEMINEN
+	@RequestMapping(value = "resetPassword", method = RequestMethod.GET)
+	public String getCreateForm(Model model) {
+		Henkilo tyhjaHenkilo = new HenkiloImpl();
+		
 
+		model.addAttribute("henkilo", tyhjaHenkilo);
+		return "unohditkoSalasanasi";
+	}
+	
+	@RequestMapping(value = "resetPassword", method = RequestMethod.POST)
 	public String salasananNollaus(
-	  HttpServletRequest request, @RequestParam("email") Model model, String userEmail) {
+	  HttpServletRequest request, @RequestParam("email") String userEmail, Model model) {
 	     
 	    Henkilo henkilo = dao.etsiSposti(userEmail);
 	    if (henkilo == null) {
-	        Exception e = null;
-			throw new HenkiloaEiLoydyPoikkeus(e);
+	    	String error = "Henkiloä ei löydy";
+	    	model.addAttribute("error", error);
+	    	return "unohditkoSalasanasi";
 	    }
 	 
 	    String satunnainen = UUID.randomUUID().toString();
+
 	    String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 	    Poletti poletti = new PolettiImpl();
 	    
 	    poletti.setKaytID(henkilo.getId());
 	    poletti.setSatunnainen(satunnainen);
-	    poletti.setPvm(timeStamp);
-	    
+	    poletti.setPvm(timeStamp);    
 	    pdao.tallenna(poletti);
 
 	    String appUrl = 
@@ -76,8 +87,8 @@ public class PolettiController {
 	      ":" + request.getServerPort() + 
 	      request.getContextPath()+satunnainen;
 	    model.addAttribute("appUrl", appUrl);
-	    
-		return"salasana/nollausLinkki";
+ 
+		return "nollausLinkki";
 	    
 	   /* SimpleMailMessage email = 
 	      constructResetTokenEmail(appUrl, request.getLocale(), satunnainen);

@@ -30,7 +30,7 @@
 		</table>
 	</fieldset>
 	<a href="henkilo/uusi">Rekisteröi</a>
-	<a href="/tunnit_lila/unohditkoSalasanasi">Unohditko salasanasi?</a>
+	<a href="nollaus/resetPassword">Unohditko salasanasi?</a>
 	</form>
 	</div>
 </body>

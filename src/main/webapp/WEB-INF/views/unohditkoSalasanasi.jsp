@@ -17,20 +17,12 @@
 	<h1>
 		Nollaa salasanasi
 	</h1>
-		<form:form modelAttribute="nollaus" method="post">
-		  	<fieldset>		
-				<legend>Sähköpostiosoite</legend>
-				
-				<p>
-					<form:label path="email">Sähköposti</form:label><br/>
-					<form:input path="email" />
-				</p>
-				<p>	
-				<p>	
-					<button type="submit">Lähetä</button>
-				</p>
-			</fieldset>
-		</form:form>
+	<p>${error}</p>
+		<form method="post">
+		<input type="text" name="email">
+		<button type="submit">paska
+		</button>
+		</form>
 		
 		
 </body>
