@@ -17,13 +17,13 @@
 	<h1>
 		Nollaa salasanasi
 	</h1>
-		<form:form modelAttribute="tunti" method="post">
+		<form:form modelAttribute="nollaus" method="post">
 		  	<fieldset>		
 				<legend>Sähköpostiosoite</legend>
 				
 				<p>
-					<form:label path="sposti">Sähköposti</form:label><br/>
-					<form:input path="sposti" />
+					<form:label path="email">Sähköposti</form:label><br/>
+					<form:input path="email" />
 				</p>
 				<p>	
 				<p>	

@@ -15,7 +15,7 @@
 </head>	
 <body>
 
-<c:out value="${poletti.satunnainen}"/>
+<c:out value="${appUrl}"/>
 		
 </body>
 </html>

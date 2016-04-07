@@ -50,10 +50,10 @@ public class PolettiController {
 		this.pdao = pdao;
 	}
 	
-	@RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "resetPassword", method = RequestMethod.POST)
 
 	public String salasananNollaus(
-	  HttpServletRequest request, @RequestParam("email") String userEmail) {
+	  HttpServletRequest request, @RequestParam("email") Model model, String userEmail) {
 	     
 	    Henkilo henkilo = dao.etsiSposti(userEmail);
 	    if (henkilo == null) {
@@ -74,8 +74,10 @@ public class PolettiController {
 	    String appUrl = 
 	      "http://" + request.getServerName() + 
 	      ":" + request.getServerPort() + 
-	      request.getContextPath();
-		return appUrl;
+	      request.getContextPath()+satunnainen;
+	    model.addAttribute("appUrl", appUrl);
+	    
+		return"salasana/nollausLinkki";
 	    
 	   /* SimpleMailMessage email = 
 	      constructResetTokenEmail(appUrl, request.getLocale(), satunnainen);
