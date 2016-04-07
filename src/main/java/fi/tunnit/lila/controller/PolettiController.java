@@ -50,7 +50,7 @@ public class PolettiController {
 		this.pdao = pdao;
 	}
 	
-	@RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "resetPassword", method = RequestMethod.POST)
 
 	public String salasananNollaus(
 	  HttpServletRequest request, @RequestParam("email") String userEmail) {
