@@ -105,7 +105,7 @@ public class TuntiController {
 		@RequestMapping(value = "delete/{tuntiID}", method = RequestMethod.GET)
 		public String getCreateForm(@PathVariable("tuntiID") Integer tuntiID, Model model) {
 			tdao.poistaTunti(tuntiID);
-			return "tunnit/poistoApu";
+			return "secure/tunnit/poistoApu";
 		}
 
 		

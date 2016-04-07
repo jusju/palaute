@@ -22,6 +22,7 @@
 	<td>Projektin ID</td>
 	<td></td>
 	<td></td>
+	<td></td>
 	</tr>
 
 
@@ -36,6 +37,7 @@
 
 	<td><a href="<c:out value="/tunnit_lila/henkilo/ttunti/${tunti.tuntiID}"/>">Tunnin tiedot</a></td>
 	<td><a href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>">Projektin tiedot</a></td>
+	<td><a href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}" class=" "><button type="button">poista</button></a></td>
 	</tr>
 	</c:forEach>
 	</table>
