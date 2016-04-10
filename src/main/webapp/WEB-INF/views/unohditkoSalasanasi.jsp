@@ -20,7 +20,7 @@
 	<p>${error}</p>
 		<form method="post">
 		<input type="text" name="email">
-		<button type="submit">paska
+		<button type="submit">Lähetä
 		</button>
 		</form>
 		

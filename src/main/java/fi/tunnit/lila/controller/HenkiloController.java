@@ -145,7 +145,7 @@ public class HenkiloController {
 		return "secure/kayttaja/listaaTunnit";
 	}
 /*
-	// HENKILï¿½N TIETOJEN Nï¿½YTTï¿½MINEN
+	// HENKILÖN TIETOJEN NÄYTTÄMINEN
 	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
@@ -164,7 +164,7 @@ public class HenkiloController {
 		return "kayttaja/naytaKayttaja";
 	}
 */
-	// TUNNIN TIETOJEN Nï¿½YTTï¿½MINEN
+	// TUNNIN TIETOJEN NÄYTTÄMINEN
 
 	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
 	public String getTunti(@PathVariable Integer tuntiID, Model model) {
@@ -174,7 +174,7 @@ public class HenkiloController {
 		return "secure/tunnit/tunninTiedot";
 	}
 
-	// PROJEKTIN TIETOJEN Lï¿½YTï¿½MINEN
+	// PROJEKTIN TIETOJEN LISÄÄMINEN
 	@RequestMapping(value = "ptunti/{projID}", method = RequestMethod.GET)
 	public String getProj(@PathVariable Integer projID, Model model) {
 		Projekti projekti = pdao.etsi(projID);
@@ -195,7 +195,7 @@ public class HenkiloController {
 		return "secure/kayttaja/listaaTunnit";
 	}
 
-	// POISTA Kï¿½YTTï¿½Jï¿½ 
+	// POISTA KÄYTTÄJÄ
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String showDelete(@PathVariable("id") Integer id) {	

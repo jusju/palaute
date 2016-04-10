@@ -7,5 +7,7 @@ public interface PolettiDAO {
 	public abstract void tallenna (Poletti poletti);
 	
 	public abstract Poletti etsi (int kaytID);
+	
+	public abstract Poletti etsiSatunnainen (String satunnainen);
 
 }

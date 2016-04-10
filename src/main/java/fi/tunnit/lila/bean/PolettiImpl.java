@@ -11,6 +11,8 @@ public class PolettiImpl implements Poletti{
 		super();
 		
 	}
+	
+	
 	public int getId() {
 		return id;
 	}

@@ -82,6 +82,21 @@ public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
 			return p;
 
 		}
+		
+		public Poletti etsiSatunnainen(String satunnainen) {
+			String sql = "select polettiID, satunnainen,kaytID,vanhenemispvm from poletti where satunnainen = ?";
+			Object[] parametrit = new Object[] { satunnainen };
+			RowMapper<Poletti> mapper = new PolettiRowMapper();
+			
+			Poletti p;
+			try {
+				p = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+			} catch (IncorrectResultSizeDataAccessException e) {
+				throw new HenkiloaEiLoydyPoikkeus(e);
+			}
+			return p;
+
+		}
 	
 
 }

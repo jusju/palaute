@@ -11,26 +11,7 @@
 
 </head>
 <body>
-	<h1>Luo Henkilö</h1>
-	<form:form modelAttribute="henkilo" method="post">
-		<fieldset>
-			<legend>Henkilön tiedot</legend>
-			
-			
-			<p>
-				<form:label path="salasana">Salasana</form:label>
-				<br />
-				<form:input path="salasana" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
-			</p>
-			<p>
-				<form:label path="vertailu">Salasana</form:label>
-				<br />
-				<form:input path="vertailu" cssErrorClass="VirheellinenKentta"/> <form:errors path="" cssClass="Virheteksti"/>
-			</p>
-			<p>
-				<button type="submit">Lisää</button>
-			</p>
-		</fieldset>
-	</form:form>
+	<h2>toimii</h2>
+	
 </body>
 </html>
