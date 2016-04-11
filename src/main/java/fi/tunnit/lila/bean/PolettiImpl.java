@@ -4,20 +4,25 @@ import java.sql.Date;
 
 public class PolettiImpl implements Poletti{
 	
-	private int id, kaytID;
+	private int polettiID, kaytID;
 	private String satunnainen;
 	private String pvm;
 	public PolettiImpl() {
 		super();
 		
 	}
-	
-	
-	public int getId() {
-		return id;
+	public PolettiImpl(int polettiID, int kaytID, String satunnainen, String pvm) {
+		super();
+		this.polettiID = polettiID;
+		this.kaytID = kaytID;
+		this.satunnainen = satunnainen;
+		this.pvm = pvm;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public int getPolettiID() {
+		return polettiID;
+	}
+	public void setPolettiID(int polettiID) {
+		this.polettiID = polettiID;
 	}
 	public int getKaytID() {
 		return kaytID;
@@ -39,10 +44,12 @@ public class PolettiImpl implements Poletti{
 	}
 	@Override
 	public String toString() {
-		return "PolettiImpl [id=" + id + ", kaytID=" + kaytID
+		return "PolettiImpl [polettiID=" + polettiID + ", kaytID=" + kaytID
 				+ ", satunnainen=" + satunnainen + ", pvm=" + pvm + "]";
 	}
-
+	
+	
+	
 	
 
 	

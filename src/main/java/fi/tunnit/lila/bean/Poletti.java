@@ -5,9 +5,9 @@ import java.sql.Date;
 public interface Poletti {
 
 	
-	public abstract int getId();
+	public abstract int getPolettiID();
 
-	public abstract void setId(int id);
+	public abstract void setPolettiID(int polettiID);
 	
 	public abstract int getKaytID();
 

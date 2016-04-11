@@ -13,7 +13,7 @@ public class PolettiRowMapper implements RowMapper <Poletti> {
 
 	public Poletti mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Poletti p = new PolettiImpl();
-		p.setId(rs.getInt("polettiID"));
+		p.setPolettiID(rs.getInt("polettiID"));
 		p.setKaytID(rs.getInt("kaytID"));
 		p.setSatunnainen(rs.getString("satunnainen"));
 		p.setPvm(rs.getString("vanhenemispvm"));

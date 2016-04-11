@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.Poletti;
 import fi.tunnit.lila.bean.Tunnit;
 
@@ -63,7 +64,7 @@ public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
 			}, idHolder);
 
 
-			p.setId(idHolder.getKey().intValue());
+			p.setPolettiID(idHolder.getKey().intValue());
 
 		}
 
@@ -97,6 +98,28 @@ public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
 			return p;
 
 		}
+		//hae kaikki poletit vertailua varten
+		public List<Poletti> haeKaikki() {
+
+			String sql = "select polettiID, satunnainen,kaytID,vanhenemispvm from poletti";
+			RowMapper<Poletti> mapper = new PolettiRowMapper();
+			List<Poletti> poletti = jdbcTemplate.query(sql, mapper);
+
+			return poletti;
+
+		}
+		
+		public List<Poletti> etsiS(String satunnainen) {
+			String sql = "select polettiID,satunnainen,kaytID,vanhenemispvm from poletti";
+			Object[] parametrit = new Object[] { satunnainen };
+			RowMapper<Poletti> mapper = new PolettiRowMapper();
+			List<Poletti> poletti = jdbcTemplate.query(sql,parametrit, mapper);
+
+			return poletti;
+
+		}
+		
+		
 	
 
 }

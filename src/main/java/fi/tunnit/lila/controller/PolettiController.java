@@ -86,7 +86,7 @@ public class PolettiController {
 				+ request.getServerPort() + request.getContextPath() + "/"
 				+ "nollaus/" + "resetPassword/" + satunnainen;
 		model.addAttribute("appUrl", appUrl);
-		
+
 		return "nollausLinkki";
 
 		/*
@@ -97,13 +97,31 @@ public class PolettiController {
 	}
 	
 
-	// Poletti linkin avaus ja tarkistus
+
+	//Poletti linkin avaus ja tarkistus
 	@RequestMapping(value = "resetPassword/{satunnainen}", method = RequestMethod.GET)
 	public String getPoletti(@PathVariable String satunnainen, Model modelAll) {
-		
-	
-		
-		System.out.println(satunnainen);
+
+		List<Poletti> poletti = new ArrayList<Poletti>();
+		poletti = pdao.haeKaikki();
+
+
+		modelAll.addAttribute("poletti", poletti);
+
+		System.out.println(satunnainen + poletti);
 		return "lisaaSalasana";
 	}
+	/*
+	// HAE KAIKKI TUNNIT
+		@RequestMapping(value = "resetPassword/{satunnainen}", method = RequestMethod.GET)
+		public String showLista(@PathVariable int polettiID, Model modelAll) {
+
+			List<Poletti> poletti = new ArrayList<Poletti>();
+			poletti = pdao.etsiS(polettiID);
+			System.out.println(polettiID);
+			modelAll.addAttribute("poletti", poletti);
+			System.out.println(polettiID);
+			return "lisaaSalasana";
+		}*/
+
 }
