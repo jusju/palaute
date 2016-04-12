@@ -104,12 +104,19 @@ public class PolettiController {
 
 		List<Poletti> poletti = new ArrayList<Poletti>();
 		poletti = pdao.haeKaikki();
-
-
-		modelAll.addAttribute("poletti", poletti);
-
-		System.out.println(satunnainen + poletti);
-		return "lisaaSalasana";
+		
+		Henkilo henkilo = new HenkiloImpl();
+		
+		for(int i = 0; i<poletti.size(); i++){
+			if(poletti.get(i).getSatunnainen().equals(satunnainen)){
+				
+				henkilo.setId(poletti.get(i).getKaytID());
+				
+				return "henkilo/muokkaa"+henkilo.getId();
+			}
+			
+		}
+		return "virhesivu";
 	}
 	/*
 	// HAE KAIKKI TUNNIT

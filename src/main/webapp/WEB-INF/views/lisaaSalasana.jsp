@@ -12,23 +12,7 @@
 </head>
 <body>
 
-	<table><tr>
-
-		<td></td> 
-		</tr>
-			<c:forEach items="${poletti}" var="poletti">
-						<tr>
-							
-
-							<td><c:out value="${poletti.satunnainen}"></c:out></td> 
-						
-
-						</tr>
-
-				</c:forEach>
-		
-
-		</table>
+	
 	
 </body>
 </html>
