@@ -105,15 +105,10 @@ public class PolettiController {
 		List<Poletti> poletti = new ArrayList<Poletti>();
 		poletti = pdao.haeKaikki();
 		
-		Henkilo henkilo = new HenkiloImpl();
-		
 		for(int i = 0; i<poletti.size(); i++){
 			System.out.println(poletti.get(i).getSatunnainen());
 			if(poletti.get(i).getSatunnainen().equals(satunnainen)){
-				
-				henkilo.setId(poletti.get(i).getKaytID());
-				
-				return "redirect:/henkilo/uusisalasana/"+henkilo.getId();
+				return "redirect:/henkilo/uusisalasana/"+satunnainen;
 			}
 			
 		}
