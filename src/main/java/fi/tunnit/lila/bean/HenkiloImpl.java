@@ -21,7 +21,7 @@ public class HenkiloImpl implements Henkilo {
 	
 	@Size(min = 1, message = "Kirjoita sähköpostiosoite.")
 	@Email(message = "Anna sähkäpostiosoite oikeassa muodossa.")
-    @UniqueEmail(message = "Antamasi sähkäpostiosoite on jo käytetty")
+    @UniqueEmail( message = "Antamasi sähkäpostiosoite on jo käytetty")
 	private String sposti;
 	
 	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = "Salasanassa pitää olla vähintän yksi isokirjain ja yksi pieni, sen pitää sisältä vähintän yksi numero ja yksi erikoismerkki, salasanan pituus on vähintän 8 merkkia.")
