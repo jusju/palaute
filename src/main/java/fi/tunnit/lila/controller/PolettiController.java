@@ -80,6 +80,7 @@ public class PolettiController {
 		poletti.setKaytID(henkilo.getId());
 		poletti.setSatunnainen(satunnainen);
 		poletti.setPvm(timeStamp);
+		pdao.poistaPoletti(henkilo.getId());
 		pdao.tallenna(poletti);
 
 		String appUrl = "http://" + request.getServerName() + ":"

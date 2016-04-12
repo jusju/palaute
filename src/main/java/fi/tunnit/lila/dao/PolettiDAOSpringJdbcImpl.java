@@ -119,7 +119,27 @@ public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
 
 		}
 		
+		public void poistaSatunnainen(String satunnainen){
+			final String sql = "DELETE FROM poletti WHERE satunnainen = ?";
+
+			try {
+			jdbcTemplate.update(sql, satunnainen);
+			} catch (IncorrectResultSizeDataAccessException e) {
+				throw new HenkiloaEiLoydyPoikkeus(e);
+			}
+			
+		}
 		
+		public void poistaPoletti(int kaytID){
+			final String sql = "DELETE FROM poletti WHERE kaytID = ?";
+
+			try {
+			jdbcTemplate.update(sql, kaytID);
+			} catch (IncorrectResultSizeDataAccessException e) {
+				throw new HenkiloaEiLoydyPoikkeus(e);
+			}
+			
+		}
 	
 
 }

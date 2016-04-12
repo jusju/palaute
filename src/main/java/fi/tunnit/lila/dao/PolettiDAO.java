@@ -16,5 +16,8 @@ public interface PolettiDAO {
 	public abstract List<Poletti> etsiS (String satunnainen);
 	
 	public abstract List<Poletti> haeKaikki();
+	
+	public void poistaSatunnainen(String satunnainen);
+	public void poistaPoletti(int kaytID);
 
 }

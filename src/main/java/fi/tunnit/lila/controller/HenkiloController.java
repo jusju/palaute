@@ -140,6 +140,8 @@ public class HenkiloController {
 			}
 		}
 		
+		podao.poistaSatunnainen(satunnainen);
+		
 		Henkilo henkilo = dao.etsi(id);
 		model.addAttribute("henkilo", henkilo);
 		
