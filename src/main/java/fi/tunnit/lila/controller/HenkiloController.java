@@ -28,8 +28,10 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
+import fi.tunnit.lila.bean.Poletti;
 import fi.tunnit.lila.bean.Projekti;
 import fi.tunnit.lila.dao.HenkiloDAO;
+import fi.tunnit.lila.dao.PolettiDAO;
 import fi.tunnit.lila.dao.ProjektiDAO;
 import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.bean.TunnitImpl;
@@ -48,6 +50,9 @@ public class HenkiloController {
 
 	@Inject
 	private ProjektiDAO pdao;
+	
+	@Inject
+	private PolettiDAO podao;
 	
 	
 	public HenkiloDAO getDao() {
@@ -72,6 +77,14 @@ public class HenkiloController {
 
 	public void setPdao(ProjektiDAO pdao) {
 		this.pdao = pdao;
+	}
+	
+	public PolettiDAO getPodao() {
+		return podao;
+	}
+
+	public void setPodao(PolettiDAO podao) {
+		this.podao = podao;
 	}
 
 	// FORMIN TEKEMINEN
@@ -113,12 +126,25 @@ public class HenkiloController {
 	}
 	
 	// K�YTT�J�N MUOKKAUS TEKEMINEN
-	@RequestMapping(value = "uusisalasana/{id}", method = RequestMethod.GET)
-	public String getUusiSalasanaForm(@PathVariable Integer id, Model model) {
+	@RequestMapping(value = "uusisalasana/{satunnainen}", method = RequestMethod.GET)
+	public String getUusiSalasanaForm(@PathVariable String satunnainen, Model model) {
+		
+		List<Poletti> poletti = new ArrayList<Poletti>();
+		poletti = podao.haeKaikki();
+		
+		int id = 0;
+		
+		for(int i = 0; i<poletti.size(); i++){
+			if(poletti.get(i).getSatunnainen().equals(satunnainen)){
+				id = poletti.get(i).getKaytID();
+			}
+		}
+		
 		Henkilo henkilo = dao.etsi(id);
 		model.addAttribute("henkilo", henkilo);
 		
 		Henkilo henkiloa = new HenkiloImpl();
+		henkiloa.setId(henkilo.getId());
 		henkiloa.setEtunimi(henkilo.getEtunimi());
 		henkiloa.setSukunimi(henkilo.getSukunimi());
 		henkiloa.setSposti(henkilo.getSposti());
@@ -128,13 +154,14 @@ public class HenkiloController {
 	}
 	
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
-	@RequestMapping(value = "uusisalasana/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "uusisalasana/{satunnainen}", method = RequestMethod.POST)
 	public String uusiSalasana(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
 		if(result.hasErrors()){
 			return "lisaaSalasana";
 		}else{
 		SalasananKryptaaja sk = new SalasananKryptaaja();
 		henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
+		System.out.println(henkilo.getId());
 		dao.muokkaa(henkilo);
 		return "redirect:/henkilo/lista";
 		}

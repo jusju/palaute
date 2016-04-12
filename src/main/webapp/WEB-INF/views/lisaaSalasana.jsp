@@ -15,13 +15,14 @@
 		<form:form modelAttribute="henkilo" method="post">
 		<fieldset>
 			<legend>Uusi salasana</legend>
+			    <form:input type="hidden" path="id"/>
 				<form:input type="hidden" path="etunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="etunimi" cssClass="Virheteksti"/>
 				<form:input type="hidden" path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
-				<form:input type="hidden" path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
+				<form:input path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
 			<p>
 				<form:label path="salasana">Salasana</form:label>
 				<br />
-				<form:input path="salasana" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
+				<form:input path="salasana" value="" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<form:label path="vertailu">Vahvista salasana</form:label>
