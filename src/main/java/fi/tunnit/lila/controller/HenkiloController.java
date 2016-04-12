@@ -111,6 +111,21 @@ public class HenkiloController {
 		model.addAttribute("henkilo", henkiloa);
 		return "kayttaja/muokkaaKayttaja";
 	}
+	
+	// K�YTT�J�N MUOKKAUS TEKEMINEN
+	@RequestMapping(value = "uusisalasana/{id}", method = RequestMethod.GET)
+	public String getUusiSalasanaForm(@PathVariable Integer id, Model model) {
+		Henkilo henkilo = dao.etsi(id);
+		model.addAttribute("henkilo", henkilo);
+
+		Henkilo henkiloa = new HenkiloImpl();
+		henkiloa.setEtunimi(henkilo.getEtunimi());
+		henkiloa.setSukunimi(henkilo.getSukunimi());
+		henkiloa.setSposti(henkilo.getSposti());
+		henkiloa.setSalasana(henkilo.getSalasana());
+		model.addAttribute("henkilo", henkiloa);
+		return "lisaaSalasana";
+	}
 
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)

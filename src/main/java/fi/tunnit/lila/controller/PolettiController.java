@@ -108,11 +108,12 @@ public class PolettiController {
 		Henkilo henkilo = new HenkiloImpl();
 		
 		for(int i = 0; i<poletti.size(); i++){
+			System.out.println(poletti.get(i).getSatunnainen());
 			if(poletti.get(i).getSatunnainen().equals(satunnainen)){
 				
 				henkilo.setId(poletti.get(i).getKaytID());
 				
-				return "henkilo/muokkaa"+henkilo.getId();
+				return "redirect:/henkilo/uusisalasana/"+henkilo.getId();
 			}
 			
 		}
