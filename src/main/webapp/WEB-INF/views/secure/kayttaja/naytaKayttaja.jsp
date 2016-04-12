@@ -7,19 +7,7 @@
 <html>
 <head>
 <title>Henkilön tietojen näyttäminen</title>
-<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 
-	<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet">
-	<link href="../resources/css/animate.min.css" rel="stylesheet">
-
-	<!-- Custom styling plus plugins -->
-	<link href="../resources/css/custom.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../resources/css/maps/jquery-jvectormap-2.0.3.css" />
-	<link href="../resources/css/icheck/flat/green.css" rel="stylesheet" />
-	<link href="../resources/css/floatexamples.css" rel="stylesheet" type="text/css" />
-
-	<script src="../resources/js/jquery.min.js"></script>
-	<script src="../resources/js/nprogress.js"></script>
 </head>	
 <body>
 <jsp:include page="navigointi.jsp"></jsp:include>
@@ -138,35 +126,35 @@
 	
 	<a href="#" onclick="history.go(-1)">Takaisin</a>
 	
-	<script src="../resources/js/bootstrap.min.js"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"/></script>
 
 	<!-- gauge js -->
-	<script type="text/javascript" src="../resources/js/gauge/gauge.min.js"></script>
-	<script type="text/javascript" src="../resources/js/gauge/gauge_demo.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/gauge/gauge.min.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/gauge/gauge_demo.js"/>"/></script>
 	<!-- chart js -->
 	<script src="../resources/js/chartjs/chart.min.js"></script>
 	<!-- bootstrap progress js -->
-	<script src="../resources/js/progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="../resources/js/nicescroll/jquery.nicescroll.min.js"></script>
+	<script src="<c:url value="/resources/js/progressbar/bootstrap-progressbar.min.js"/>"/></script>
+	<script src="<c:url value="/resources/js/nicescroll/jquery.nicescroll.min.js"/>"/></script>
 	<!-- icheck -->
-	<script src="../resources/js/icheck/icheck.min.js"></script>
+	<script src="<c:url value="/resources/js/icheck/icheck.min.js"/>"/></script>
 	<!-- daterangepicker -->
-	<script type="text/javascript" src="../resources/js/moment/moment.min.js"></script>
-	<script type="text/javascript" src="../resources/js/datepicker/daterangepicker.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/moment/moment.min.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/datepicker/daterangepicker.js"/>"/></script>
 
 	<script src="../resources/js/custom.js"></script>
 
 	<!-- flot js -->
 	<!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.pie.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.orderBars.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.time.min.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/date.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.spline.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.stack.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/curvedLines.js"></script>
-	<script type="text/javascript" src="../resources/js/flot/jquery.flot.resize.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.pie.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.orderBars.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.time.min.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/date.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.spline.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.stack.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/curvedLines.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.resize.js"/>"/></script>
 	<script>
 		$(document).ready(function() {
 			// [17, 74, 6, 39, 20, 85, 7]
@@ -245,10 +233,10 @@
 	</script>
 
 	<!-- worldmap -->
-	<script type="text/javascript" src="../resources/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
-	<script type="text/javascript" src="../resources/js/maps/gdp-data.js"></script>
-	<script type="text/javascript" src="../resources/js/maps/jquery-jvectormap-world-mill-en.js"></script>
-	<script type="text/javascript" src="../resources/js/maps/jquery-jvectormap-us-aea-en.js"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/maps/jquery-jvectormap-2.0.3.min.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/maps/gdp-data.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/maps/jquery-jvectormap-world-mill-en.js"/>"/></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/maps/jquery-jvectormap-us-aea-en.js"/>"/></script>
 	<!-- pace -->
 	<script src="js/pace/pace.min.js"></script>
 	<script>

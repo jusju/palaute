@@ -87,5 +87,32 @@ public class SecureController {
 		return "secure/kayttaja/naytaKayttaja";
 		
 	}
+	
+	@RequestMapping(value = "/oma/tunnit", method = RequestMethod.GET)
+	public String paasivuT(Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String sposti = auth.getName();
+	    System.out.println(sposti);
+
+	    Henkilo henkilo = dao.etsiSposti(sposti);
+	    System.out.println(henkilo.getEtunimi());
+	    
+	    int id = henkilo.getId();
+	    
+		model.addAttribute("henkilo", henkilo);
+
+		List<Tunnit> tunnit = new ArrayList<Tunnit>();
+		tunnit = tdao.etsi(id);
+		
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		projektit = pdao.haeKaikki();
+		
+		model.addAttribute("tunnit", tunnit);
+		model.addAttribute("projektit", projektit);
+
+		return "secure/kayttaja/naytaTunnit";
+		
+	}
 
 }

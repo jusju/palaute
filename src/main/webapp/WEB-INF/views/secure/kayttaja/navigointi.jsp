@@ -1,17 +1,25 @@
-<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
+<%@ page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<html>
+<head>
+<title>Sis√§√§nkirjautuminen</title>
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
 
-	<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet">
-	<link href="../resources/css/animate.min.css" rel="stylesheet">
+	<link href="<c:url value="/resources/fonts/css/font-awesome.min.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/animate.min.css"/>" rel="stylesheet">
 
 	<!-- Custom styling plus plugins -->
-	<link href="../resources/css/custom.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../resources/css/maps/jquery-jvectormap-2.0.3.css" />
-	<link href="../resources/css/icheck/flat/green.css" rel="stylesheet" />
-	<link href="../resources/css/floatexamples.css" rel="stylesheet" type="text/css" />
+	<link href="<c:url value="/resources/css/custom.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/maps/jquery-jvectormap-2.0.3.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/icheck/flat/green.css"/>" rel="stylesheet" />
+	<link href="<c:url value="/resources/css/floatexamples.css"/>" rel="stylesheet" type="text/css" />
 
-	<script src="../resources/js/jquery.min.js"></script>
-	<script src="../resources/js/nprogress.js"></script>
-
+	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/nprogress.js"/>"></script>
+</head>
 <body class="nav-md">
 
 	<div class="container body">
@@ -20,7 +28,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="Etusivu.html" class="site_title"><i class="fa fa-home"></i> <span>K‰ytt‰j‰ paneeli</span></a>
+						<a href="Etusivu.html" class="site_title"><i class="fa fa-home"></i> <span>K√§ytt√§j√§ paneeli</span></a>
 					</div>
 					<div class="clearfix"></div>
 
@@ -31,7 +39,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Tervetuloa,</span>
-							<h2>K‰ytt‰j‰</h2>
+							<h2>K√§ytt√§j√§</h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -42,10 +50,10 @@
 					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
-							<h3>K‰ytt‰j‰</h3>
+							<h3>K√§ytt√§j√§</h3>
 							<ul class="nav side-menu">
                 				<li><a href="Projekti.html"><i class="fa fa-folder-open-o"></i> Projektit </a></li>
-                				<li><a href="Tunnit.html"><i class="fa fa-clock-o"></i> Tunnit </a></li>
+                				<li><a href="/tunnit_lila/secure/oma/tunnit"><i class="fa fa-clock-o"></i> Tunnit </a></li>
 							</ul>
 						</div>
 					</div>
@@ -73,7 +81,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/user.png" alt="">K‰ytt‰j‰
+                  <img src="images/user.png" alt="">K√§ytt√§j√§
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -88,3 +96,22 @@
       </div>
       </body>
 			<!-- /top navigation -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
