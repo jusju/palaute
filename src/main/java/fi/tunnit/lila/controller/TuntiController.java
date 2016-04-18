@@ -74,6 +74,11 @@ public class TuntiController {
 	// FORMIN TEKEMINEN
 	@RequestMapping(value = "uusi/{id}", method = RequestMethod.GET)
 	public String getCreateFormTunnit(@PathVariable("id") Integer id, Model model) {
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		projektit = pdao.haeKaikki();
+		
+		model.addAttribute("projektit", projektit);
+		
 		Tunnit uusiTunti = new TunnitImpl();
 		uusiTunti.setKaytID(id);
 		System.out.println(id);
@@ -87,7 +92,7 @@ public class TuntiController {
 	@RequestMapping(value = "uusi/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "tunti") TunnitImpl tunti) {
 		tdao.talleta(tunti);
-		return "redirect:/secure/oma";
+		return "redirect:/secure/oma/tunnit";
 	}
 
 	// HAE KAIKKI TUNNIT

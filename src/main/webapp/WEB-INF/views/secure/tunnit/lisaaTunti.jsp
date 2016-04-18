@@ -25,12 +25,19 @@
 		  	<fieldset>		
 				<legend>Tunnin tiedot</legend>
 				<p>
-					<form:label	path="kaytID">Käyttäjä ID</form:label><br/>
-					<form:input path="kaytID" />		
+					<form:input path="kaytID" type="hidden" />		
 				</p>
 				<p>	
-					<form:label path="projID">Projekti ID</form:label><br/>
-					<form:input path="projID" />
+					<form:label path="projID">Projekti</form:label><br/>
+															<select class="form-control" name="projID">
+											<c:forEach items="${projektit}" var="projekti">
+
+
+												<option value="${projekti.projID}"><c:out value="${projekti.projnimi}" /></option>
+
+
+											</c:forEach>
+										</select>
 				</p>
 				<p>	
 					

@@ -9,12 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.bean.Projekti;
+import fi.tunnit.lila.bean.ProjektiImpl;
 import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.dao.HenkiloDAO;
 import fi.tunnit.lila.dao.HenkiloDAOSpringJdbcImpl;
@@ -112,6 +114,29 @@ public class SecureController {
 		model.addAttribute("projektit", projektit);
 
 		return "secure/kayttaja/naytaTunnit";
+		
+	}
+	
+	@RequestMapping(value = "/oma/projektit", method = RequestMethod.GET)
+	public String paasivuP(Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String sposti = auth.getName();
+	    System.out.println(sposti);
+
+	    Henkilo henkilo = dao.etsiSposti(sposti);
+	    System.out.println(henkilo.getEtunimi());
+	    
+	    //int id = henkilo.getId();
+	    
+		model.addAttribute("henkilo", henkilo);
+		
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		projektit = pdao.haeKaikki();
+
+		model.addAttribute("projektit", projektit);
+
+		return "secure/kayttaja/naytaProjektit";
 		
 	}
 

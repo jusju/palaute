@@ -93,14 +93,14 @@ public class ProjektiController {
 			
 
 			model.addAttribute("projekti", uusiProjekti);
-			return "projekti/lisaaProjekti";
+			return "secure/projekti/lisaaProjekti";
 		}
 
 		// FORMIN TIETOJEN VASTAANOTTO
 		@RequestMapping(value = "uusi", method = RequestMethod.POST)
 		public String create(@ModelAttribute(value = "projekti") ProjektiImpl projekti) {
 			pdao.talleta(projekti);
-			return "redirect:/projektit/lista";
+			return "redirect:/secure/oma/projektit";
 		}
 		
 	
@@ -140,7 +140,7 @@ public class ProjektiController {
 			tdao.poistaPTunnit(projID);
 			pdao.poistaProjekti(projID);
 
-			return "projekti/poistoApu";
+			return "secure/projekti/poistoApu";
 
 	 
 
