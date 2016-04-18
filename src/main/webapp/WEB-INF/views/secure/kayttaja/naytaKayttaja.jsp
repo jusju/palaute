@@ -3,6 +3,7 @@
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,11 @@
 							<div class="row x_title">
 								<div class="col-md-6">
 									<h3>Tervetuloa käyttäjä paneeliin!</h3>
+									
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<p><a href="admin/super/tools">Admin tools</a></p>
+									</sec:authorize>
+									
 								</div>
 							</div>
 							<div class="ln_solid"></div>

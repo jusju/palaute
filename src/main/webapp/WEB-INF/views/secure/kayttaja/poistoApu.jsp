@@ -10,7 +10,7 @@
 
 
 <%
-    String redirectURL = "/tunnit_lila/henkilo/lista";
+    String redirectURL = "/tunnit_lila/secure/admin/super/tools";
     response.sendRedirect(redirectURL);
 %>
 

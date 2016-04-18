@@ -122,7 +122,7 @@ public class HenkiloController {
 		henkiloa.setSposti(henkilo.getSposti());
 		henkiloa.setSalasana(henkilo.getSalasana());
 		model.addAttribute("henkilo", henkiloa);
-		return "kayttaja/muokkaaKayttaja";
+		return "secure/kayttaja/muokkaaKayttaja";
 	}
 	
 	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS TEKEMINEN
@@ -173,10 +173,13 @@ public class HenkiloController {
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
 		if(result.hasErrors()){
-			return "kayttaja/muokkaaKayttaja";
+			return "secure/kayttaja/muokkaaKayttaja";
 		}else{
+			System.out.println(henkilo);
+			SalasananKryptaaja sk = new SalasananKryptaaja();
+			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
 		dao.muokkaa(henkilo);
-		return "redirect:/henkilo/lista";
+		return "redirect:/secure/admin/super/tools";
 		}
 	}
 
@@ -202,7 +205,7 @@ public class HenkiloController {
 		return "secure/kayttaja/listaaTunnit";
 	}
 /*
-	// HENKILÖN TIETOJEN NÄYTTÄMINEN
+	// HENKILï¿½N TIETOJEN Nï¿½YTTï¿½MINEN
 	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
@@ -221,7 +224,7 @@ public class HenkiloController {
 		return "kayttaja/naytaKayttaja";
 	}
 */
-	// TUNNIN TIETOJEN NÄYTTÄMINEN
+	// TUNNIN TIETOJEN Nï¿½YTTï¿½MINEN
 
 	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
 	public String getTunti(@PathVariable Integer tuntiID, Model model) {
@@ -231,7 +234,7 @@ public class HenkiloController {
 		return "secure/tunnit/tunninTiedot";
 	}
 
-	// PROJEKTIN TIETOJEN LISÄÄMINEN
+	// PROJEKTIN TIETOJEN LISï¿½ï¿½MINEN
 	@RequestMapping(value = "ptunti/{projID}", method = RequestMethod.GET)
 	public String getProj(@PathVariable Integer projID, Model model) {
 		Projekti projekti = pdao.etsi(projID);
@@ -252,7 +255,7 @@ public class HenkiloController {
 		return "secure/kayttaja/listaaTunnit";
 	}
 
-	// POISTA KÄYTTÄJÄ
+	// POISTA Kï¿½YTTï¿½Jï¿½
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String showDelete(@PathVariable("id") Integer id) {	
