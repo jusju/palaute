@@ -3,7 +3,6 @@
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,22 +55,22 @@
 
 										<tr class="even pointer">
 											<c:forEach items="${tunnit}" var="tunti">
-											<td><a href="<c:out value="/tunnit_lila/henkilo/ttunti/${tunti.tuntiID}"/>"><c:out value="${tunti.date}"></c:out></a></td>
-
+												<td class=" "><c:out value="${tunti.date}"></c:out>
+												</td>
+												
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
-														<td><a href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out value="${projektit.projnimi}"></c:out></a></td>
+														<td><a
+													href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out value="${projektit.projnimi}"></c:out></a></td>
 													</c:if>
 												</c:forEach>
 												<td class=" "><c:out value="${tunti.kuvaus}"></c:out>
 												</td>
-												
-												<c:set var="aloitus" value="${tunti.aloitusaika}"/>
-												<c:set var="lopetus" value="${tunti.lopetusaika}"/>
-												
-													<td class=" "><c:out value="${aloitus}"></c:out></td>
+												<td> 												
 
-
+												<c:out value="${tunti.lopetusaika - tunti.aloitusaika}"/>
+												
+												</td>
 												
 												<td class=" "><a
 													href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}"><button
