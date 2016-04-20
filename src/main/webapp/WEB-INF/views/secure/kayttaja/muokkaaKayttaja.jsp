@@ -25,21 +25,13 @@
 				<br />
 				<form:input path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
 			</p>
-			<p>
-				<form:label path="sposti">Sähköposti</form:label>
-				<br />
-				<form:input path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
-			</p>
-			<p>
-				<form:label path="salasana">Salasana</form:label>
-				<br />
-				<form:input path="salasana" type="password" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
-			</p>
-			<p>
-				<form:label path="vertailu">Salasana</form:label>
-				<br />
-				<form:input path="vertailu" type="password" cssErrorClass="VirheellinenKentta"/> <form:errors path="" cssClass="Virheteksti"/>
-			</p>
+
+				<form:input path="sposti" type="hidden" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
+
+
+	
+				<form:input path="salasana" type="hidden" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
+
 			<p>
 				<button type="submit">tallenna</button>
 			</p>

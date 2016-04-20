@@ -158,7 +158,7 @@ public class HenkiloController {
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "uusisalasana/{satunnainen}", method = RequestMethod.POST)
 	public String uusiSalasana(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
-		if(result.hasErrors()){
+		if(result.hasFieldErrors("etunimi") || result.hasFieldErrors("sukunimi") || result.hasFieldErrors("salasana") || result.hasFieldErrors("vartailu")){
 			return "lisaaSalasana";
 		}else{
 		SalasananKryptaaja sk = new SalasananKryptaaja();
@@ -172,7 +172,7 @@ public class HenkiloController {
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
 	public String create(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
-		if(result.hasErrors()){
+		if(result.hasFieldErrors("etunimi") || result.hasFieldErrors("sukunimi")){
 			return "secure/kayttaja/muokkaaKayttaja";
 		}else{
 			System.out.println(henkilo);
