@@ -78,6 +78,11 @@
 			
 		<sec:logout logout-success-url="/logout" />
 		
+		<sec:headers >
+        	<sec:cache-control />
+        	<sec:hsts/>
+    	</sec:headers>
+		
 	</sec:http>
 	
 	
@@ -107,6 +112,7 @@
 
 
 	<sec:global-method-security pre-post-annotations="enabled" />
+	
 	
 
 </beans>
