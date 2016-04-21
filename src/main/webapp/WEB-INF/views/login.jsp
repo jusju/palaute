@@ -6,32 +6,62 @@
 <html>
 <head>
 <title>Sisäänkirjautuminen</title>
-<link rel="stylesheet" href="resources/styles/common.css" type="text/css" />
-<link rel="stylesheet" href="resources/styles/form.css" type="text/css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap core CSS -->
+  <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/animate.min.css"/>" rel="stylesheet">
+  <!-- Custom styling plus plugins -->
+  <link href="<c:url value="/resources/css/custom.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/icheck/flat/green.css"/>" rel="stylesheet">
+  <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </head>
-<body>
-	<div id="sisalto">
-	<h1>KIRJAUDU SISÄÄN</h1>
+<body style="background:#F7F7F7;">
 
-	<c:if test="${not empty loginerror}">
+ 
+    <div id="wrapper">
+      <div id="login" class="animate form">
+        <section class="login_content">
+		<c:if test="${not empty loginerror}">
 		<p class="Error">Sisäänkirjautuminen epäonnistui. Käyttäjätunnus tai salasana on syötetty väärin.</p>
 	</c:if>
 
 	<c:if test="${not empty loggedout}">
 		<p class="Info">Uloskirjautuminen onnistui</p>
 	</c:if>
-	
-	<form action="j_spring_security_check" method="post">
-	<fieldset>
-		<table>
-		<tr><td>USERNAME:</td><td><input type='text' name='j_username' value=''></td></tr>
-		<tr><td>PASSWORD:</td><td><input type='password' name='j_password' /></td></tr>
-		<tr><td>&nbsp;</td><td><button type="submit">Kirjaudu</button></td></tr>
-		</table>
-	</fieldset>
-	<a href="henkilo/uusi">Rekisteröi</a>
-	<a href="nollaus/resetPassword">Unohditko salasanasi?</a>
-	</form>
-	</div>
+          <form action="j_spring_security_check" method="post">
+            <h1>Kirjautuminen</h1>
+            
+            <div>
+              <input type="text" name='j_username' class="form-control" placeholder="Kirjaudu Sähköpostiosoitteella"/>
+            </div>
+            <div>
+              <input type="password" name='j_password' class="form-control" placeholder="Salasana"/>
+            </div>
+            <div>
+              
+              <button class="btn btn-default submit" type="submit">Kirjaudu sisään</button>
+              <a class="reset_pass" href="nollaus/resetPassword">Unohditko salasanasi?</a>
+            </div>
+            <div class="clearfix"></div>
+            <div class="separator">
+
+              <p class="change_link">Uusi sivustolla?
+                <a href="henkilo/uusi" class="to_register"> Rekisteröidy </a>
+              </p>
+             
+            </div>
+          </form>
+          <!-- form -->
+        </section>
+        <!-- content -->
+ 
+
+        <!-- content -->
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

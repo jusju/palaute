@@ -108,7 +108,7 @@
 
 
 
-	<a href="#" onclick="history.go(-1)">Takaisin</a>
+
 
 
 

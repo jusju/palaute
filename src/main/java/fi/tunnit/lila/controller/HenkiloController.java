@@ -165,7 +165,7 @@ public class HenkiloController {
 		henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
 		System.out.println(henkilo.getId());
 		dao.muokkaa(henkilo);
-		return "redirect:/henkilo/lista";
+		return "redirect:/";
 		}
 	}
 

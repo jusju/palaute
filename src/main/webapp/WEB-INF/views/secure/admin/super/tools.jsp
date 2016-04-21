@@ -12,37 +12,81 @@
 	href="../../resources/styles/common.css">
 </head>
 <body>
-<h1>EXTREME SUOJATTU ADMIN-SIVU</h1>
+	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
 
-<p>Admin tools...</p>
+	<!-- page content -->
+	<div class="right_col" role="main">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>Tunnit</h3>
+				</div>
+			</div>
+			<div class="clearfix"></div>
 
-	<h2>Kaikki käyttäjät</h2>
-	<table border="0">
-		<tr>
- 		<td>Käyttäjän ID</td> 
-		<td>Etunimi</td> 
-		<td>Sukunimi</td> 
-		<td></td> 
-		<td></td> 
-		</tr>
-			<c:forEach items="${henkilot}" var="henkilo">
-						<tr>
-							
-							<td><a href="ktunti/${henkilo.id}">${henkilo.id}</a></td> 
-							<td><c:out value="${henkilo.etunimi}"></c:out></td> 
-							<td><c:out value="${henkilo.sukunimi}"></c:out></td> 
-							<td><c:out value="${henkilo.sposti}"></c:out></td> 
-						
-								<td><a href="/tunnit_lila/henkilo/muokkaa/${henkilo.id}">muokkaa</a></td>
-								<td><a href="/tunnit_lila/henkilo/delete/${henkilo.id}">poista</a></td>
-						</tr>
+			<div class="row">
 
-				</c:forEach>
-		
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Kaikki tunnit</h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li><a class="collapse-link"><i
+										class="fa fa-chevron-up"></i></a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<div class="table-responsive">
+								<table id="example"
+									class="table table-striped responsive-utilities jambo_table">
+									<thead>
+										<tr class="headings ">
+											<th>Etunimi</th>
+											<th>Sukunimi</th>
+											<th>Muokkaa</th>
+											<th>Poista</th>
+										</tr>
+									</thead>
 
-		</table>
+									<tbody>
 
-<p><a href="../main">Pääsivu</a></p>
-<p><a href="../../j_spring_security_logout" > Kirjaudu ulos</a></p>
+										<tr class="even pointer">
+											<c:forEach items="${henkilot}" var="henkilo">
+												<td class=" "><c:out value="${henkilo.etunimi}"></c:out></td>
+												<td class=" "><c:out value="${henkilo.sukunimi}"></c:out></td>
+												<td class=" "><a
+													href="/tunnit_lila/henkilo/muokkaa/${henkilo.id}"><button
+															type="button" class="btn btn-danger btn-xs">Muokkaa</button></a></td>
+												<td class=" "><a
+													href="/tunnit_lila/henkilo/delete/${henkilo.id}"><button
+															type="button" class="btn btn-danger btn-xs">poista</button></a></td>
+										</tr>
+										</c:forEach>
+
+
+
+
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</tbody>
+
+
+
+
+
+
+
+
+		</div>
+
+	</div>
+
 </body>
 </html>
