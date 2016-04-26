@@ -26,11 +26,11 @@
 				<form:input path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
 			</p>
 
-				<form:input path="sposti" type="hidden" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
+				<form:input path="sposti" type="hidden" />
 
 
 	
-				<form:input path="salasana" type="hidden" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>
+				<form:input path="salasana" type="hidden" />
 
 			<p>
 				<button type="submit">tallenna</button>

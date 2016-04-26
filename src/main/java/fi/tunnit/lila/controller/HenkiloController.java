@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
@@ -99,7 +100,7 @@ public class HenkiloController {
 
 	// FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "uusi", method = RequestMethod.POST)
-	public String muokkaa(@ModelAttribute(value = "henkilo") @Valid HenkiloImpl henkilo, BindingResult result) {
+	public String muokkaa(@ModelAttribute(value = "henkilo") @Validated(HenkiloImpl.uusiHenkilo.class) HenkiloImpl henkilo, BindingResult result) {
 		if(result.hasErrors()){
 			return "/lisaaKayttaja";
 		}else{
@@ -157,13 +158,15 @@ public class HenkiloController {
 	
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "uusisalasana/{satunnainen}", method = RequestMethod.POST)
-	public String uusiSalasana(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
-		if(result.hasFieldErrors("salasana") || result.hasFieldErrors("vartailu")){
-			return "lisaaSalasana";
+	public String uusiSalasana(@ModelAttribute(value = "henkilo")@Validated(HenkiloImpl.uusiSalasana.class) HenkiloImpl henkilo, BindingResult result) {
+		if(result.hasErrors()){
+
+				return "lisaaSalasana";
+
 		}else{
 		SalasananKryptaaja sk = new SalasananKryptaaja();
 		henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
-		System.out.println(henkilo.getId());
+		System.out.println("HEllo");
 		dao.muokkaa(henkilo);
 		return "redirect:/";
 		}
@@ -171,8 +174,8 @@ public class HenkiloController {
 
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
-	public String create(@ModelAttribute(value = "henkilo")@Valid HenkiloImpl henkilo, BindingResult result) {
-		if(result.hasFieldErrors("etunimi") || result.hasFieldErrors("sukunimi")){
+	public String create(@ModelAttribute(value = "henkilo")@Validated(HenkiloImpl.muokkaaHenkilo.class) HenkiloImpl henkilo, BindingResult result) {
+		if(result.hasErrors()){
 			return "secure/kayttaja/muokkaaKayttaja";
 		}else{
 			System.out.println(henkilo);
