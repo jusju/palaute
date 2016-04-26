@@ -8,24 +8,38 @@ import org.hibernate.validator.constraints.Email;
 import fi.tunnit.lila.bean.validation.PasswordCompare;
 import fi.tunnit.lila.bean.validation.UniqueEmail;
 
-@PasswordCompare(message ="Salasanat eiv‰t t‰sm‰‰!")
+@PasswordCompare(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.uusiSalasana.class}, message ="Salasanat eiv‰t t‰sm‰‰!")
 public class HenkiloImpl implements Henkilo {
+
+
+	public interface uusiHenkilo {
+
+	}
+	
+	public interface muokkaaHenkilo {
+
+	}
+	
+	public interface uusiSalasana {
+
+	}
+	
 
 	
 	private int id;
 	
-	@Size(min = 3, message = "Etunimess‰ pit‰‰ olla v‰hint‰‰n 3 kirjainta.")
+	@Size(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.muokkaaHenkilo.class}, min = 3, message = "Etunimess‰ pit‰‰ olla v‰hint‰‰n 3 kirjainta.")
 	private String etunimi;
 	
-	@Size(min = 1, message = "Kirjoita sukunimesi.")
+	@Size(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.muokkaaHenkilo.class}, min = 1, message = "Kirjoita sukunimesi.")
 	private String sukunimi;
 	
-	@Size(min = 1, message = "Kirjoita s‰hkˆpostiosoite.")
-	@Email(message = "Anna s‰hk‰postiosoite oikeassa muodossa.")
-    @UniqueEmail( message = "Antamasi s‰hk‰postiosoite on jo k‰ytetty")
+	@Size(groups = {HenkiloImpl.uusiHenkilo.class}, min = 1, message = "Kirjoita s‰hkˆpostiosoite.")
+	@Email(groups = {HenkiloImpl.uusiHenkilo.class}, message = "Anna s‰hk‰postiosoite oikeassa muodossa.")
+    @UniqueEmail(groups = {HenkiloImpl.uusiHenkilo.class}, message = "Antamasi s‰hk‰postiosoite on jo k‰ytetty")
 	private String sposti;
 	
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = "Salasanassa pit‰‰ olla v‰hint‰n yksi isokirjain ja yksi pieni, sen pit‰‰ sis‰lt‰ v‰hint‰n yksi numero ja yksi erikoismerkki, salasanan pituus on v‰hint‰n 8 merkkia.")
+	@Pattern(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.uusiSalasana.class}, regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = "Salasanassa pit‰‰ olla v‰hint‰n yksi isokirjain ja yksi pieni, sen pit‰‰ sis‰lt‰ v‰hint‰n yksi numero ja yksi erikoismerkki, salasanan pituus on v‰hint‰n 8 merkkia.")
 	private String salasana;
 	
 

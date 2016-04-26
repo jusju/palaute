@@ -33,7 +33,7 @@
 			    <form:input type="hidden" path="id"/>
 				<form:input type="hidden" path="etunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="etunimi" cssClass="Virheteksti"/>
 				<form:input type="hidden" path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
-				<form:input class="form-control" path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
+				<form:input type="hidden" class="form-control" path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
 
 					<p>
 	<p>
