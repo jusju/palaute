@@ -1,27 +1,36 @@
 package fi.tunnit.lila.util;
-package crunchify.com.tutorials;
+
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 
-@Service("EmailLahe")
+@Component
 public class SpostiLahetys {
 
 	@Autowired
-	private MailSender crunchifymail; // MailSender interface defines a strategy
+	private mailSender MailSender; // MailSender interface defines a strategy
 										// for sending simple mails
  
-	public void crunchifyReadyToSendEmail(String toAddress, String fromAddress, String subject, String msgBody) {
+	public void send(String to, String msgBody) throws MessagingException {
  
-		SimpleMailMessage crunchifyMsg = new SimpleMailMessage();
-		crunchifyMsg.setFrom(fromAddress);
-		crunchifyMsg.setTo(toAddress);
-		crunchifyMsg.setSubject(subject);
-		crunchifyMsg.setText(msgBody);
-		crunchifymail.send(crunchifyMsg);
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper;
+		
+		helper = new MimeMessageHelper(message, true);
+		
+		helper.setSubject("Unohdetun salasanan palautuslinkki");
+		helper.setTo(to);
+		helper.setText(msgBody, true);
+		
+		javaMailSender.send(message);
+		
+
 	}
 	
 }

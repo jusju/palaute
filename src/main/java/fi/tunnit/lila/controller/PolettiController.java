@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.dao.HenkiloDAO;
 import fi.tunnit.lila.dao.HenkiloaEiLoydyPoikkeus;
 import fi.tunnit.lila.dao.PolettiDAO;
+import fi.tunnit.lila.util.SpostiLahetys;
 
 @Controller
 @RequestMapping(value = "/nollaus")
@@ -86,6 +88,15 @@ public class PolettiController {
 		String appUrl = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + request.getContextPath() + "/"
 				+ "nollaus/" + "resetPassword/" + satunnainen;
+		
+		SpostiLahetys sposti = new SpostiLahetys();
+		try {
+			sposti.send(userEmail, appUrl);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Järjestelmässä tapahtui virhe :(");
+		}
+	
 		model.addAttribute("appUrl", appUrl);
 
 		return "nollausLinkki";
