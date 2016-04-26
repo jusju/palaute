@@ -11,6 +11,7 @@ import fi.tunnit.lila.bean.validation.UniqueEmail;
 @PasswordCompare(message ="Salasanat eiv‰t t‰sm‰‰!")
 public class HenkiloImpl implements Henkilo {
 
+	
 	private int id;
 	
 	@Size(min = 3, message = "Etunimess‰ pit‰‰ olla v‰hint‰‰n 3 kirjainta.")
