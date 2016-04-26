@@ -78,9 +78,9 @@
 
 								</sec:authorize>
 							
-						</div>
+					 
 						<sec:authorize access="hasRole('ROLE_USER')">
-						<div class="menu_section">
+						
 							<h3>Käyttäjä</h3>
 						<ul class="nav side-menu">
 							<li><a href="/tunnit_lila/secure/oma/projektit"><i
