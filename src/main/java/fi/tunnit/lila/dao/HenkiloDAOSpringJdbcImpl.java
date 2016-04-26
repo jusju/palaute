@@ -230,6 +230,7 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
 		try {
 		jdbcTemplate.update(sql, id);
+		
 				
 		} catch (IncorrectResultSizeDataAccessException e) {
 			throw new HenkiloaEiLoydyPoikkeus(e);
@@ -237,6 +238,34 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 
 
 	}
+	
+	public void poistaHenkilonAuth(int id) {
+		final String sqlAuth ="DELETE FROM kayttajan_authority WHERE kayttaja_id = ?";
+
+		try {
+		jdbcTemplate.update(sqlAuth, id);
+				
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+
+
+	}
+	
+	public void poistaHenkilonPoletti(int id) {
+		final String sql ="DELETE FROM poletti WHERE kaytID = ?";
+
+		try {
+		jdbcTemplate.update(sql, id);
+				
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+
+
+	}
+	
+	
 
 	public List<Henkilo> haeKaikki() {
 

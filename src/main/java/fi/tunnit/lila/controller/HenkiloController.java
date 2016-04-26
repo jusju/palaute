@@ -262,6 +262,8 @@ public class HenkiloController {
 
 		
 			tdao.poistaHTunnit(id);
+			dao.poistaHenkilonAuth(id);
+			dao.poistaHenkilonPoletti(id);
 			dao.poistaHenkilo(id);
 
 			return "secure/kayttaja/poistoApu";

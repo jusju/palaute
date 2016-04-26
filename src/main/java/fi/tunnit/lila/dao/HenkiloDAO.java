@@ -19,4 +19,8 @@ public interface HenkiloDAO {
 	public abstract List<Henkilo> haeKaikki();
 
 	public void poistaHenkilo(int id);
+	
+	public void poistaHenkilonAuth(int id);
+	
+	public void poistaHenkilonPoletti(int id);
 }
