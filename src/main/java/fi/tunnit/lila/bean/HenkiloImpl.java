@@ -11,6 +11,7 @@ import fi.tunnit.lila.bean.validation.UniqueEmail;
 @PasswordCompare(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.uusiSalasana.class}, message ="Salasanat eiv‰t t‰sm‰‰!")
 public class HenkiloImpl implements Henkilo {
 
+
 	public interface uusiHenkilo {
 
 	}
@@ -23,6 +24,7 @@ public class HenkiloImpl implements Henkilo {
 
 	}
 	
+
 	
 	private int id;
 	

@@ -25,5 +25,7 @@ public interface Henkilo {
 	public abstract String getVertailu();
 
 	public abstract void setVertailu(String vertailu);
+	
+	
 
 }
