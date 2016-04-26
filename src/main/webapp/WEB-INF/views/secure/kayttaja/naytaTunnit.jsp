@@ -55,23 +55,19 @@
 
 										<tr class="even pointer">
 											<c:forEach items="${tunnit}" var="tunti">
-												<td class=" "><c:out value="${tunti.date}"></c:out>
-												</td>
-												
+												<td class=" "><c:out value="${tunti.date}"></c:out></td>
+
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
 														<td><a
-													href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out value="${projektit.projnimi}"></c:out></a></td>
+															href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out
+																	value="${projektit.projnimi}"></c:out></a></td>
 													</c:if>
 												</c:forEach>
-												<td class=" "><c:out value="${tunti.kuvaus}"></c:out>
-												</td>
-												<td> 												
+												<td class=" "><c:out value="${tunti.kuvaus}"></c:out></td>
+												<td><c:out
+														value="${tunti.lopetusaika - tunti.aloitusaika}" /></td>
 
-												<c:out value="${tunti.lopetusaika - tunti.aloitusaika}"/>
-												
-												</td>
-												
 												<td class=" "><a
 													href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}"><button
 															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
@@ -79,7 +75,7 @@
 										</c:forEach>
 
 
-										
+
 
 									</tbody>
 
@@ -93,9 +89,8 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="x_panel">
-						<a
-													href="/tunnit_lila/tunnit/uusi/${henkilo.id}"><button
-															type="button" class="btn btn-success ">Lisää tunti</button></a>
+						<a href="/tunnit_lila/tunnit/uusi/${henkilo.id}"><button
+								type="button" class="btn btn-success ">Lisää tunti</button></a>
 					</div>
 				</div>
 			</div>
@@ -116,9 +111,6 @@
 	</div>
 	<!-- /page content -->
 
-	</div>
-
-	</div>
 
 
 
@@ -126,8 +118,6 @@
 
 
 
-
-	<a href="#" onclick="history.go(-1)">Takaisin</a>
 
 
 

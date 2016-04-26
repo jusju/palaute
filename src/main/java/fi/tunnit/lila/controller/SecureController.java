@@ -98,7 +98,6 @@ public class SecureController {
 	    System.out.println(sposti);
 
 	    Henkilo henkilo = dao.etsiSposti(sposti);
-	    System.out.println(henkilo.getEtunimi());
 	    
 	    int id = henkilo.getId();
 	    
