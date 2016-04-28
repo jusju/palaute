@@ -3,6 +3,7 @@
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,9 @@
 											<th>Päivämäärä</th>
 											<th>Projekti</th>
 											<th>Selite</th>
-											<th>Aika (h)</th>
+											<th>Aloitus-aika</th>
+											<th>Lopetus-aika</th>
+											<th>Yhteensä</th>
 											<th>Poista</th>
 										</tr>
 									</thead>
@@ -65,14 +68,49 @@
 													</c:if>
 												</c:forEach>
 												<td class=" "><c:out value="${tunti.kuvaus}"></c:out></td>
-												<td><c:out
-														value="${tunti.lopetusaika - tunti.aloitusaika}" /></td>
+												<td><c:out value="${tunti.aloitusaika}" /></td>
+												<td><c:out value="${tunti.lopetusaika}" /></td>
 
+
+
+
+
+
+												<c:set var="at" value="${tunti.aloitusaika}" />
+												<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
+
+												<c:set var="am" value="${tunti.aloitusaika}" />
+												<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
+
+												
+
+												<c:set var="lot" value="${tunti.lopetusaika}" />
+												<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
+
+												<c:set var="lm" value="${tunti.lopetusaika}" />
+												<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
+
+												
+
+												<c:set var="yht"
+													value="${ltunnit - atunnit}:${lminuutit - aminuutit}"></c:set>
+												<td><c:out value="${yht}" /></td>
 												<td class=" "><a
 													href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}"><button
 															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
 										</tr>
+
+
+
+
+
+
 										</c:forEach>
+
+
+
+
+
 
 
 
