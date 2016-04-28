@@ -1,7 +1,6 @@
 package fi.tunnit.lila.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,9 +15,9 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import fi.tunnit.lila.bean.Henkilo;
+
 import fi.tunnit.lila.bean.Poletti;
-import fi.tunnit.lila.bean.Tunnit;
+
 
 @Repository
 public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
@@ -69,35 +68,7 @@ public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
 		}
 
 
-		public Poletti etsi(int kaytID) {
-			String sql = "select polettiID, satunnainen,kaytID,vanhenemispvm from poletti where kaytID = ?";
-			Object[] parametrit = new Object[] { kaytID };
-			RowMapper<Poletti> mapper = new PolettiRowMapper();
-			
-			Poletti p;
-			try {
-				p = jdbcTemplate.queryForObject(sql, parametrit, mapper);
-			} catch (IncorrectResultSizeDataAccessException e) {
-				throw new HenkiloaEiLoydyPoikkeus(e);
-			}
-			return p;
 
-		}
-		
-		public Poletti etsiSatunnainen(String satunnainen) {
-			String sql = "select polettiID, satunnainen,kaytID,vanhenemispvm from poletti where satunnainen = ?";
-			Object[] parametrit = new Object[] { satunnainen };
-			RowMapper<Poletti> mapper = new PolettiRowMapper();
-			
-			Poletti p;
-			try {
-				p = jdbcTemplate.queryForObject(sql, parametrit, mapper);
-			} catch (IncorrectResultSizeDataAccessException e) {
-				throw new HenkiloaEiLoydyPoikkeus(e);
-			}
-			return p;
-
-		}
 		//hae kaikki poletit vertailua varten
 		public List<Poletti> haeKaikki() {
 
@@ -109,15 +80,7 @@ public class PolettiDAOSpringJdbcImpl implements PolettiDAO {
 
 		}
 		
-		public List<Poletti> etsiS(String satunnainen) {
-			String sql = "select polettiID,satunnainen,kaytID,vanhenemispvm from poletti";
-			Object[] parametrit = new Object[] { satunnainen };
-			RowMapper<Poletti> mapper = new PolettiRowMapper();
-			List<Poletti> poletti = jdbcTemplate.query(sql,parametrit, mapper);
 
-			return poletti;
-
-		}
 		
 		public void poistaSatunnainen(String satunnainen){
 			final String sql = "DELETE FROM poletti WHERE satunnainen = ?";

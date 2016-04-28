@@ -4,28 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.swing.tree.RowMapper;
-import javax.validation.Valid;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.support.SessionStatus;
 
-import com.sun.javafx.collections.MappingChange.Map;
 
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
@@ -35,7 +24,7 @@ import fi.tunnit.lila.dao.HenkiloDAO;
 import fi.tunnit.lila.dao.PolettiDAO;
 import fi.tunnit.lila.dao.ProjektiDAO;
 import fi.tunnit.lila.bean.Tunnit;
-import fi.tunnit.lila.bean.TunnitImpl;
+
 import fi.tunnit.lila.dao.TunnitDAO;
 import fi.tunnit.lila.util.SalasananKryptaaja;
 
@@ -165,7 +154,6 @@ public class HenkiloController {
 		}else{
 		SalasananKryptaaja sk = new SalasananKryptaaja();
 		henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
-		System.out.println("HEllo");
 		dao.muokkaa(henkilo);
 		return "redirect:/";
 		}
@@ -177,7 +165,6 @@ public class HenkiloController {
 		if(result.hasErrors()){
 			return "secure/kayttaja/muokkaaKayttaja";
 		}else{
-			System.out.println(henkilo);
 			SalasananKryptaaja sk = new SalasananKryptaaja();
 			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
 		dao.muokkaa(henkilo);
