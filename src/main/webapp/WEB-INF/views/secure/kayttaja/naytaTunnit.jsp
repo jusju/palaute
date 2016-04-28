@@ -58,6 +58,8 @@
 									<tbody>
 
 										<tr class="even pointer">
+										<c:set var="kaikkiTun" value="${0}" />
+										<c:set var="kaikkiMin" value="${0}" />
 											<c:forEach items="${tunnit}" var="tunti">
 												<td class=" "><c:out value="${tunti.date}"></c:out></td>
 
@@ -104,8 +106,11 @@
 
 												<td><c:out value="${yhtt} tuntia ${yhtm} minuuttia" /></td>
 
-
-
+												<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
+												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+												
+											
+																										
 
 
 
@@ -122,9 +127,20 @@
 
 
 										</c:forEach>
-
-
-
+										
+												    <c:forEach items="${tunnit}" var="tunti">
+												      <c:if test="${kaikkiMin > 59}"> <c:set var="kaikkiTun" value="${kaikkiTun+1}"></c:set> 
+										<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
+										</c:if>
+												    </c:forEach>
+																						
+										
+										
+										
+										
+										
+										<td><h2>Yhteensä: <c:out value="${kaikkiTun}" /> tuntia <c:out value="${kaikkiMin}" /> minuuttia</h2></td>
+										
 
 
 
