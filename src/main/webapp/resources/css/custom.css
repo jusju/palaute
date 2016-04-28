@@ -5819,6 +5819,8 @@ form:after {
     color: #777;
     margin: 0 0 20px;
     width: 100%;
+    min-height: 34px;
+    padding-left:12px
 }
 .login_content form input[type="text"]:focus,
 .login_content form input[type="email"]:focus,
