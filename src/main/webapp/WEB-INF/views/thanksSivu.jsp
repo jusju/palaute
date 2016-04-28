@@ -15,8 +15,8 @@
 </head>	
 <body>
 
-<c:out value="${appUrl}"/>
-<a href="<c:out value="/tunnit_lila/nollaus/resetPassword/${poletti.satunnainen}"/>">Nollaa</a>
+<c:out value="${thanks}"/>
+<a href="<c:out value="/tunnit_lila/"/>">Etusivulle</a>
 		
 </body>
 </html>

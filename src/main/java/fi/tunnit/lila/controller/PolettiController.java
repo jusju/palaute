@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +21,7 @@ import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.bean.Poletti;
 import fi.tunnit.lila.bean.PolettiImpl;
-import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.dao.HenkiloDAO;
-import fi.tunnit.lila.dao.HenkiloaEiLoydyPoikkeus;
 import fi.tunnit.lila.dao.PolettiDAO;
 import fi.tunnit.lila.util.SpostiLahetys;
 
@@ -36,6 +34,9 @@ public class PolettiController {
 
 	@Inject
 	private HenkiloDAO dao;
+	
+	@Autowired
+	private SpostiLahetys sposti;
 
 	public HenkiloDAO getDao() {
 		return dao;
@@ -89,17 +90,15 @@ public class PolettiController {
 				+ request.getServerPort() + request.getContextPath() + "/"
 				+ "nollaus/" + "resetPassword/" + satunnainen;
 		
-		SpostiLahetys sposti = new SpostiLahetys();
-		try {
-			sposti.sendEmail(userEmail, appUrl);
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Järjestelmässä tapahtui virhe :(");
-		}
-	
-		model.addAttribute("appUrl", appUrl);
 
-		return "nollausLinkki";
+		String subject = "Unohdetun salasanan nollauslinkki";
+		sposti.sendMail(userEmail, subject, appUrl);
+		
+		String thanks = "Nollauslinkki on lähetetty teidän sähköpostiin";
+	
+		model.addAttribute("thanks", thanks);
+
+		return "thanksSivu";
 
 		/*
 		 * SimpleMailMessage email = constructResetTokenEmail(appUrl,
@@ -138,5 +137,7 @@ public class PolettiController {
 			System.out.println(polettiID);
 			return "lisaaSalasana";
 		}*/
+
+
 
 }

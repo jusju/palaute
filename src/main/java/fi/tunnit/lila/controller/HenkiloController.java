@@ -151,7 +151,6 @@ public class HenkiloController {
 		henkiloa.setEtunimi(henkilo.getEtunimi());
 		henkiloa.setSukunimi(henkilo.getSukunimi());
 		henkiloa.setSposti(henkilo.getSposti());
-		henkiloa.setSalasana(henkilo.getSalasana());
 		model.addAttribute("henkilo", henkiloa);
 		return "lisaaSalasana";
 	}
