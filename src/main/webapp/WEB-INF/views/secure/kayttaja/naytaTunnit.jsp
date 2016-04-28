@@ -99,11 +99,10 @@
 												<c:if test="${lminuutit < aminuutit}"> <c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
 												</c:if>
 
-												<c:if test="${lminuutit > aminuutit}"> <c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+												<c:if test="${lminuutit > aminuutit || lminuutit == aminuutit}"> <c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
 												</c:if>
 
-											
-												<td><c:out value="${yhtt}:${yhtm}" /></td>
+												<td><c:out value="${yhtt} tuntia ${yhtm} minuuttia" /></td>
 
 
 
