@@ -25,8 +25,11 @@
 				<br />
 				<form:input path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
 			</p>
-
-				<form:input path="sposti" type="hidden" />
+			<p>
+				<form:label path="sposti">Sähköpostiosoite</form:label>
+				<br />
+				<form:input class="form-control" placeholder="Sähköpostiosoite" path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
+			</p>
 
 
 	

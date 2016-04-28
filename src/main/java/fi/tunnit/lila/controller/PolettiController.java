@@ -91,7 +91,7 @@ public class PolettiController {
 		
 		SpostiLahetys sposti = new SpostiLahetys();
 		try {
-			sposti.send(userEmail, appUrl);
+			sposti.sendEmail(userEmail, appUrl);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Järjestelmässä tapahtui virhe :(");

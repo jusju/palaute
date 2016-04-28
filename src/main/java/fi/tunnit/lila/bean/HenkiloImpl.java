@@ -34,8 +34,8 @@ public class HenkiloImpl implements Henkilo {
 	@Size(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.muokkaaHenkilo.class}, min = 1, message = "Kirjoita sukunimesi.")
 	private String sukunimi;
 	
-	@Size(groups = {HenkiloImpl.uusiHenkilo.class}, min = 1, message = "Kirjoita sähköpostiosoite.")
-	@Email(groups = {HenkiloImpl.uusiHenkilo.class}, message = "Anna sähkäpostiosoite oikeassa muodossa.")
+	@Size(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.muokkaaHenkilo.class}, min = 1, message = "Kirjoita sähköpostiosoite.")
+	@Email(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.muokkaaHenkilo.class}, message = "Anna sähkäpostiosoite oikeassa muodossa.")
     @UniqueEmail(groups = {HenkiloImpl.uusiHenkilo.class}, message = "Antamasi sähkäpostiosoite on jo käytetty")
 	private String sposti;
 	
