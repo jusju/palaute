@@ -5,6 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +58,8 @@
 									</thead>
 
 									<tbody>
-
-										<tr class="even pointer">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<tr class="even pointer">
 											<c:set var="kaikkiTun" value="${0}" />
 											<c:set var="kaikkiMin" value="${0}" />
 											<c:forEach items="${tunnit}" var="tunti">
@@ -128,6 +130,86 @@
 												<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
 											</c:if>
 										</c:forEach>
+										
+
+								</sec:authorize>
+							
+					 
+						<sec:authorize access="hasRole('ROLE_USER')">
+						
+						<tr class="even pointer">
+											<c:set var="kaikkiTun" value="${0}" />
+											<c:set var="kaikkiMin" value="${0}" />
+											<c:forEach items="${tunnit}" var="tunti">
+												<td class=" "><c:out value="${tunti.date}"></c:out></td>
+
+												<c:forEach items="${projektit}" var="projektit">
+													<c:if test="${tunti.projID == projektit.projID}">
+														<td><a
+															href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out
+																	value="${projektit.projnimi}"></c:out></a></td>
+													</c:if>
+												</c:forEach>
+												<td class=" "><c:out value="${tunti.kuvaus}"></c:out></td>
+												<td><c:out value="${tunti.aloitusaika}" /></td>
+												<td><c:out value="${tunti.lopetusaika}" /></td>
+
+
+												<c:set var="at" value="${tunti.aloitusaika}" />
+												<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
+
+												<c:set var="am" value="${tunti.aloitusaika}" />
+												<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
+
+												<c:set var="lot" value="${tunti.lopetusaika}" />
+												<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
+
+												<c:set var="lm" value="${tunti.lopetusaika}" />
+												<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
+
+
+
+
+
+
+												<c:if test="${ltunnit < atunnit}">
+													<c:set var="yhtt" value="${ltunnit+24 - atunnit}"></c:set>
+												</c:if>
+
+												<c:if test="${ltunnit > atunnit}">
+													<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
+												</c:if>
+
+												<c:if test="${lminuutit < aminuutit}">
+													<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
+												</c:if>
+
+												<c:if
+													test="${lminuutit > aminuutit || lminuutit == aminuutit}">
+													<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+												</c:if>
+
+												<td><c:out value="${yhtt} tuntia ${yhtm} minuuttia" /></td>
+
+												<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
+												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+
+												<td class=" "><a
+													href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}"><button
+															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
+										</tr>
+
+
+										</c:forEach>
+
+										<c:forEach items="${tunnit}" var="tunti">
+											<c:if test="${kaikkiMin > 59}">
+												<c:set var="kaikkiTun" value="${kaikkiTun+1}"></c:set>
+												<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
+											</c:if>
+										</c:forEach>
+										
+						</sec:authorize>
 										
 
 										

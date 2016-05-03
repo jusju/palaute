@@ -73,7 +73,7 @@
 												class="fa fa-users"></i>Käyttäjät </a></li>
 										<li><a href="/tunnit_lila/secure/oma/projektit"><i
 												class="fa fa-folder-open-o"></i> Projektit </a></li>
-										<li><a href="/tunnit_lila/secure/oma/tunnit"><i
+										<li><a href="/tunnit_lila/secure/oma/tuntilista"><i
 												class="fa fa-clock-o"></i> Tunnit </a></li>
 									</ul>
 
@@ -84,8 +84,7 @@
 						
 							<h3>Käyttäjä</h3>
 						<ul class="nav side-menu">
-							<li><a href="/tunnit_lila/secure/oma/projektit"><i
-									class="fa fa-folder-open-o"></i> Projektit </a></li>
+							
 							<li><a href="/tunnit_lila/secure/oma/tunnit"><i
 									class="fa fa-clock-o"></i> Tunnit </a></li>
 						</ul>

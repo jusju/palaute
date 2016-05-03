@@ -89,7 +89,7 @@ public class SecureController {
 		return "secure/kayttaja/naytaKayttaja";
 		
 	}
-	
+	//Käyttäjän omat tunnit
 	@RequestMapping(value = "/oma/tunnit", method = RequestMethod.GET)
 	public String paasivuT(Model model) {
 		
@@ -115,6 +115,22 @@ public class SecureController {
 		return "secure/kayttaja/naytaTunnit";
 		
 	}
+	
+	// HAE KAIKKI TUNNIT
+		@RequestMapping(value = "/oma/tuntilista", method = RequestMethod.GET)
+		public String showLista(Model modelAll) {
+
+			List<Tunnit> tunnit = new ArrayList<Tunnit>();
+			tunnit = tdao.haeTunnit();
+			
+			List<Projekti> projektit = new ArrayList<Projekti>();
+			projektit = pdao.haeKaikki();
+
+			modelAll.addAttribute("tunnit", tunnit);
+			modelAll.addAttribute("projektit", projektit);
+
+			return "secure/kayttaja/naytaTunnit";
+		}
 	
 	@RequestMapping(value = "/oma/projektit", method = RequestMethod.GET)
 	public String paasivuP(Model model) {
