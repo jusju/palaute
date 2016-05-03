@@ -48,7 +48,6 @@
 									<thead>
 										<tr class="headings ">
 											<th>Päivämäärä</th>
-											<th>Työntekijä</th>
 											<th>Projekti</th>
 											<th>Selite</th>
 											<th>Aloitus-aika</th>
@@ -59,30 +58,19 @@
 									</thead>
 
 									<tbody>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<tr class="even pointer">
+				 
+						
+						
+						<tr class="even pointer">
 											<c:set var="kaikkiTun" value="${0}" />
 											<c:set var="kaikkiMin" value="${0}" />
 											<c:forEach items="${tunnit}" var="tunti">
-											
-												
 												<td class=" "><c:out value="${tunti.date}"></c:out></td>
-												
-												
-												<c:forEach items="${henkilot}" var="henkilo">
-												<c:if test="${tunti.kaytID == henkilo.id}">
-														<td><a
-															href="<c:out value="/tunnit_lila/secure/admin/super/ktunti/${tunti.kaytID}"/>"><c:out
-																	value="${henkilo.etunimi} ${henkilo.sukunimi}"></c:out></a></td>
-													</c:if>
-												</c:forEach>
-												
-												
-												
+
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
 														<td><a
-															href="<c:out value="/tunnit_lila/secure/admin/super/ptunti/${projektit.projID}"/>"><c:out
+															href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out
 																	value="${projektit.projnimi}"></c:out></a></td>
 													</c:if>
 												</c:forEach>
@@ -145,8 +133,10 @@
 											</c:if>
 										</c:forEach>
 										
+					
+										
 
-								</sec:authorize>
+										
 
 									</tbody>
 

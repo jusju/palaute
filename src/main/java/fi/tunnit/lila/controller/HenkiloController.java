@@ -223,14 +223,7 @@ public class HenkiloController {
 		return "secure/tunnit/tunninTiedot";
 	}
 
-	// PROJEKTIN TIETOJEN LIS��MINEN
-	@RequestMapping(value = "ptunti/{projID}", method = RequestMethod.GET)
-	public String getProj(@PathVariable Integer projID, Model model) {
-		Projekti projekti = pdao.etsi(projID);
-		model.addAttribute("projekti", projekti);
-
-		return "secure/projekti/projektinTiedot";
-	}
+	
 
 	// HAE KAIKKI PROJEKTIT
 

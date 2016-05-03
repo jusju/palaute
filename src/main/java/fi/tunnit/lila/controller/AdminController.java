@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -75,10 +76,46 @@ public class AdminController {
 		
 		List<Projekti> projektit = new ArrayList<Projekti>();
 		projektit = pdao.haeKaikki();
+		
+		List<Henkilo> henkilot = new ArrayList<Henkilo>();
+		henkilot = dao.haeKaikki();
 
 		modelAll.addAttribute("tunnit", tunnit);
 		modelAll.addAttribute("projektit", projektit);
+		modelAll.addAttribute("henkilot", henkilot);
 
 		return "secure/admin/super/naytaTunnit";
 	}
+	
+
+	@RequestMapping(value = "/ktunti/{id}", method = RequestMethod.GET)
+	public String getTunti(@PathVariable Integer id, Model model) {
+		List<Tunnit> tunnit = new ArrayList<Tunnit>();
+		tunnit = tdao.etsi(id);
+		
+		List<Projekti> projektit = new ArrayList<Projekti>();
+		projektit = pdao.haeKaikki();
+		
+		model.addAttribute("tunnit", tunnit);
+		model.addAttribute("projektit", projektit);
+	
+		return "secure/admin/super/naytaTunnitK";
+	}
+	
+	// PROJEKTIN TIETOJEN LIS��MINEN
+		@RequestMapping(value = "/ptunti/{projID}", method = RequestMethod.GET)
+		public String getProj(@PathVariable Integer projID, Model model) {
+			
+			List<Tunnit> ptunnit = new ArrayList<Tunnit>();
+			ptunnit = tdao.etsiPT(projID);
+			List<Henkilo> henkilot = new ArrayList<Henkilo>();
+			henkilot = dao.haeKaikki();
+			List<Projekti> projektit = new ArrayList<Projekti>();
+			projektit = pdao.haeKaikki();
+			
+			model.addAttribute("ptunnit", ptunnit);
+			model.addAttribute("henkilot", henkilot);
+			model.addAttribute("projektit", projektit);
+			return "secure/admin/super/projektinTunnit";
+		}
 }

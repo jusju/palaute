@@ -69,9 +69,7 @@
 
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
-														<td><a
-															href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out
-																	value="${projektit.projnimi}"></c:out></a></td>
+														<td><c:out value="${projektit.projnimi}"></c:out></td>
 													</c:if>
 												</c:forEach>
 												<td class=" "><c:out value="${tunti.kuvaus}"></c:out></td>
