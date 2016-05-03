@@ -80,10 +80,14 @@ public class SecureController {
 		List<Tunnit> tunnit = new ArrayList<Tunnit>();
 		tunnit = tdao.etsi(id);
 		
+		List<Tunnit> kaikkitunnit = new ArrayList<Tunnit>();
+		kaikkitunnit = tdao.haeTunnit();
+		
 		List<Projekti> projektit = new ArrayList<Projekti>();
 		projektit = pdao.haeKaikki();
 		
 		model.addAttribute("tunnit", tunnit);
+		model.addAttribute("kaikki", kaikkitunnit);
 		model.addAttribute("projektit", projektit);
 
 		return "secure/kayttaja/naytaKayttaja";
