@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<jsp:include page="navigointi.jsp"></jsp:include>
+	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
 
 	<!-- page content -->
 	<div class="right_col" role="main">
@@ -58,10 +58,8 @@
 									</thead>
 
 									<tbody>
-				 
-						<sec:authorize access="hasRole('ROLE_USER')">
-						
-						<tr class="even pointer">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<tr class="even pointer">
 											<c:set var="kaikkiTun" value="${0}" />
 											<c:set var="kaikkiMin" value="${0}" />
 											<c:forEach items="${tunnit}" var="tunti">
@@ -133,10 +131,8 @@
 											</c:if>
 										</c:forEach>
 										
-						</sec:authorize>
-										
 
-										
+								</sec:authorize>
 
 									</tbody>
 
