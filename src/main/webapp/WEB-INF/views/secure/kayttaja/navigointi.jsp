@@ -69,7 +69,7 @@
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
 									<h3>Admin</h3>
 									<ul class="nav side-menu">
-										<li><a href="/tunnit_lila/secure/admin/super/tools"><i
+										<li><a href="/tunnit_lila/secure/admin/super/kayttajalista"><i
 												class="fa fa-users"></i>Käyttäjät </a></li>
 										<li><a href="/tunnit_lila/secure/oma/projektit"><i
 												class="fa fa-folder-open-o"></i> Projektit </a></li>

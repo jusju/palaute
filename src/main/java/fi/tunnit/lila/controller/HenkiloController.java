@@ -100,22 +100,9 @@ public class HenkiloController {
 		}
 	}
 
-	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS TEKEMINEN
-	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.GET)
-	public String getMuokkaaForm(@PathVariable Integer id, Model model) {
-		Henkilo henkilo = dao.etsi(id);
-		model.addAttribute("henkilo", henkilo);
-
-		Henkilo henkiloa = new HenkiloImpl();
-		henkiloa.setEtunimi(henkilo.getEtunimi());
-		henkiloa.setSukunimi(henkilo.getSukunimi());
-		henkiloa.setSposti(henkilo.getSposti());
-		henkiloa.setSalasana(henkilo.getSalasana());
-		model.addAttribute("henkilo", henkiloa);
-		return "secure/kayttaja/muokkaaKayttaja";
-	}
 	
-	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS TEKEMINEN
+	
+	// KÄYTTÄJÄN MUOKKAUS TEKEMINEN
 	@RequestMapping(value = "uusisalasana/{satunnainen}", method = RequestMethod.GET)
 	public String getUusiSalasanaForm(@PathVariable String satunnainen, Model model) {
 		
@@ -144,7 +131,7 @@ public class HenkiloController {
 		return "lisaaSalasana";
 	}
 	
-	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
+	// KÄYTTÄJÄN MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "uusisalasana/{satunnainen}", method = RequestMethod.POST)
 	public String uusiSalasana(@ModelAttribute(value = "henkilo")@Validated(HenkiloImpl.uusiSalasana.class) HenkiloImpl henkilo, BindingResult result) {
 		if(result.hasErrors()){
@@ -159,18 +146,7 @@ public class HenkiloController {
 		}
 	}
 
-	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
-	@RequestMapping(value = "muokkaa/{id}", method = RequestMethod.POST)
-	public String create(@ModelAttribute(value = "henkilo")@Validated(HenkiloImpl.muokkaaHenkilo.class) HenkiloImpl henkilo, BindingResult result) {
-		if(result.hasErrors()){
-			return "secure/kayttaja/muokkaaKayttaja";
-		}else{
-			SalasananKryptaaja sk = new SalasananKryptaaja();
-			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
-		dao.muokkaa(henkilo);
-		return "redirect:/secure/admin/super/tools";
-		}
-	}
+	
 
 	// HAE KAIKKI OIKEA
 	@RequestMapping(value = "lista", method = RequestMethod.GET)
@@ -194,7 +170,7 @@ public class HenkiloController {
 		return "secure/kayttaja/listaaTunnit";
 	}
 /*
-	// HENKILï¿½N TIETOJEN Nï¿½YTTï¿½MINEN
+	// HENKILï¿½N TIETOJEN NÄYTTÄMINEN
 	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
@@ -213,7 +189,7 @@ public class HenkiloController {
 		return "kayttaja/naytaKayttaja";
 	}
 */
-	// TUNNIN TIETOJEN Nï¿½YTTï¿½MINEN
+	// TUNNIN TIETOJEN NÄYTTÄMINEN
 
 	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
 	public String getTunti(@PathVariable Integer tuntiID, Model model) {
@@ -237,19 +213,7 @@ public class HenkiloController {
 		return "secure/kayttaja/listaaTunnit";
 	}
 
-	// POISTA Kï¿½YTTï¿½Jï¿½
 
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-	public String showDelete(@PathVariable("id") Integer id) {	
-
-		
-			tdao.poistaHTunnit(id);
-			dao.poistaHenkilonAuth(id);
-			dao.poistaHenkilonPoletti(id);
-			dao.poistaHenkilo(id);
-
-			return "secure/kayttaja/poistoApu";
-	}
 	
 	
 

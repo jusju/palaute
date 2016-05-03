@@ -204,9 +204,9 @@
 								<c:out value="${kaikkiMin}" />
 								minuuttia
 							</h3>
-							<p>
-								<c:out value="${projekti.projnimi}" />
-							</p>
+							
+								<h2><c:out value="${projekti.projnimi}" /></h2>
+						
 						</div>
 					</div>
 			</c:forEach>

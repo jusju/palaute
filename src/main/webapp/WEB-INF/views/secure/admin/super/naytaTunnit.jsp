@@ -59,7 +59,7 @@
 									</thead>
 
 									<tbody>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
 									<tr class="even pointer">
 											<c:set var="kaikkiTun" value="${0}" />
 											<c:set var="kaikkiMin" value="${0}" />

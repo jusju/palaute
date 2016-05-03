@@ -3,6 +3,8 @@
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +15,7 @@
 </head>
 <body>
 	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
-
+<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<!-- page content -->
 	<div class="right_col" role="main">
 		<div class="">
@@ -56,15 +58,16 @@
 												<td class=" "><c:out value="${henkilo.etunimi}"></c:out></td>
 												<td class=" "><c:out value="${henkilo.sukunimi}"></c:out></td>
 												<td class=" "><a
-													href="/tunnit_lila/henkilo/muokkaa/${henkilo.id}"><button
+													href="/tunnit_lila/secure/admin/super/muokkaa/${henkilo.id}"><button
 															type="button" class="btn btn-danger btn-xs">Muokkaa</button></a></td>
 												<td class=" "><a
-													href="/tunnit_lila/henkilo/delete/${henkilo.id}"><button
+													href="/tunnit_lila/secure/admin/super/delete/${henkilo.id}"><button
 															type="button" class="btn btn-danger btn-xs">poista</button></a></td>
 										</tr>
+										
 										</c:forEach>
 
-
+</sec:authorize>
 
 
 									</tbody>
