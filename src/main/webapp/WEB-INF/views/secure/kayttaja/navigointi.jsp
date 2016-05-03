@@ -71,7 +71,7 @@
 									<ul class="nav side-menu">
 										<li><a href="/tunnit_lila/secure/admin/super/kayttajalista"><i
 												class="fa fa-users"></i>Käyttäjät </a></li>
-										<li><a href="/tunnit_lila/secure/oma/projektit"><i
+										<li><a href="/tunnit_lila/secure/admin/super/projektilista"><i
 												class="fa fa-folder-open-o"></i> Projektit </a></li>
 										<li><a href="/tunnit_lila/secure/admin/super/tuntilista"><i
 												class="fa fa-clock-o"></i> Tunnit </a></li>

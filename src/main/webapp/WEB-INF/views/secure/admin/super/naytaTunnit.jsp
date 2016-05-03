@@ -131,7 +131,7 @@
 												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
 
 												<td class=" "><a
-													href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}"><button
+													href="/tunnit_lila/secure/admin/super/delete/tunti/${tunti.tuntiID}"><button
 															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
 										</tr>
 

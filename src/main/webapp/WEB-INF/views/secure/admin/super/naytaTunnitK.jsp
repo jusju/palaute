@@ -70,7 +70,7 @@
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
 														<td><a
-															href="<c:out value="/tunnit_lila/henkilo/ptunti/${tunti.projID}"/>"><c:out
+															href="<c:out value="/tunnit_lila/secure/admin/super/ptunti/${tunti.projID}"/>"><c:out
 																	value="${projektit.projnimi}"></c:out></a></td>
 													</c:if>
 												</c:forEach>
@@ -119,7 +119,7 @@
 												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
 
 												<td class=" "><a
-													href="/tunnit_lila/tunnit/delete/${tunti.tuntiID}"><button
+													href="/tunnit_lila/secure/admin/super/delete/ktunti/${tunti.tuntiID}"><button
 															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
 										</tr>
 
