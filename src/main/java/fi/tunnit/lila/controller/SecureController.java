@@ -117,6 +117,8 @@ public class SecureController {
 	}
 	
 	
+	
+	
 	@RequestMapping(value = "/oma/projektit", method = RequestMethod.GET)
 	public String paasivuP(Model model) {
 		
