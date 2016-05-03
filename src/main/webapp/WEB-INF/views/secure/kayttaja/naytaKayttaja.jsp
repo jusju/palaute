@@ -18,7 +18,7 @@
 	<jsp:include page="navigointi.jsp"></jsp:include>
 
 
-	<div class="right_col" role="main">
+	<div class="right_col" style="min-height: 614px;" role="main">
 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
@@ -28,188 +28,188 @@
 						<div class="col-md-6">
 							<h3>Tervetuloa käyttäjä paneeliin!</h3>
 
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<p>
-									<a href="admin/super/tools">Admin tools</a>
-								</p>
-							</sec:authorize>
+
 
 						</div>
 					</div>
 					<div class="ln_solid"></div>
-					<div class="col-md-12 col-sm-12 col-xs-12">Vasemmalta löydät
-						kaiken tarvittavan.</div>
-
+					
 					<div class="clearfix"></div>
 				</div>
 			</div>
 
 		</div>
 		<br />
-<sec:authorize access="hasRole('ROLE_USER')">
-		<c:forEach items="${projektit}" var="projekti">
-		<c:set var="kaikkiTun" value="${0}" />
-		<c:set var="kaikkiMin" value="${0}" />
+		<sec:authorize access="hasRole('ROLE_USER')">
+		<div class="row">
+			<c:forEach items="${projektit}" var="projekti">
+			
+				<c:set var="kaikkiTun" value="${0}" />
+				<c:set var="kaikkiMin" value="${0}" />
 
-			<div class="row">
-				<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="tile-stats">
-						<div class="icon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-						<div class="count"></div>
-						<c:forEach items="${tunnit}" var="tunti">
-						<c:if test="${projekti.projID == tunti.projID}">
+				
+					<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="tile-stats">
+							<div class="icon">
+								<i class="fa fa-clock-o"></i>
+							</div>
 
-													
-
-						<c:set var="at" value="${tunti.aloitusaika}" />
-												<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
-
-												<c:set var="am" value="${tunti.aloitusaika}" />
-												<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
-
-												<c:set var="lot" value="${tunti.lopetusaika}" />
-												<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
-
-												<c:set var="lm" value="${tunti.lopetusaika}" />
-												<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
+							<div class="count"></div>
+							<c:forEach items="${tunnit}" var="tunti">
+								<c:if test="${projekti.projID == tunti.projID}">
 
 
 
+									<c:set var="at" value="${tunti.aloitusaika}" />
+									<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
+
+									<c:set var="am" value="${tunti.aloitusaika}" />
+									<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
+
+									<c:set var="lot" value="${tunti.lopetusaika}" />
+									<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
+
+									<c:set var="lm" value="${tunti.lopetusaika}" />
+									<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
 
 
 
-												<c:if test="${ltunnit < atunnit}">
-													<c:set var="yhtt" value="${ltunnit+24 - atunnit}"></c:set>
-												</c:if>
 
-												<c:if test="${ltunnit > atunnit}">
-													<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
-												</c:if>
 
-												<c:if test="${lminuutit < aminuutit}">
-													<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
-												</c:if>
 
-												<c:if
-													test="${lminuutit > aminuutit || lminuutit == aminuutit}">
-													<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
-												</c:if>
+									<c:if test="${ltunnit < atunnit}">
+										<c:set var="yhtt" value="${ltunnit+24 - atunnit}"></c:set>
+									</c:if>
 
-												
+									<c:if test="${ltunnit > atunnit}">
+										<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
+									</c:if>
 
-												<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
-												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+									<c:if test="${lminuutit < aminuutit}">
+										<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
+									</c:if>
 
-							
-</c:if>
-							
-						</c:forEach>
-						
-						<c:forEach items="${tunnit}" var="tunti">
-											<c:if test="${kaikkiMin > 59}">
-												<c:set var="kaikkiTun" value="${kaikkiTun+1}"></c:set>
-												<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
-											</c:if>
-										</c:forEach>
-						
-<h3>
+									<c:if test="${lminuutit > aminuutit || lminuutit == aminuutit}">
+										<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+									</c:if>
+
+
+
+									<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
+									<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+
+
+								</c:if>
+
+							</c:forEach>
+
+							<c:forEach items="${tunnit}" var="tunti">
+								<c:if test="${kaikkiMin > 59}">
+									<c:set var="kaikkiTun" value="${kaikkiTun+1}"></c:set>
+									<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
+								</c:if>
+							</c:forEach>
+
+							<h3>
 								Yhteensä:
 								<c:out value="${kaikkiTun}" />
 								tuntia
 								<c:out value="${kaikkiMin}" />
 								minuuttia
 							</h3>
-						<p>
-							<c:out value="${projekti.projnimi}" />
-						</p>
+
+							<h2>
+								<c:out value="${projekti.projnimi}" />
+							</h2>
+
+						</div>
 					</div>
-				</div>
-		</c:forEach>
+					
+			</c:forEach>
+			
 		</sec:authorize>
-		
+
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<c:forEach items="${projektit}" var="projekti">
-		<c:set var="kaikkiTun" value="${0}" />
-		<c:set var="kaikkiMin" value="${0}" />
+		<div class="row">
+			<c:forEach items="${projektit}" var="projekti">
+				<c:set var="kaikkiTun" value="${0}" />
+				<c:set var="kaikkiMin" value="${0}" />
 
-			<div class="row">
-				<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="tile-stats">
-						<div class="icon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-						<div class="count"></div>
-						<c:forEach items="${kaikki}" var="tunti">
-						<c:if test="${projekti.projID == tunti.projID}">
-
-													
-
-						<c:set var="at" value="${tunti.aloitusaika}" />
-												<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
-
-												<c:set var="am" value="${tunti.aloitusaika}" />
-												<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
-
-												<c:set var="lot" value="${tunti.lopetusaika}" />
-												<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
-
-												<c:set var="lm" value="${tunti.lopetusaika}" />
-												<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
+				
+					<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="tile-stats">
+							<div class="icon">
+								<i class="fa fa-clock-o"></i>
+							</div>
+							<div class="count"></div>
+							<c:forEach items="${kaikki}" var="tunti">
+								<c:if test="${projekti.projID == tunti.projID}">
 
 
 
+									<c:set var="at" value="${tunti.aloitusaika}" />
+									<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
+
+									<c:set var="am" value="${tunti.aloitusaika}" />
+									<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
+
+									<c:set var="lot" value="${tunti.lopetusaika}" />
+									<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
+
+									<c:set var="lm" value="${tunti.lopetusaika}" />
+									<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
 
 
 
-												<c:if test="${ltunnit < atunnit}">
-													<c:set var="yhtt" value="${ltunnit+24 - atunnit}"></c:set>
-												</c:if>
 
-												<c:if test="${ltunnit > atunnit}">
-													<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
-												</c:if>
 
-												<c:if test="${lminuutit < aminuutit}">
-													<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
-												</c:if>
 
-												<c:if
-													test="${lminuutit > aminuutit || lminuutit == aminuutit}">
-													<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
-												</c:if>
+									<c:if test="${ltunnit < atunnit}">
+										<c:set var="yhtt" value="${ltunnit+24 - atunnit}"></c:set>
+									</c:if>
 
-												
+									<c:if test="${ltunnit > atunnit}">
+										<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
+									</c:if>
 
-												<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
-												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+									<c:if test="${lminuutit < aminuutit}">
+										<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
+									</c:if>
 
-							
-</c:if>
-							
-						</c:forEach>
-						
-						<c:forEach items="${kaikki}" var="tunti">
-											<c:if test="${kaikkiMin > 59}">
-												<c:set var="kaikkiTun" value="${kaikkiTun+1}"></c:set>
-												<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
-											</c:if>
-										</c:forEach>
-						
-<h3>
+									<c:if test="${lminuutit > aminuutit || lminuutit == aminuutit}">
+										<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+									</c:if>
+
+
+
+									<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
+									<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+
+
+								</c:if>
+
+							</c:forEach>
+
+							<c:forEach items="${kaikki}" var="tunti">
+								<c:if test="${kaikkiMin > 59}">
+									<c:set var="kaikkiTun" value="${kaikkiTun+1}"></c:set>
+									<c:set var="kaikkiMin" value="${kaikkiMin-60}"></c:set>
+								</c:if>
+							</c:forEach>
+
+							<h3>
 								Yhteensä:
 								<c:out value="${kaikkiTun}" />
 								tuntia
 								<c:out value="${kaikkiMin}" />
 								minuuttia
 							</h3>
-						<p>
-							<c:out value="${projekti.projnimi}" />
-						</p>
+							<p>
+								<c:out value="${projekti.projnimi}" />
+							</p>
+						</div>
 					</div>
-				</div>
-		</c:forEach>
+			</c:forEach>
 		</sec:authorize>
 	</div>
 	<!-- footer content -->
