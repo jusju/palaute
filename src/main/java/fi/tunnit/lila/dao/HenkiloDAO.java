@@ -13,6 +13,8 @@ public interface HenkiloDAO {
 	public abstract void muokkaa(Henkilo henkilo);
 	
 	public void muokkaaOikeus(int id);
+	
+	public void OikeusPoisto(int id);
 
 	public abstract Henkilo etsi(int id);
 	

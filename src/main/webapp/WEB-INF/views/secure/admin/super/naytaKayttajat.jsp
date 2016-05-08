@@ -48,6 +48,7 @@
 												<th>Sukunimi</th>
 												<th>Muokkaa</th>
 												<th>Poista</th>
+												<th>Anna oikeudet</th>
 												<th>Oikeudet</th>
 											</tr>
 										</thead>
@@ -70,6 +71,11 @@
 														href="/tunnit_lila/secure/admin/super/muokkaa/kayttajanoikeus/${henkilo.id}"><button
 																type="button" class="btn btn-danger btn-xs">Anna
 																ylläpito oikeudet</button></a></td>
+																
+																<td class=" "><a
+														href="/tunnit_lila/secure/admin/super/poista/kayttajanoikeus/${henkilo.id}"><button
+																type="button" class="btn btn-danger btn-xs">Poista ylläpito oikeudet</button></a></td>
+											
 											</tr>
 
 											</c:forEach>

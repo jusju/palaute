@@ -223,16 +223,24 @@ public class AdminController {
 		return "redirect:/secure/admin/super/projektilista";
 	}
 
-	
 	// muokkaa käyttäjän oikeus
 
-		@RequestMapping(value = "/muokkaa/kayttajanoikeus/{id}", method = RequestMethod.GET)
-		public String annaOikeudet(@PathVariable("id") Integer id) {
+	@RequestMapping(value = "/muokkaa/kayttajanoikeus/{id}", method = RequestMethod.GET)
+	public String annaOikeudet(@PathVariable("id") Integer id) {
 
-			dao.muokkaaOikeus(id);
-			
+		dao.muokkaaOikeus(id);
 
-			return "secure/admin/super/muokkausOikeudetApu";
-		}
+		return "secure/admin/super/muokkausOikeudetApu";
+	}
+
+	// muokkaa käyttäjän oikeus
+
+	@RequestMapping(value = "/poista/kayttajanoikeus/{id}", method = RequestMethod.GET)
+	public String poistaOikeudet(@PathVariable("id") Integer id) {
+
+		dao.OikeusPoisto(id);
+
+		return "secure/admin/super/poistoOikeudetApu";
+	}
 
 }
