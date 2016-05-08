@@ -1,8 +1,6 @@
-CREATE TABLE kayttajan_projektit
+CREATE TABLE projektit
 (
-kaytID INT(20),
-projID INT(20),
-PRIMARY KEY (kaytID),
-FOREIGN KEY (kaytID) REFERENCES kayttaja(kaytID),
-FOREIGN KEY (projID) REFERENCES projektit(projID)
+projID INT(20) NOT NULL auto_increment,
+projnimi VARCHAR(100),
+PRIMARY KEY (projID)
 )engine=InnoDB;
