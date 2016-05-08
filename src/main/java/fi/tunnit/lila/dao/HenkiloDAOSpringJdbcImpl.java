@@ -276,5 +276,20 @@ public class HenkiloDAOSpringJdbcImpl implements HenkiloDAO {
 		return henkilot;
 
 	}
+	
+
+	public void muokkaaOikeus(int id) {
+		final String sql = "update kayttajan_authority ka inner join kayttaja k on ka.kayttaja_id=k.kaytID set ka.authority_id=2 where k.kaytID=?";
+
+		try {
+		jdbcTemplate.update(sql, id);
+		
+				
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+
+
+	}
 
 }

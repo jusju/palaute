@@ -15,81 +15,87 @@
 </head>
 <body>
 	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<!-- page content -->
-	<div class="right_col" role="main">
-		<div class="">
-			<div class="page-title">
-				<div class="title_left">
-					<h3>Tunnit</h3>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<!-- page content -->
+		<div class="right_col" role="main">
+			<div class="">
+				<div class="page-title">
+					<div class="title_left">
+						<h3>Tunnit</h3>
+					</div>
 				</div>
-			</div>
-			<div class="clearfix"></div>
+				<div class="clearfix"></div>
 
-			<div class="row">
+				<div class="row">
 
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="x_panel">
-						<div class="x_title">
-							<h2>Kaikki tunnit</h2>
-							<ul class="nav navbar-right panel_toolbox">
-								<li><a class="collapse-link"><i
-										class="fa fa-chevron-up"></i></a></li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<div class="x_content">
-							<div class="table-responsive">
-								<table id="example"
-									class="table table-striped responsive-utilities jambo_table">
-									<thead>
-										<tr class="headings ">
-											<th>Etunimi</th>
-											<th>Sukunimi</th>
-											<th>Muokkaa</th>
-											<th>Poista</th>
-										</tr>
-									</thead>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Kaikki tunnit</h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-up"></i></a></li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<div class="table-responsive">
+									<table id="example"
+										class="table table-striped responsive-utilities jambo_table">
+										<thead>
+											<tr class="headings ">
+												<th>Etunimi</th>
+												<th>Sukunimi</th>
+												<th>Muokkaa</th>
+												<th>Poista</th>
+												<th>Oikeudet</th>
+											</tr>
+										</thead>
 
-									<tbody>
+										<tbody>
 
-										<tr class="even pointer">
-											<c:forEach items="${henkilot}" var="henkilo">
-												<td class=" "><c:out value="${henkilo.etunimi}"></c:out></td>
-												<td class=" "><c:out value="${henkilo.sukunimi}"></c:out></td>
-												<td class=" "><a
-													href="/tunnit_lila/secure/admin/super/muokkaa/${henkilo.id}"><button
-															type="button" class="btn btn-danger btn-xs">Muokkaa</button></a></td>
-												<td class=" "><a
-													href="/tunnit_lila/secure/admin/super/delete/kayttaja/${henkilo.id}"><button
-															type="button" class="btn btn-danger btn-xs">poista</button></a></td>
-										</tr>
-										
-										</c:forEach>
+											<tr class="even pointer">
+												<c:forEach items="${henkilot}" var="henkilo">
+													<td class=" "><c:out value="${henkilo.etunimi}"></c:out></td>
+													<td class=" "><c:out value="${henkilo.sukunimi}"></c:out></td>
+													<td class=" "><a
+														href="/tunnit_lila/secure/admin/super/muokkaa/${henkilo.id}"><button
+																type="button" class="btn btn-danger btn-xs">Muokkaa</button></a></td>
+													<td class=" "><a
+														href="/tunnit_lila/secure/admin/super/delete/kayttaja/${henkilo.id}"><button
+																type="button" class="btn btn-danger btn-xs">poista</button></a></td>
 
-</sec:authorize>
+												
+													<td class=" "><a
+														href="/tunnit_lila/secure/admin/super/muokkaa/kayttajanoikeus/${henkilo.id}"><button
+																type="button" class="btn btn-danger btn-xs">Anna
+																ylläpito oikeudet</button></a></td>
+											</tr>
+
+											</c:forEach>
+
+											</sec:authorize>
 
 
-									</tbody>
+										</tbody>
 
-								</table>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				</tbody>
+
+
+
+
+
+
+
+
 			</div>
-			</tbody>
-
-
-
-
-
-
-
 
 		</div>
-
-	</div>
-
 </body>
 </html>
