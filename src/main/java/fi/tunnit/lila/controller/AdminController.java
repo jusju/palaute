@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.tunnit.lila.bean.Henkilo;
 import fi.tunnit.lila.bean.HenkiloImpl;
+import fi.tunnit.lila.bean.KayttajanAuthority;
 import fi.tunnit.lila.bean.Projekti;
 import fi.tunnit.lila.bean.ProjektiImpl;
 import fi.tunnit.lila.bean.Tunnit;
 import fi.tunnit.lila.dao.HenkiloDAO;
+import fi.tunnit.lila.dao.KayttajanAuthorityDAO;
 import fi.tunnit.lila.dao.ProjektiDAO;
 import fi.tunnit.lila.dao.TunnitDAO;
 import fi.tunnit.lila.util.SalasananKryptaaja;
@@ -38,6 +40,9 @@ public class AdminController {
 
 	@Inject
 	private ProjektiDAO pdao;
+	
+	@Inject
+	private KayttajanAuthorityDAO kdao;
 
 	public ProjektiDAO getPdao() {
 		return pdao;
@@ -62,13 +67,27 @@ public class AdminController {
 	public void setDao(HenkiloDAO dao) {
 		this.dao = dao;
 	}
+	
+	public KayttajanAuthorityDAO getkDao() {
+		return kdao;
+	}
 
+	public void setKdao(KayttajanAuthorityDAO kdao) {
+		this.kdao = kdao;
+	}
+
+	
+	//HAE KAIKKI KÄYTTÄJÄT
 	@RequestMapping(value = "/kayttajalista", method = RequestMethod.GET)
 	public String paasivu(Model model) {
 
 		List<Henkilo> henkilot = new ArrayList<Henkilo>();
 		henkilot = dao.haeKaikki();
-
+		
+		List<KayttajanAuthority> authorit = new ArrayList<KayttajanAuthority>();
+		authorit = kdao.etsiK();
+		
+		model.addAttribute("authorit", authorit);
 		model.addAttribute("henkilot", henkilot);
 
 		return "secure/admin/super/naytaKayttajat";

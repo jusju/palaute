@@ -46,10 +46,11 @@
 											<tr class="headings ">
 												<th>Etunimi</th>
 												<th>Sukunimi</th>
+												<th>Oikeudet</th>
 												<th>Muokkaa</th>
 												<th>Poista</th>
-												<th>Anna oikeudet</th>
-												<th>Oikeudet</th>
+												<th></th>
+											
 											</tr>
 										</thead>
 
@@ -59,23 +60,47 @@
 												<c:forEach items="${henkilot}" var="henkilo">
 													<td class=" "><c:out value="${henkilo.etunimi}"></c:out></td>
 													<td class=" "><c:out value="${henkilo.sukunimi}"></c:out></td>
+
+													<c:forEach items="${authorit}" var="authorit">
+														<c:if
+															test="${henkilo.id == authorit.kaytID && authorit.authID == 1}">
+															<td class=" "><c:out value="Tavallinen käyttäjä"></c:out></td>
+														</c:if>
+														<c:if
+															test="${henkilo.id == authorit.kaytID && authorit.authID == 2}">
+															<td class=" "><c:out value="Ylläpitäjä"></c:out></td>
+														</c:if>
+													</c:forEach>
+
 													<td class=" "><a
 														href="/tunnit_lila/secure/admin/super/muokkaa/${henkilo.id}"><button
-																type="button" class="btn btn-danger btn-xs">Muokkaa</button></a></td>
+																type="button" class="btn btn-success btn-xs">Muokkaa</button></a></td>
 													<td class=" "><a
 														href="/tunnit_lila/secure/admin/super/delete/kayttaja/${henkilo.id}"><button
 																type="button" class="btn btn-danger btn-xs">poista</button></a></td>
 
-												
-													<td class=" "><a
+
+													<c:forEach items="${authorit}" var="authorit">
+														<c:if
+															test="${henkilo.id == authorit.kaytID && authorit.authID == 1}">
+															<td class=" "><a
 														href="/tunnit_lila/secure/admin/super/muokkaa/kayttajanoikeus/${henkilo.id}"><button
-																type="button" class="btn btn-danger btn-xs">Anna
+																type="button" class="btn btn-success btn-xs">Anna
 																ylläpito oikeudet</button></a></td>
-																
-																<td class=" "><a
+														</c:if>
+														
+														<c:if
+															test="${henkilo.id == authorit.kaytID && authorit.authID == 2}">
+															<td class=" "><a
 														href="/tunnit_lila/secure/admin/super/poista/kayttajanoikeus/${henkilo.id}"><button
-																type="button" class="btn btn-danger btn-xs">Poista ylläpito oikeudet</button></a></td>
-											
+																type="button" class="btn btn-danger btn-xs">Poista
+																ylläpito oikeudet</button></a></td>
+														</c:if>
+													</c:forEach>
+
+													
+
+													
 											</tr>
 
 											</c:forEach>
