@@ -7,16 +7,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap core CSS -->
+  <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/animate.min.css"/>" rel="stylesheet">
+  <!-- Custom styling plus plugins -->
+  <link href="<c:url value="/resources/css/custom.css"/>" rel="stylesheet">
+  <link href="<c:url value="/resources/css/icheck/flat/green.css"/>" rel="stylesheet">
+  <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <title>Salasanan unohdus</title>
  
 </head>	
-<body>
+<body style="background:#F7F7F7;">
 
-<c:out value="${thanks}"/>
-<a href="<c:out value="/tunnit_lila/"/>">Etusivulle</a>
+    <div id="wrapper">
+      <div id="login" class="animate form">
+        <section class="login_content">
+	<c:out value="${thanks}"/>
+<a href="<c:out value="/tunnit_lila/"/>"><h1>Etusivulle</h1></a>
+	
 		
+		        </section>
+
+      </div>
+    </div>
+
 </body>
 </html>
+
+
