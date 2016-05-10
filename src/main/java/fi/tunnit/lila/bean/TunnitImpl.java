@@ -1,9 +1,23 @@
 package fi.tunnit.lila.bean;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class TunnitImpl implements Tunnit {
 
 	private int tuntiID,kaytID,projID;
-	private String date,aloitusaika,lopetusaika,kuvaus;
+	@Size(min = 1, message = "Anna päivämäärä")
+	@Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", message = "Anna päivämäärä muodossa dd.mm.yyyy")
+	private String date;
+	@Size(min = 1, message = "Anna aloitusaika")
+	@Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Anna aloitusaika muodossa TT:MM")
+	private String aloitusaika;
+	@Size(min = 1, message = "Anna lopetusaika")
+	@Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Anna lopetusaika muodossa TT:MM")
+	private String lopetusaika;
+	@Size(min = 1, message = "Kirjoita kuvaus")
+	private String kuvaus;
+	
 	public TunnitImpl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,6 +51,7 @@ public class TunnitImpl implements Tunnit {
 	public void setProjID(int projID) {
 		this.projID = projID;
 	}
+	
 	public String getDate() {
 		return date;
 	}

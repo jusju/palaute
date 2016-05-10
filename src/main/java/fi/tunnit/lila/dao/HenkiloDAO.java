@@ -11,6 +11,10 @@ public interface HenkiloDAO {
 	public abstract void talleta(Henkilo henkilo);
 	
 	public abstract void muokkaa(Henkilo henkilo);
+	
+	public void muokkaaOikeus(int id);
+	
+	public void OikeusPoisto(int id);
 
 	public abstract Henkilo etsi(int id);
 	
@@ -23,4 +27,6 @@ public interface HenkiloDAO {
 	public void poistaHenkilonAuth(int id);
 	
 	public void poistaHenkilonPoletti(int id);
+	
+	
 }

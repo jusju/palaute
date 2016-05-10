@@ -17,15 +17,16 @@
   <link href="<c:url value="/resources/css/custom.css"/>" rel="stylesheet">
   <link href="<c:url value="/resources/css/icheck/flat/green.css"/>" rel="stylesheet">
   <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<title>Salasanan unohdus</title>
+<title>Sivua ei löydy</title>
  
 </head>	
 <body style="background:#F7F7F7;">
 
     <div id="wrapper">
       <div id="login" class="animate form">
+      
         <section class="login_content">
-	<c:out value="${thanks}"/>
+<h1>404</h1>
 <a href="<c:out value="/tunnit_lila/"/>"><h1>Etusivulle</h1></a>
 	
 		

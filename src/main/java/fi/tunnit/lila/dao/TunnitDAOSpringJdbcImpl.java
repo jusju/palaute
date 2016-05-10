@@ -87,6 +87,17 @@ public class TunnitDAOSpringJdbcImpl implements TunnitDAO {
 		return tunnit;
 
 	}
+	
+	//Projektin tunteihin
+	public List<Tunnit> etsiPT(int projID) {
+		String sql = "select tuntiID,kaytID,projID,date,aloitusaika,lopetusaika,kuvaus from tunnit where projID = ?";
+		Object[] parametrit = new Object[] { projID };
+		RowMapper<Tunnit> mapper = new TunnitRowMapper();
+		List<Tunnit> tunnit = jdbcTemplate.query(sql,parametrit, mapper);
+
+		return tunnit;
+
+	}
 
 	
 	public Tunnit etsiTunnit(int id) {

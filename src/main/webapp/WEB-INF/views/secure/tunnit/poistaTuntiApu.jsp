@@ -10,25 +10,14 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<title>Projektin lisääminen</title>
+<title>Tuntien poisto</title>
  
 </head>	
 <body>
-	<h1>
-		Lisää projekti
-	</h1>
-		<form:form modelAttribute="projekti" method="post">
-		  	<fieldset>		
-				<legend>Projektin tiedot</legend>
-				<p>
-					<form:label	path="projnimi">Projektin nimi</form:label><br/>
-					<form:input path="projnimi" />		
-				</p>
-				<p>	
-					<button type="submit">Lisää</button>
-				</p>
-			</fieldset>
-		</form:form>
+	
+
+    <%response.sendRedirect("/tunnit_lila/tunnit/lista");%>
+
 		
 		
 </body>

@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<jsp:include page="navigointi.jsp"></jsp:include>
+	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
 
 	<!-- page content -->
 	<div class="right_col" role="main">
@@ -59,7 +59,7 @@
 
 									<tbody>
 				 
-						<sec:authorize access="hasRole('ROLE_USER')">
+						
 						
 						<tr class="even pointer">
 											<c:set var="kaikkiTun" value="${0}" />
@@ -69,7 +69,9 @@
 
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
-														<td><c:out value="${projektit.projnimi}"></c:out></td>
+														<td><a
+															href="<c:out value="/tunnit_lila/secure/admin/super/ptunti/${tunti.projID}"/>"><c:out
+																	value="${projektit.projnimi}"></c:out></a></td>
 													</c:if>
 												</c:forEach>
 												<td class=" "><c:out value="${tunti.kuvaus}"></c:out></td>
@@ -117,7 +119,7 @@
 												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
 
 												<td class=" "><a
-													href="/tunnit_lila/secure/oma/tunnit/delete/${tunti.tuntiID}"><button
+													href="/tunnit_lila/secure/admin/super/delete/ktunti/${tunti.tuntiID}"><button
 															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
 										</tr>
 
@@ -131,7 +133,7 @@
 											</c:if>
 										</c:forEach>
 										
-						</sec:authorize>
+					
 										
 
 										
@@ -155,7 +157,7 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="x_panel">
-						<a href="/tunnit_lila/secure/oma/uusi/${henkilo.id}"><button
+						<a href="/tunnit_lila/tunnit/uusi/${henkilo.id}"><button
 								type="button" class="btn btn-success ">Lisää tunti</button></a>
 					</div>
 				</div>

@@ -30,7 +30,7 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
+
 	<!-- Production implementation of the JavaMailSender interface, supporting 
 		both JavaMail MimeMessages and Spring SimpleMailMessages -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -38,24 +38,31 @@
 		<property name="port" value="587" />
 		<property name="username" value="teamlilatunnit@gmail.com" />
 		<property name="password" value="Salasana1" />
- 
+
 		<!-- The name of the property, following JavaBean naming conventions -->
 		<property name="javaMailProperties">
 			<props>
+
+				<prop key="mail.smtp.port">587</prop>
+				<prop key="mail.smtp.host">smtp.gmail.com</prop>
 				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.debug">true</prop>
+
 			</props>
 		</property>
 	</bean>
-	
+
+
+
 	<!-- DATA SOURCE -->
-	
+
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource"/>
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-		
+
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -64,48 +71,37 @@
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
 	</bean>
-	
+
 	<context:property-placeholder location="classpath*:/db_connection.properties" />
-	
+
 	<!-- SPRING SECURITY -->
 
 	<sec:http auto-config="true" use-expressions="true">
-	<!--
-		<sec:port-mappings>
-		
-		<sec:port-mapping http="80" https="443"/>
-		
-		<sec:port-mapping http="9080" https="9443"/>
-		
-		<sec:port-mapping http="8080" https="8443"/>
-		
-		<sec:port-mapping http="7777" https="7443"/>
-		
-		</sec:port-mappings>
-		
-		requires-channel="https"
-	-->	
-		<!-- lisäämällä requires-channel="https" saadaan https toimimaan, kokeilemme torstaina -->
-		<sec:intercept-url pattern="/secure/admin/super/**" access="hasRole('ROLE_ADMIN')" />
+		<!-- <sec:port-mappings> <sec:port-mapping http="80" https="443"/> <sec:port-mapping 
+			http="9080" https="9443"/> <sec:port-mapping http="8080" https="8443"/> <sec:port-mapping 
+			http="7777" https="7443"/> </sec:port-mappings> requires-channel="https" -->
+		<!-- lisäämällä requires-channel="https" saadaan https toimimaan, kokeilemme 
+			torstaina -->
+		<sec:intercept-url pattern="/secure/admin/super/**"
+			access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/secure/*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/*" access="permitAll" />
 
-		<sec:form-login
-			login-page="/loginpage"
-			default-target-url="/secure/oma"
-			authentication-failure-url="/loginfail" />
-			
+		<sec:form-login login-page="/loginpage"
+			default-target-url="/secure/oma" authentication-failure-url="/loginfail" />
+
 		<sec:logout logout-success-url="/logout" />
-		
-		<sec:headers >
-        	<sec:cache-control />
-        	<sec:hsts/>
-    	</sec:headers>
-		
+
+		<sec:headers>
+			<sec:cache-control />
+			<sec:hsts />
+		</sec:headers>
+
 	</sec:http>
-	
-	
-	<bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+
+
+	<bean id="encoder"
+		class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
 
 	<sec:authentication-manager>
@@ -117,21 +113,15 @@
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
-	<!-- USER DEFINITIONS BY XML
-	
-	 <sec:authentication-manager>
-			<sec:authentication-provider>
-				<sec:user-service>
-					<sec:user name="user" password="userpassu" authorities="ROLE_USER" />
-					<sec:user name="admin" password="adminpassu" authorities="ROLE_ADMIN" />
-				</sec:user-service>
-			</sec:authentication-provider>
-		</sec:authentication-manager>
-	-->
+	<!-- USER DEFINITIONS BY XML <sec:authentication-manager> <sec:authentication-provider> 
+		<sec:user-service> <sec:user name="user" password="userpassu" authorities="ROLE_USER" 
+		/> <sec:user name="admin" password="adminpassu" authorities="ROLE_ADMIN" 
+		/> </sec:user-service> </sec:authentication-provider> </sec:authentication-manager> -->
 
 
-	<sec:global-method-security pre-post-annotations="enabled" />
-	
-	
+	<sec:global-method-security
+		pre-post-annotations="enabled" />
+
+
 
 </beans>

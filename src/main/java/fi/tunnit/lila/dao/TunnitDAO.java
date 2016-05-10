@@ -10,6 +10,8 @@ public interface TunnitDAO {
 	
 	public abstract List<Tunnit> etsi(int kaytID);
 	
+	public abstract List<Tunnit> etsiPT(int projID);
+	
 	public abstract Tunnit etsiTunti(int tuntiID);
 	
 	public abstract void talleta(Tunnit tunnit);

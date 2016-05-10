@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<jsp:include page="navigointi.jsp"></jsp:include>
+	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
 
 	<!-- page content -->
 	<div class="right_col" role="main">
@@ -48,6 +48,7 @@
 									<thead>
 										<tr class="headings ">
 											<th>Päivämäärä</th>
+											<th>Työntekijä</th>
 											<th>Projekti</th>
 											<th>Selite</th>
 											<th>Aloitus-aika</th>
@@ -58,18 +59,31 @@
 									</thead>
 
 									<tbody>
-				 
-						<sec:authorize access="hasRole('ROLE_USER')">
-						
-						<tr class="even pointer">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<tr class="even pointer">
 											<c:set var="kaikkiTun" value="${0}" />
 											<c:set var="kaikkiMin" value="${0}" />
 											<c:forEach items="${tunnit}" var="tunti">
+											
+												
 												<td class=" "><c:out value="${tunti.date}"></c:out></td>
-
+												
+												
+												<c:forEach items="${henkilot}" var="henkilo">
+												<c:if test="${tunti.kaytID == henkilo.id}">
+														<td><a
+															href="<c:out value="/tunnit_lila/secure/admin/super/ktunti/${tunti.kaytID}"/>"><c:out
+																	value="${henkilo.etunimi} ${henkilo.sukunimi}"></c:out></a></td>
+													</c:if>
+												</c:forEach>
+												
+												
+												
 												<c:forEach items="${projektit}" var="projektit">
 													<c:if test="${tunti.projID == projektit.projID}">
-														<td><c:out value="${projektit.projnimi}"></c:out></td>
+														<td><a
+															href="<c:out value="/tunnit_lila/secure/admin/super/ptunti/${projektit.projID}"/>"><c:out
+																	value="${projektit.projnimi}"></c:out></a></td>
 													</c:if>
 												</c:forEach>
 												<td class=" "><c:out value="${tunti.kuvaus}"></c:out></td>
@@ -117,7 +131,7 @@
 												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
 
 												<td class=" "><a
-													href="/tunnit_lila/secure/oma/tunnit/delete/${tunti.tuntiID}"><button
+													href="/tunnit_lila/secure/admin/super/delete/tunti/${tunti.tuntiID}"><button
 															type="button" class="btn btn-danger btn-xs">Poista</button></a></td>
 										</tr>
 
@@ -131,10 +145,8 @@
 											</c:if>
 										</c:forEach>
 										
-						</sec:authorize>
-										
 
-										
+								</sec:authorize>
 
 									</tbody>
 
@@ -151,16 +163,16 @@
 					</div>
 				</div>
 			</div>
-
+<%-- 
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="x_panel">
-						<a href="/tunnit_lila/secure/oma/uusi/${henkilo.id}"><button
+						<a href="/tunnit_lila/tunnit/secure/admin/super/uusi/${henkilo.id}"><button
 								type="button" class="btn btn-success ">Lisää tunti</button></a>
 					</div>
 				</div>
 			</div>
-
+--%>
 
 		</div>
 		<!-- footer content -->
