@@ -105,6 +105,14 @@ public class TuntiController {
 		modelAll.addAttribute("tunnit", tunnit);
 		return "tunnit/listaaTunnit";
 	}
+	
+	// POISTA TUNTI
+		@RequestMapping(value = "/tunnit/delete/{tuntiID}", method = RequestMethod.GET)
+		public String getCreateForm(@PathVariable("tuntiID") Integer tuntiID,
+				Model model) {
+			tdao.poistaTunti(tuntiID);
+			return "poistaTuntiApu";
+		}
 
 	
 

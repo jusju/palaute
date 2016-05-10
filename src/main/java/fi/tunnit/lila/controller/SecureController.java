@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +19,7 @@ import fi.tunnit.lila.bean.HenkiloImpl;
 import fi.tunnit.lila.bean.Projekti;
 import fi.tunnit.lila.bean.ProjektiImpl;
 import fi.tunnit.lila.bean.Tunnit;
+import fi.tunnit.lila.bean.TunnitImpl;
 import fi.tunnit.lila.dao.HenkiloDAO;
 import fi.tunnit.lila.dao.HenkiloDAOSpringJdbcImpl;
 import fi.tunnit.lila.dao.ProjektiDAO;
@@ -145,5 +147,61 @@ public class SecureController {
 		return "secure/kayttaja/naytaProjektit";
 		
 	}
+	
+	
+	// Tunnin lisäys
+		@RequestMapping(value = "oma/uusi/{id}", method = RequestMethod.GET)
+		public String getCreateFormTunnit(@PathVariable("id") Integer id, Model model) {
+		
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String sposti = auth.getName();
+		    System.out.println(sposti);
+
+		    Henkilo henkilo = dao.etsiSposti(sposti);
+		    System.out.println(henkilo.getEtunimi());
+		    
+		    //int id = henkilo.getId();
+		    
+			model.addAttribute("henkilo", henkilo);
+			
+			List<Projekti> projektit = new ArrayList<Projekti>();
+			projektit = pdao.haeKaikki();
+			
+			model.addAttribute("projektit", projektit);
+			
+			Tunnit uusiTunti = new TunnitImpl();
+			uusiTunti.setKaytID(id);
+			System.out.println(id);
+			uusiTunti.setDate("");
+
+			model.addAttribute("tunti", uusiTunti);
+			return "secure/kayttaja/lisaaTunti";
+		}
+
+		// TUNNIN TIETOJEN VASTAANOTTO
+		@RequestMapping(value = "oma/uusi/{id}", method = RequestMethod.POST)
+		public String create(@ModelAttribute(value = "tunti") TunnitImpl tunti) {
+			tdao.talleta(tunti);
+			return "redirect:/secure/oma/tunnit";
+		}
+		
+		// POISTA TUNTI
+				@RequestMapping(value = "oma/tunnit/delete/{tuntiID}", method = RequestMethod.GET)
+				public String getCreateForm(@PathVariable("tuntiID") Integer tuntiID,
+						Model model) {
+					
+					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				    String sposti = auth.getName();
+				    System.out.println(sposti);
+
+				    Henkilo henkilo = dao.etsiSposti(sposti);
+				    System.out.println(henkilo.getEtunimi());
+				    
+				    //int id = henkilo.getId();
+				    
+					model.addAttribute("henkilo", henkilo);
+					tdao.poistaTunti(tuntiID);
+					return "secure/kayttaja/poistaTuntiApu";
+				}
 
 }

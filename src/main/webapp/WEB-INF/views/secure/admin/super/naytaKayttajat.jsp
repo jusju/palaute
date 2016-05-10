@@ -79,7 +79,7 @@
 														href="/tunnit_lila/secure/admin/super/delete/kayttaja/${henkilo.id}"><button
 																type="button" class="btn btn-danger btn-xs">poista</button></a></td>
 
-
+<%--
 													<c:forEach items="${authorit}" var="authorit">
 														<c:if
 															test="${henkilo.id == authorit.kaytID && authorit.authID == 1}">
@@ -96,7 +96,8 @@
 																type="button" class="btn btn-danger btn-xs">Poista
 																ylläpito oikeudet</button></a></td>
 														</c:if>
-													</c:forEach>
+														--%>
+												<%--	</c:forEach>--%>
 
 													
 

@@ -261,5 +261,7 @@ public class AdminController {
 
 		return "secure/admin/super/poistoOikeudetApu";
 	}
+	
+	
 
 }
