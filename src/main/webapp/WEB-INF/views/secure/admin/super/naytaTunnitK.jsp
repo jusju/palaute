@@ -24,7 +24,7 @@
 		<div class="">
 			<div class="page-title">
 				<div class="title_left">
-					<h3>Tunnit</h3>
+					<h3>Käyttäjän </h3><h2>${henkilo.etunimi} ${henkilo.sukunimi}<h2>
 				</div>
 			</div>
 			<div class="clearfix"></div>

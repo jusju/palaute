@@ -77,7 +77,7 @@ public class AdminController {
 	}
 
 	
-	//HAE KAIKKI KÄYTTÄJÄT
+	//HAE KAIKKI Kï¿½YTTï¿½Jï¿½T
 	@RequestMapping(value = "/kayttajalista", method = RequestMethod.GET)
 	public String paasivu(Model model) {
 
@@ -120,14 +120,17 @@ public class AdminController {
 
 		List<Projekti> projektit = new ArrayList<Projekti>();
 		projektit = pdao.haeKaikki();
+		
+		Henkilo henk = dao.etsi(id);
 
+		model.addAttribute("henkilo", henk);
 		model.addAttribute("tunnit", tunnit);
 		model.addAttribute("projektit", projektit);
 
 		return "secure/admin/super/naytaTunnitK";
 	}
 
-	// PROJEKTIN TIETOJEN LISÄÄMINEN
+	// PROJEKTIN TIETOJEN LISï¿½ï¿½MINEN
 	@RequestMapping(value = "/ptunti/{projID}", method = RequestMethod.GET)
 	public String getProj(@PathVariable Integer projID, Model model) {
 
@@ -137,14 +140,17 @@ public class AdminController {
 		henkilot = dao.haeKaikki();
 		List<Projekti> projektit = new ArrayList<Projekti>();
 		projektit = pdao.haeKaikki();
+		
+		Projekti proj = pdao.etsi(projID);
 
+		model.addAttribute("proj", proj);
 		model.addAttribute("ptunnit", ptunnit);
 		model.addAttribute("henkilot", henkilot);
 		model.addAttribute("projektit", projektit);
 		return "secure/admin/super/projektinTunnit";
 	}
 
-	// POISTA KÄYTTÄJÄ
+	// POISTA Kï¿½YTTï¿½Jï¿½
 
 	@RequestMapping(value = "/delete/kayttaja/{id}", method = RequestMethod.GET)
 	public String showDelete(@PathVariable("id") Integer id) {
@@ -157,7 +163,7 @@ public class AdminController {
 		return "secure/admin/super/poistoApuKayttaja";
 	}
 
-	// KÄYTTÄJÄN MUOKKAUS TEKEMINEN
+	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS TEKEMINEN
 	@RequestMapping(value = "/muokkaa/{id}", method = RequestMethod.GET)
 	public String getMuokkaaForm(@PathVariable Integer id, Model model) {
 		Henkilo henkilo = dao.etsi(id);
@@ -172,7 +178,7 @@ public class AdminController {
 		return "secure/admin/super/muokkaaKayttaja";
 	}
 
-	// KÄYTTÄJÄN MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
+	// Kï¿½YTTï¿½Jï¿½N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "/muokkaa/{id}", method = RequestMethod.POST)
 	public String create(
 			@ModelAttribute(value = "henkilo") @Validated(HenkiloImpl.muokkaaHenkilo.class) HenkiloImpl henkilo,
@@ -195,7 +201,7 @@ public class AdminController {
 		return "secure/admin/super/poistoApuTunti";
 	}
 
-	// POISTA Käyttäjäsivulla TUNTI
+	// POISTA Kï¿½yttï¿½jï¿½sivulla TUNTI
 	@RequestMapping(value = "/delete/ktunti/{tuntiID}", method = RequestMethod.GET)
 	public String getCreateForme(@PathVariable("tuntiID") Integer tuntiID,
 			Model model) {
@@ -242,7 +248,7 @@ public class AdminController {
 		return "redirect:/secure/admin/super/projektilista";
 	}
 
-	// muokkaa käyttäjän oikeus
+	// muokkaa kï¿½yttï¿½jï¿½n oikeus
 
 	@RequestMapping(value = "/muokkaa/kayttajanoikeus/{id}", method = RequestMethod.GET)
 	public String annaOikeudet(@PathVariable("id") Integer id) {
@@ -252,7 +258,7 @@ public class AdminController {
 		return "secure/admin/super/muokkausOikeudetApu";
 	}
 
-	// muokkaa käyttäjän oikeus
+	// muokkaa kï¿½yttï¿½jï¿½n oikeus
 
 	@RequestMapping(value = "/poista/kayttajanoikeus/{id}", method = RequestMethod.GET)
 	public String poistaOikeudet(@PathVariable("id") Integer id) {

@@ -24,7 +24,8 @@
 		<div class="">
 			<div class="page-title">
 				<div class="title_left">
-					<h3>Tunnit</h3>
+					<h3>Projektin </h3> <h2>${proj.projnimi}</h2>
+
 				</div>
 			</div>
 			<div class="clearfix"></div>
