@@ -122,11 +122,15 @@
 							aria-expanded="false"> <img src="images/user.png" alt="">Käyttäjä
 								<span class=" fa fa-angle-down"></span>
 						</a>
+						
+						
 							<ul
 								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 								<li><a href="/tunnit_lila/logout""><i
 										class="fa fa-sign-out pull-right"></i> Kirjaudu ulos</a></li>
 							</ul></li>
+							
+							
 					</ul>
 				</nav>
 			</div>
