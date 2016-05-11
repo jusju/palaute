@@ -1,13 +1,26 @@
 package fi.tunnit.lila.bean;
 
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
+
+
 public class ProjektiImpl implements Projekti  {
 	
+
+	
+
+	
 	private int projID;
+	@Size(min = 1, message = "Kirjoita kuvaus")
 	private String projnimi;
 	public ProjektiImpl() {
 		super();
+		
+		
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public ProjektiImpl(int projID, String projnimi) {
 		super();
 		this.projID = projID;

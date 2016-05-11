@@ -48,10 +48,11 @@
 									class="table table-striped responsive-utilities jambo_table">
 									<thead>
 										<tr class="headings ">
-											<th>Projekti</th>
-											<th>Työntekijä</th>
-											<th>Selite</th>
 											<th>Päivämäärä</th>
+											<th>Työntekijä</th>
+											<th>Kuvaus</th>
+											<th>Aloitusaika</th>
+											<th>Lopetusaika</th>
 										</tr>
 									</thead>
 
@@ -62,17 +63,15 @@
 						<tr class="even pointer">
 											<c:forEach items="${ptunnit}" var="tunnit">
 		<tr>
-			<c:forEach items="${projektit}" var="projektit">
-				<c:if test="${tunnit.projID == projektit.projID}">
-					<td><c:out value="${projektit.projnimi}"></c:out></td>
-				</c:if>
-			</c:forEach>
+			
 			
 			<c:forEach items="${henkilot}" var="henkilo">
 			<c:if test="${tunnit.kaytID == henkilo.id}">
+			<td><c:out value="${tunnit.date}"></c:out></td>
 					<td><a href="<c:out value="/tunnit_lila/secure/admin/super/ktunti/${henkilo.id}"/>"><c:out value="${henkilo.etunimi} ${henkilo.sukunimi}"></c:out></a></td>
 					<td><c:out value="${tunnit.kuvaus}"></c:out></td>
-					<td><c:out value="${tunnit.date}"></c:out></td>
+					<td><c:out value="${tunnit.aloitusaika}"></c:out></td>
+					<td><c:out value="${tunnit.lopetusaika}"></c:out></td>
 				</c:if>
 				
 			</c:forEach>

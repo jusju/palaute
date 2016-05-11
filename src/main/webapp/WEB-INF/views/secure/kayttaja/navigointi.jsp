@@ -49,7 +49,7 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="images/user.png" alt="..."
+							<img src="<c:url value="/resources/images/user.png"/>" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -119,7 +119,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class=""><a href="javascript:;"
 							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/user.png" alt="">Käyttäjä
+							aria-expanded="false"> <img src="<c:url value="/resources/images/user.png"/>" alt="">Käyttäjä
 								<span class=" fa fa-angle-down"></span>
 						</a>
 						

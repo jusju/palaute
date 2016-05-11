@@ -211,7 +211,7 @@
 			</c:forEach>
 		</sec:authorize>
 	</div>
-	<!-- footer content -->
+	<%--<!-- footer content -->
 
 	<footer>
 		<div class="copyright-info">
@@ -221,8 +221,9 @@
 		</div>
 		<div class="clearfix"></div>
 	</footer>
-	<!-- /footer content -->
-	</div>
+		<!-- /footer content -->
+		--%>	
+		</div>
 	<!-- /page content -->
 
 

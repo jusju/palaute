@@ -6,13 +6,13 @@ import javax.validation.constraints.Size;
 public class TunnitImpl implements Tunnit {
 
 	private int tuntiID,kaytID,projID;
-	@Size(min = 1, message = "Anna päivämäärä")
-	@Pattern(regexp = "^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$", message = "Anna päivämäärä oikeassa muodossa")
+	@Size(min = 1, message = "")
+	@Pattern(regexp = "^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$", message = "Anna p�iv�m��r� oikeassa muodossa")
 	private String date;
-	@Size(min = 1, message = "Anna aloitusaika")
+	@Size(min = 1, message = "")
 	@Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Anna aloitusaika muodossa TT:MM")
 	private String aloitusaika;
-	@Size(min = 1, message = "Anna lopetusaika")
+	@Size(min = 1, message = "")
 	@Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Anna lopetusaika muodossa TT:MM")
 	private String lopetusaika;
 	@Size(min = 1, message = "Kirjoita kuvaus")
