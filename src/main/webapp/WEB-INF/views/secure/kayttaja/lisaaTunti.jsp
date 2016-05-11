@@ -77,8 +77,9 @@
 
 
 															<form:label path="date">Päivämäärä</form:label>
-															<br />
+
 															<form:input type="text" id="date" placeholder="DD/MM/YYYY"
+
 																path="date" /> <form:errors path="date" cssClass="Virheteksti"/>
 														</p>
 														
@@ -136,6 +137,8 @@
 		<!-- /footer content -->
 	</div>
 	<!-- /page content -->
+	
+	
 	
 	</sec:authorize>
         <script type="text/javascript">

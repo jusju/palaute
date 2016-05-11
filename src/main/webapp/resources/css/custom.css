@@ -2423,7 +2423,7 @@ span.section {
 .form-control {
     border-radius: 0;
     line-height: 30px;
-    width: 100%;
+    width: 200px;
 }
 
 .form-horizontal .control-label {
