@@ -13,18 +13,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Henkilön tietojen näyttäminen</title>
+<title>Tunnin lisääminen</title>
+	<jsp:include page="navigointi.jsp"></jsp:include>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.8.18/themes/smoothness/jquery-ui.css"/>
 
- <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>
+    
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </head>
 <sec:authorize access="hasRole('ROLE_USER')">
 <body>
-	<jsp:include page="navigointi.jsp"></jsp:include>
 
 	<!-- page content -->
 	<div class="right_col" role="main">
@@ -79,12 +80,17 @@
 															</select>
 														</p>
 														<p>
+														
+														
+
+
 
 															<form:label path="date">Päivämäärä</form:label>
 															<br />
-															<form:input type="text" id="datepicker" name="datepicker"
+															<form:input type="text" id="datepicker" placeholder="DD/MM/YYYY"
 																path="date" /> <form:errors path="date" cssClass="Virheteksti"/>
 														</p>
+														
 														<p>
 															<form:label path="aloitusaika">Aloitusaika</form:label>
 															<br />
@@ -125,6 +131,7 @@
 
 
 		</div>
+		
 		<!-- footer content -->
 
 		<footer>
@@ -138,7 +145,23 @@
 		<!-- /footer content -->
 	</div>
 	<!-- /page content -->
-
+	<script>
+	$(function(){
+            $('#datepicker').datepicker({
+                inline: true,
+                //nextText: '→',
+                //prevText: '←',
+                showOtherMonths: true,
+                //dateFormat: 'dd MM yy',
+                dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
+                //showOn: "button",
+                //buttonImage: "img/calendar-blue.png",
+                //buttonImageOnly: true,
+            });
+        });
+	
+	</script>
+	
 	</sec:authorize>
 </body>
 
