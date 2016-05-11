@@ -15,14 +15,6 @@
 <head>
 <title>Tunnin lisääminen</title>
 	<jsp:include page="navigointi.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.8.18/themes/smoothness/jquery-ui.css"/>
-
-    
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
 </head>
 <sec:authorize access="hasRole('ROLE_USER')">
 <body>
@@ -51,8 +43,7 @@
 						</div>
 						<div class="x_content">
 							<div class="table-responsive">
-								<table id="example"
-									class="table table-striped responsive-utilities jambo_table">
+								<table id="example" class="table table-striped responsive-utilities jambo_table" style="height:auto">
 								
 
 									<tbody>
@@ -87,7 +78,7 @@
 
 															<form:label path="date">Päivämäärä</form:label>
 															<br />
-															<form:input type="text" id="datepicker" placeholder="DD/MM/YYYY"
+															<form:input type="text" id="date" placeholder="DD/MM/YYYY"
 																path="date" /> <form:errors path="date" cssClass="Virheteksti"/>
 														</p>
 														
@@ -145,24 +136,26 @@
 		<!-- /footer content -->
 	</div>
 	<!-- /page content -->
-	<script>
-	$(function(){
-            $('#datepicker').datepicker({
-                inline: true,
-                //nextText: '→',
-                //prevText: '←',
-                showOtherMonths: true,
-                //dateFormat: 'dd MM yy',
-                dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
-                //showOn: "button",
-                //buttonImage: "img/calendar-blue.png",
-                //buttonImageOnly: true,
-            });
-        });
-	
-	</script>
 	
 	</sec:authorize>
+        <script type="text/javascript">
+		$(function () {
+			$("#date").datetimepicker({
+				format: "DD/MM/YYYY",
+			});
+		});
+		$(function () {
+			$("#aloitusaika").datetimepicker({
+				format : 'HH:mm'
+			});
+		});
+		$(function () {
+            $("#lopetusaika").datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+	</script>
+
 </body>
 
 </html>
