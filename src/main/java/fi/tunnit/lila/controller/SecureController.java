@@ -152,8 +152,8 @@ public class SecureController {
 	
 	
 	// Tunnin lis�ys
-		@RequestMapping(value = "oma/uusi/{id}", method = RequestMethod.GET)
-		public String getCreateFormTunnit(@PathVariable("id") Integer id, Model model) {
+		@RequestMapping(value = "oma/uusi", method = RequestMethod.GET)
+		public String getCreateFormTunnit(Model model) {
 		
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		    String sposti = auth.getName();
@@ -162,7 +162,7 @@ public class SecureController {
 		    Henkilo henkilo = dao.etsiSposti(sposti);
 		    System.out.println(henkilo.getEtunimi());
 		    
-		    //int id = henkilo.getId();
+		    int id = henkilo.getId();
 		    
 			model.addAttribute("henkilo", henkilo);
 			
@@ -181,7 +181,7 @@ public class SecureController {
 		}
 
 		// TUNNIN TIETOJEN VASTAANOTTO
-		@RequestMapping(value = "oma/uusi/{id}", method = RequestMethod.POST)
+		@RequestMapping(value = "oma/uusi", method = RequestMethod.POST)
 		public String create(@ModelAttribute(value = "tunti") @Valid TunnitImpl tunti, BindingResult result) {
 			if(result.hasErrors()){
 				return "secure/kayttaja/lisaaTunti";
