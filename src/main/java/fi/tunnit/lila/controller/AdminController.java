@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -243,9 +244,14 @@ public class AdminController {
 	// UUDEN PROJEKTIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "uusi/projekti", method = RequestMethod.POST)
 	public String create(
-			@ModelAttribute(value = "projekti") ProjektiImpl projekti) {
-		pdao.talleta(projekti);
-		return "redirect:/secure/admin/super/projektilista";
+			@ModelAttribute(value = "projekti")@Valid ProjektiImpl projekti, BindingResult result) {
+		if(result.hasErrors()){
+			return "secure/admin/super/lisaaProjekti";
+		}else{
+			pdao.talleta(projekti);
+			return "redirect:/secure/admin/super/projektilista";
+		}
+		
 	}
 
 	// muokkaa k�ytt�j�n oikeus

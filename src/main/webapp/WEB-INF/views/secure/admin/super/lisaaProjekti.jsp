@@ -64,7 +64,7 @@
 														<p>
 															<form:label path="projnimi">Projektin nimi</form:label>
 															<br />
-															<form:input path="projnimi" />
+															<form:input path="projnimi" /> <form:errors path="projnimi" cssClass="Virheteksti"/>
 														</p>
 														<p>
 															<button type="submit">Lisää</button>

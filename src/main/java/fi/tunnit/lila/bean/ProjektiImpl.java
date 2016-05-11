@@ -1,7 +1,6 @@
 package fi.tunnit.lila.bean;
 
 import javax.validation.constraints.Size;
-import javax.validation.constraints.Pattern;
 
 
 public class ProjektiImpl implements Projekti  {
@@ -11,7 +10,7 @@ public class ProjektiImpl implements Projekti  {
 
 	
 	private int projID;
-	@Size(min = 1, message = "Kirjoita kuvaus")
+	@Size(min = 1, message = "Anna projektille nimi")
 	private String projnimi;
 	public ProjektiImpl() {
 		super();
