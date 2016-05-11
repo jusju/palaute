@@ -15,6 +15,8 @@
 <head>
 <title>Tunnin lisääminen</title>
 	<jsp:include page="navigointi.jsp"></jsp:include>
+	<script type="text/javascript" src="<c:url value="/resources/moment/min/moment.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"/>"></script>
 </head>
 <sec:authorize access="hasRole('ROLE_USER')">
 <body>

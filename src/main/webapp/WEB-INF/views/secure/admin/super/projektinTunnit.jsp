@@ -12,13 +12,25 @@
 <head>
 <title>Henkilön tietojen näyttäminen</title>
 
+<script src="<c:url value="/resources/js/custom.js"/>"></script>
 
+	<!-- flot js -->
+	<!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"/>"></script><![endif]-->
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.pie.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.orderBars.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.time.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/date.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.spline.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.stack.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/curvedLines.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/flot/jquery.flot.resize.js"/>"></script>
 
 </head>
 
 <body>
-	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
 
+	<jsp:include page="../../kayttaja/navigointi.jsp"></jsp:include>
 	<!-- page content -->
 	<div class="right_col" role="main">
 		<div class="">
