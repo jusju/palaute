@@ -87,7 +87,7 @@
 
 															<form:label path="date">Päivämäärä</form:label>
 															<br />
-															<form:input type="text" id="datepicker" placeholder="DD/MM/YYYY"
+															<form:input type="text"  id="datepicker" placeholder="DD/MM/YYYY"
 																path="date" /> <form:errors path="date" cssClass="Virheteksti"/>
 														</p>
 														
@@ -161,6 +161,8 @@
         });
 	
 	</script>
+	
+	
 	
 	</sec:authorize>
 </body>

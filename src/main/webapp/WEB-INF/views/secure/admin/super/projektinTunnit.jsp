@@ -85,15 +85,7 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="x_panel">
-						<a href="/tunnit_lila/tunnit/uusi/${henkilo.id}"><button
-								type="button" class="btn btn-success ">Lisää tunti</button></a>
-					</div>
-				</div>
-			</div>
-
+			
 
 		</div>
 		<!-- footer content -->

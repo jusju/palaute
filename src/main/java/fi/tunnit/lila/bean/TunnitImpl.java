@@ -6,8 +6,8 @@ import javax.validation.constraints.Size;
 public class TunnitImpl implements Tunnit {
 
 	private int tuntiID,kaytID,projID;
-	@Size(min = 1, message = "Anna p√§iv√§m√§√§r√§")
-	@Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", message = "Anna p√§iv√§m√§√§r√§ muodossa dd.mm.yyyy")
+	@Size(min = 1, message = "Anna p‰iv‰m‰‰r‰")
+	//@Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", message = "Anna p‰iv‰m‰‰r‰ muodossa dd.mm.yyyy")
 	private String date;
 	@Size(min = 1, message = "Anna aloitusaika")
 	@Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Anna aloitusaika muodossa TT:MM")
