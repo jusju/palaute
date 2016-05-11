@@ -118,8 +118,7 @@
 								minuuttia
 							</h3>
 
-							<h2>
-								<c:out value="${projekti.projnimi}" />
+							<h2><c:out value="${projekti.projnimi}" />
 							</h2>
 
 						</div>
@@ -205,7 +204,7 @@
 								minuuttia
 							</h3>
 							
-								<h2><c:out value="${projekti.projnimi}" /></h2>
+								<h2><a href="<c:out value="/tunnit_lila/secure/admin/super/ptunti/${projekti.projID}"/>"><c:out value="${projekti.projnimi}" /></a></h2>
 						
 						</div>
 					</div>

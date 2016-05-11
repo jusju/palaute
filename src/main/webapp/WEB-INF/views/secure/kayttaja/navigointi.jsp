@@ -10,7 +10,7 @@
 <title>Sisäänkirjautuminen</title>
 <link href="<c:url value="/resources/css/bootstrap.min.css"/>"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="<c:url value="/resources/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>">
 <link href="<c:url value="/resources/fonts/css/font-awesome.min.css"/>"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/animate.min.css"/>"
@@ -29,7 +29,7 @@
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/nprogress.js"/>"></script>
 <link href="<c:url value="/resources/css/custom.css"/>" rel="stylesheet">
-<link rel="stylesheet" href="<c:url value="/resources/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>"/>
+
 <script type="text/javascript" src="<c:url value="/resources/moment/min/moment.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"/>"></script>
 </head>

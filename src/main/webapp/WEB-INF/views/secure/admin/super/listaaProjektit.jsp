@@ -52,7 +52,8 @@
 
 										<tr class="even pointer">
 											<c:forEach items="${projektit}" var="projekti">
-												<td class=" "><c:out value="${projekti.projnimi}"></c:out>
+												<td class=" "><a
+															href="<c:out value="/tunnit_lila/secure/admin/super/ptunti/${projekti.projID}"/>"><c:out value="${projekti.projnimi}"></c:out></a>
 												</td>
 												
 												<td class=" "><a

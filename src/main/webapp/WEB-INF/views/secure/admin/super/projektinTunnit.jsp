@@ -69,7 +69,7 @@
 			
 			<c:forEach items="${henkilot}" var="henkilo">
 			<c:if test="${tunnit.kaytID == henkilo.id}">
-					<td><c:out value="${henkilo.etunimi} ${henkilo.sukunimi}"></c:out></td>
+					<td><a href="<c:out value="/tunnit_lila/secure/admin/super/ktunti/${henkilo.id}"/>"><c:out value="${henkilo.etunimi} ${henkilo.sukunimi}"></c:out></a></td>
 					<td><c:out value="${tunnit.kuvaus}"></c:out></td>
 					<td><c:out value="${tunnit.date}"></c:out></td>
 				</c:if>

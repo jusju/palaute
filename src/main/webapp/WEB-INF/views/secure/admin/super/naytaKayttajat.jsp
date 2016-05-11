@@ -46,6 +46,8 @@
 											<tr class="headings ">
 												<th>Etunimi</th>
 												<th>Sukunimi</th>
+												<th>Sähköposti</th>
+												<th></th>
 												<th>Oikeudet</th>
 												<th>Muokkaa</th>
 												<th>Poista</th>
@@ -60,6 +62,8 @@
 												<c:forEach items="${henkilot}" var="henkilo">
 													<td class=" "><c:out value="${henkilo.etunimi}"></c:out></td>
 													<td class=" "><c:out value="${henkilo.sukunimi}"></c:out></td>
+													<td class=" "><a
+															href="<c:out value="/tunnit_lila/secure/admin/super/ktunti/${henkilo.id}"/>"><c:out value="${henkilo.sposti }"></c:out></a><td>
 
 													<c:forEach items="${authorit}" var="authorit">
 														<c:if

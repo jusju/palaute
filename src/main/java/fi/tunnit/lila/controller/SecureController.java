@@ -157,7 +157,6 @@ public class SecureController {
 		
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		    String sposti = auth.getName();
-		    System.out.println(sposti);
 
 		    Henkilo henkilo = dao.etsiSposti(sposti);
 		    
@@ -172,7 +171,7 @@ public class SecureController {
 			
 			Tunnit uusiTunti = new TunnitImpl();
 			uusiTunti.setKaytID(id);
-			System.out.println(id);
+			
 			uusiTunti.setDate("");
 
 			model.addAttribute("tunti", uusiTunti);
@@ -181,8 +180,12 @@ public class SecureController {
 
 		// TUNNIN TIETOJEN VASTAANOTTO
 		@RequestMapping(value = "oma/uusi", method = RequestMethod.POST)
-		public String create(@ModelAttribute(value = "tunti") @Valid TunnitImpl tunti, BindingResult result) {
+		public String create(@ModelAttribute(value = "tunti") @Valid TunnitImpl tunti, BindingResult result, Model model) {
 			if(result.hasErrors()){
+				List<Projekti> projektit = new ArrayList<Projekti>();
+				projektit = pdao.haeKaikki();
+				
+				model.addAttribute("projektit", projektit);
 				return "secure/kayttaja/lisaaTunti";
 			}else{
 				tdao.talleta(tunti);
@@ -194,17 +197,6 @@ public class SecureController {
 				@RequestMapping(value = "oma/tunnit/delete/{tuntiID}", method = RequestMethod.GET)
 				public String getCreateForm(@PathVariable("tuntiID") Integer tuntiID,
 						Model model) {
-					
-					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				    String sposti = auth.getName();
-				    System.out.println(sposti);
-
-				    Henkilo henkilo = dao.etsiSposti(sposti);
-				    System.out.println(henkilo.getEtunimi());
-				    
-				    //int id = henkilo.getId();
-				    
-					model.addAttribute("henkilo", henkilo);
 					tdao.poistaTunti(tuntiID);
 					return "secure/kayttaja/poistaTuntiApu";
 				}
