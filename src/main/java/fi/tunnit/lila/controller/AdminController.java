@@ -187,8 +187,6 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "secure/admin/super/muokkaaKayttaja";
 		} else {
-			SalasananKryptaaja sk = new SalasananKryptaaja();
-			henkilo.setSalasana(sk.kryptattuna(henkilo.getSalasana()));
 			dao.muokkaa(henkilo);
 			return "redirect:/secure/admin/super/kayttajalista";
 		}
