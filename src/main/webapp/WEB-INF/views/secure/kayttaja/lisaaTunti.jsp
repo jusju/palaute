@@ -60,7 +60,7 @@
 															<form:input path="kaytID" type="hidden" />
 														</p>
 														<p>
-															<form:label path="projID">Projekti</form:label>
+															<form:label path="projID">Projekti</form:label><p>${virhe}</p>
 															<br /> <select class="form-control" name="projID">
 																<c:forEach items="${projektit}" var="projekti">
 
