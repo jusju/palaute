@@ -77,9 +77,9 @@ public class HenkiloController {
 		this.podao = podao;
 	}
 
-	// FORMIN TEKEMINEN
+	// Uuden käyttäjän luonti
 	@RequestMapping(value = "uusi", method = RequestMethod.GET)
-	public String getCreateForm(Model model) {
+	public String CreateForm(Model model) {
 		Henkilo tyhjaHenkilo = new HenkiloImpl();
 		
 
@@ -87,9 +87,9 @@ public class HenkiloController {
 		return "lisaaKayttaja";
 	}
 
-	// FORMIN TIETOJEN VASTAANOTTO
+	// Uuden käyttäjän luonnin tietojen vastaano
 	@RequestMapping(value = "uusi", method = RequestMethod.POST)
-	public String muokkaa(@ModelAttribute(value = "henkilo") @Validated(HenkiloImpl.uusiHenkilo.class) HenkiloImpl henkilo, BindingResult result) {
+	public String getForm(@ModelAttribute(value = "henkilo") @Validated(HenkiloImpl.uusiHenkilo.class) HenkiloImpl henkilo, BindingResult result) {
 		if(result.hasErrors()){
 			return "/lisaaKayttaja";
 		}else{
@@ -146,75 +146,6 @@ public class HenkiloController {
 		}
 	}
 
-	
 
-	// HAE KAIKKI OIKEA
-	@RequestMapping(value = "lista", method = RequestMethod.GET)
-	public String showList(Model modelAll) {
-
-		List<Henkilo> henkilot = new ArrayList<Henkilo>();
-		henkilot = dao.haeKaikki();
-
-		modelAll.addAttribute("henkilot", henkilot);
-		return "kayttaja/listaaKayttajat";
-	}
-
-	// HAE KAIKKI TUNNIT
-	@RequestMapping(value = "listaus", method = RequestMethod.GET)
-	public String showLista(Model modelAll) {
-
-		List<Tunnit> tunnit = new ArrayList<Tunnit>();
-		tunnit = tdao.haeTunnit();
-
-		modelAll.addAttribute("tunnit", tunnit);
-		return "secure/kayttaja/listaaTunnit";
-	}
-/*
-	// HENKILï¿½N TIETOJEN NÄYTTÄMINEN
-	@RequestMapping(value = "ktunti/{id}", method = RequestMethod.GET)
-	public String getView(@PathVariable Integer id, Model model) {
-		Henkilo henkilo = dao.etsi(id);
-		model.addAttribute("henkilo", henkilo);
-
-		List<Tunnit> tunnit = new ArrayList<Tunnit>();
-		tunnit = tdao.etsi(id);
-
-		model.addAttribute("tunnit", tunnit);
-
-		List<Projekti> projektit = new ArrayList<Projekti>();
-		projektit = pdao.haeKaikki();
-
-		model.addAttribute("projektit", projektit);
-
-		return "kayttaja/naytaKayttaja";
-	}
-*/
-	// TUNNIN TIETOJEN NÄYTTÄMINEN
-
-	@RequestMapping(value = "ttunti/{tuntiID}", method = RequestMethod.GET)
-	public String getTunti(@PathVariable Integer tuntiID, Model model) {
-		Tunnit tunnit = tdao.etsiTunti(tuntiID);
-		model.addAttribute("tunnit", tunnit);
-
-		return "secure/tunnit/tunninTiedot";
-	}
-
-	
-
-	// HAE KAIKKI PROJEKTIT
-
-	@RequestMapping(value = "projlista", method = RequestMethod.GET)
-	public String showPlista(Model modelAll) {
-
-		List<Projekti> projektit = new ArrayList<Projekti>();
-		projektit = pdao.haeKaikki();
-
-		modelAll.addAttribute("projektit", projektit);
-		return "secure/kayttaja/listaaTunnit";
-	}
-
-
-	
-	
 
 }
