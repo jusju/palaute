@@ -151,7 +151,7 @@ public class SecureController {
 	}
 	
 	
-	// Tunnin lisÔøΩys
+	// Tunnin lis‰ys
 		@RequestMapping(value = "oma/uusi", method = RequestMethod.GET)
 		public String getCreateFormTunnit(Model model) {
 		
@@ -168,7 +168,7 @@ public class SecureController {
 			projektit = pdao.haeKaikki();
 			//Magic validonti jos projekteja ei ole
 			if(projektit.size() == 0){
-				String projvirhe = "Ei projekteja tietokannassa, tuntien lis√§√§minen on mahdotonta!";
+				String projvirhe = "Ei projekteja tietokannassa, tuntien lis‰‰minen on mahdotonta!";
 				model.addAttribute("virhe", projvirhe);
 			}
 			model.addAttribute("projektit", projektit);
@@ -191,7 +191,7 @@ public class SecureController {
 			
 			if(result.hasErrors() || projektit.size() == 0){
 				//Magic validonti jos projekteja ei ole
-				String projvirhe = "Ei projekteja tietokannassa, tuntien lis√§√§minen on mahdotonta!";
+				String projvirhe = "Ei projekteja tietokannassa, tuntien lis‰‰minen on mahdotonta!";
 				model.addAttribute("virhe", projvirhe);
 				return "secure/kayttaja/lisaaTunti";
 			}else{
