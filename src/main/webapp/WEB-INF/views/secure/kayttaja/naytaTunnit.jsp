@@ -91,48 +91,59 @@
 												<td><c:out value="${tunti.lopetusaika}" /></td>
 
 
-												<c:set var="at" value="${tunti.aloitusaika}" />
-												<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
+											<c:set var="at" value="${tunti.aloitusaika}" />
+													<c:set var="atunnit" value="${fn:substring(at, 0, 2)}" />
 
-												<c:set var="am" value="${tunti.aloitusaika}" />
-												<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
+													<c:set var="am" value="${tunti.aloitusaika}" />
+													<c:set var="aminuutit" value="${fn:substring(am, 3, 5)}" />
 
-												<c:set var="lot" value="${tunti.lopetusaika}" />
-												<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
+													<c:set var="lot" value="${tunti.lopetusaika}" />
+													<c:set var="ltunnit" value="${fn:substring(lot, 0, 2)}" />
 
-												<c:set var="lm" value="${tunti.lopetusaika}" />
-												<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
-
-
+													<c:set var="lm" value="${tunti.lopetusaika}" />
+													<c:set var="lminuutit" value="${fn:substring(lm, 3, 5)}" />
 
 
 
+													<c:if test="${lminuutit < aminuutit && ltunnit > atunnit}">
+														<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
+														<c:set var="yhtt" value="${ltunnit - atunnit-1}"></c:set>
+													</c:if>
 
-												<c:if test="${ltunnit < atunnit}">
-													<c:set var="yhtt" value="${ltunnit+24 - atunnit}"></c:set>
-												</c:if>
+													<c:if test="${lminuutit > aminuutit && ltunnit > atunnit}">
+														<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+														<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
+													</c:if>
+													
+													<c:if test="${lminuutit < aminuutit && ltunnit < atunnit}">
+														<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
+														<c:set var="yhtt" value="${ltunnit+23 - atunnit-1}"></c:set>
+													</c:if>
 
-												<c:if test="${ltunnit > atunnit}">
-													<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
-												</c:if>
+													<c:if test="${lminuutit > aminuutit && ltunnit < atunnit}">
+														<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+														<c:set var="yhtt" value="${ltunnit+23 - atunnit}"></c:set>
+													</c:if>
+
+
+
+													<c:if test="${ltunnit == atunnit && aminuutit > lminuutit}">
+														<c:set var="yhtt" value="${23}"></c:set>
+														<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
+													</c:if>
+
+
+													<c:if test="${ltunnit == atunnit && aminuutit < lminuutit}">
+														<c:set var="yhtt" value="${0}"></c:set>
+														<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
+													</c:if>
+
+													<td><c:out value="${yhtt} tuntia ${yhtm} minuuttia" /></td>
+
+													<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
+													<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
+
 												
-												<c:if test="${ltunnit == atunnit}">
-													<c:set var="yhtt" value="${ltunnit - atunnit}"></c:set>
-												</c:if>
-
-												<c:if test="${lminuutit < aminuutit}">
-													<c:set var="yhtm" value="${lminuutit+60 - aminuutit}"></c:set>
-												</c:if>
-
-												<c:if
-													test="${lminuutit > aminuutit || lminuutit == aminuutit}">
-													<c:set var="yhtm" value="${lminuutit - aminuutit}"></c:set>
-												</c:if>
-
-												<td><c:out value="${yhtt} tuntia ${yhtm} minuuttia" /></td>
-
-												<c:set var="kaikkiTun" value="${kaikkiTun+yhtt}" />
-												<c:set var="kaikkiMin" value="${kaikkiMin+yhtm}" />
 
 												<td class=" "><a
 													href="/tunnit_lila/secure/oma/tunnit/delete/${tunti.tuntiID}"><button
