@@ -39,7 +39,7 @@ public class HenkiloImpl implements Henkilo {
     @UniqueEmail(groups = {HenkiloImpl.uusiHenkilo.class}, message = "Antamasi s‰hk‰postiosoite on jo k‰ytetty")
 	private String sposti;
 	
-	@Pattern(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.uusiSalasana.class}, regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = "Salasanassa pit‰‰ olla v‰hint‰n yksi isokirjain ja yksi pieni, sen pit‰‰ sis‰lt‰ v‰hint‰n yksi numero ja yksi erikoismerkki, salasanan pituus on v‰hint‰n 8 merkkia.")
+	@Pattern(groups = {HenkiloImpl.uusiHenkilo.class, HenkiloImpl.uusiSalasana.class}, regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = "Salasanassa pit‰‰ olla v‰hint‰n yksi isokirjain ja yksi pieni, sen pit‰‰ sis‰lt‰ v‰hint‰n yksi numero ja salasanan pituus on v‰hint‰n 8 merkkia.")
 	private String salasana;
 	
 
