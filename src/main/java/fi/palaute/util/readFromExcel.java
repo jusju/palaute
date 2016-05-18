@@ -48,7 +48,7 @@ public String[][] read() throws IOException
             {
             	if(data[4][i].contains("ICT") || data[4][i].contains("SWD")){
 
-            	filtered.add(data[4][i]+" "+data[5][i]+" "+data[4][i]+"@myy.haaga-helia.fi");
+            	filtered.add("insert into kurssi(tunnus, nimi, sposti) VALUES("+data[4][i]+","+data[5][i]+","+data[4][i]+"@myy.haaga-helia.fi)");
             	}
             }
 

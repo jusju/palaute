@@ -97,7 +97,7 @@ rel="stylesheet" type="text/css" />
 
 				<!-- /menu footer buttons -->
 				<div class="sidebar-footer hidden-small">
-					<a href="/tunnit_lila/logout" data-toggle="tooltip"
+					<a href="/palaute/logout" data-toggle="tooltip"
 						data-placement="top" title="Kirjaudu ulos"> <span
 						class="glyphicon glyphicon-off" aria-hidden="true"></span>
 					</a>
@@ -116,7 +116,7 @@ rel="stylesheet" type="text/css" />
 					</div>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li class=""><a href="/tunnit_lila/logout" data-toggle="tooltip"
+						<li class=""><a href="/palaute/logout" data-toggle="tooltip"
 						data-placement="top" title="Kirjaudu ulos">Kirjaudu ulos
 								<span class=" fa fa-angle-down"></span>
 						</a>
