@@ -24,25 +24,12 @@
  <div id="wrapper">
       <div id="login" class="animate form">
         <section class="login_content">
-	<h1>Luo Henkilö</h1>
-	<form:form modelAttribute="henkilo" method="post">
-
-			
+	<h1>Luo käyttäjä</h1>
+	<form:form modelAttribute="kayttaja" method="post">
 			<p>
-				<form:label path="etunimi"></form:label>
+				<form:label path="tunnus"></form:label>
 				<br />
-				
-				<form:input class="form-control" placeholder="Etunimi" path="etunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="etunimi" cssClass="Virheteksti"/>
-			</p>
-			<p>
-				<form:label path="sukunimi"></form:label>
-				<br />
-				<form:input class="form-control" placeholder="Sukunimi" path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
-			</p>
-			<p>
-				<form:label path="sposti"></form:label>
-				<br />
-				<form:input class="form-control" placeholder="Sähköpostiosoite" path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
+				<form:input class="form-control" placeholder="Opiskelijatunnus" path="tunnus" cssErrorClass="VirheellinenKentta"/> <form:errors path="tunnus" cssClass="Virheteksti"/>
 			</p>
 			<p>
 				<form:label path="salasana"></form:label>

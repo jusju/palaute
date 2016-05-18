@@ -27,7 +27,7 @@
       
         <section class="login_content">
 <h1>Voi ei, ohjelmassa tapahtui virhe</h1>
-<a href="<c:out value="/tunnit_lila/"/>"><h1>Etusivulle</h1></a>
+<a href="<c:out value="/palaute/"/>"><h1>Etusivulle</h1></a>
 	
 		
 		        </section>

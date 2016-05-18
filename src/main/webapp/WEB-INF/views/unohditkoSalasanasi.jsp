@@ -30,7 +30,7 @@
 	</h1>
 	<p>${error}</p>
 		<form method="post">
-		<input class="form-control" type="text" name="email">
+		<input class="form-control" type="text" name="tunnus" placeholder="Anna opiskelijatunnus muodossa a1234567">
 		<button class="btn btn-default submit" type="submit">Lähetä</button>
 		
 		</form>

@@ -27,16 +27,12 @@
     <div id="wrapper">
       <div id="login" class="animate form">
 	 <section class="login_content">
-		<form:form modelAttribute="henkilo" method="post">
+		<form:form modelAttribute="kayttaja" method="post">
 		
 			<legend>Uusi salasana</legend>
-			    <form:input type="hidden" path="id"/>
-				<form:input type="hidden" path="etunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="etunimi" cssClass="Virheteksti"/>
-				<form:input type="hidden" path="sukunimi" cssErrorClass="VirheellinenKentta"/> <form:errors path="sukunimi" cssClass="Virheteksti"/>
-				<form:input type="hidden" class="form-control" path="sposti" cssErrorClass="VirheellinenKentta"/> <form:errors path="sposti" cssClass="Virheteksti"/>
-
-					<p>
-	<p>
+				<form:input type="hidden" path="id"/>
+				<form:input type="hidden" class="form-control" path="tunnus"/>
+			<p>
 				<form:label path="salasana"></form:label>
 				<br />
 				<form:input class="form-control" placeholder="Salasana" path="salasana" type="password" cssErrorClass="VirheellinenKentta"/> <form:errors path="salasana" cssClass="Virheteksti"/>

@@ -24,7 +24,7 @@
       <div id="login" class="animate form">
         <section class="login_content">
 		<c:if test="${not empty loginerror}">
-		<p class="Error">Sisäänkirjautuminen epäonnistui. Opiskelijatunnus tai salasana on syötetty väärin.</p>
+		<p class="Error">Sisäänkirjautuminen epäonnistui. Käyttäjätunnus tai salasana on syötetty väärin.</p>
 	</c:if>
 
 	<c:if test="${not empty loggedout}">
@@ -34,7 +34,7 @@
             <h1>Kirjautuminen</h1>
             
             <div>
-              <input type="text" name='j_username' class="form-control" placeholder="Opiskelijatunnus muodossa a1234567"/>
+              <input type="text" name='j_username' class="form-control" placeholder="Kirjaudu Sähköpostiosoitteella"/>
             </div>
             <div>
               <input type="password" name='j_password' class="form-control" placeholder="Salasana"/>
@@ -48,7 +48,7 @@
             <div class="separator">
 
               <p class="change_link">Uusi sivustolla?
-                <a href="kayttaja/uusi" class="to_register"> Rekisteröidy </a>
+                <a href="henkilo/uusi" class="to_register"> Rekisteröidy </a>
               </p>
              
             </div>
