@@ -5,10 +5,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import fi.palaute.bean.Toteutus;
 import fi.palaute.bean.ToteutusImpl;
@@ -19,10 +21,8 @@ import fi.palaute.dao.ToteutusDAOSpringJdbcImpl;
 
 public class readExcel {
 	
-	@Autowired
-	private ToteutusDAO dao;
- 
-	public static void main(String[] args) throws IOException {
+
+	public void toteutukset() throws IOException{
 		FileInputStream fis = new FileInputStream(new File("/Users/evgenybecker/Desktop/2016k_Helsinki.xls"));
 		
 		HSSFWorkbook wb = new HSSFWorkbook(fis);
@@ -54,12 +54,19 @@ public class readExcel {
 			toteutus.setToteutusNimi(nimi);
 			toteutus.setToteutusTunnus(tunnus);
 			toteutus.setOpettajaNimi(ope);
-
 			toteutukset.add(toteutus);
 			}
-
-			dao.insertBatch(toteutukset);
+			
 		}
+
+		ToteutusDAO dao = new ToteutusDAOSpringJdbcImpl();
+		dao.insertBatch(toteutukset);
+	}
+	
+	public static void main(String[] args) throws IOException {
+
+		readExcel re = new readExcel();
+		re.toteutukset();
 		
 
 	}

@@ -1,8 +1,10 @@
 package fi.palaute.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +21,9 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
+
 import fi.palaute.bean.Toteutus;
 
 
@@ -29,34 +34,44 @@ public class ToteutusDAOSpringJdbcImpl implements ToteutusDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-
-	
-	public void insertBatch(final List<Toteutus> toteutukset) {
+	public void insertBatch(ArrayList<Toteutus> toteutukset) {
 		final String sql = "insert into toteutus(toteutusTunnus, toteutusNimi, opettajaNimi) values(?,?,?)";
+	    
+	    String username = "root";
+	    String password = "root";
+	    String url = "jdbc:mysql://localhost:3306/palaute";
+	   
+	    Connection yhteys = null;
+	    try {
+	    Class.forName("com.mysql.jdbc.Driver");
 
-		for(int i=0; i<toteutukset.size();i++){
-			System.out.println(toteutukset.get(i).getToteutusTunnus());
-		}
-		
-		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter(){
+	    yhteys = DriverManager.getConnection(url, username, password);
+	    
+	    System.out.println("Listassa " + toteutukset.size() + " kurssia");
+	    
+	    PreparedStatement ps = yhteys.prepareStatement(sql);
+	    
+	    for (int i = 0; i < toteutukset.size(); i++) {
+	     ps.setString(1, toteutukset.get(i).getToteutusTunnus());
+	     ps.setString(2, toteutukset.get(i).getToteutusNimi());
+	     ps.setString(3, toteutukset.get(i).getOpettajaNimi());
+	     ps.addBatch();
+	    }
+	    
+	    ps.executeBatch();
+	    
+	    yhteys.commit();
+	    
+	    yhteys.close();
+	    
 
-	        @Override
-	        public void setValues(PreparedStatement ps, int i)
-	            throws SQLException {
+	   } catch (Exception e) {
+	    // Virheet
+	    System.out.println("Tietokantayhteyden avauksessa tapahtui virhe");
+	    e.printStackTrace();
+	   }
 
-	            Toteutus t = toteutukset.get(i);
-	            ps.setString(1, t.getToteutusTunnus());
-	            ps.setString(2, t.getToteutusNimi());
-	            ps.setString(3, t.getOpettajaNimi());
-
-	        }
-
-	        @Override
-	        public int getBatchSize() {
-	            return toteutukset.size();
-	        }
-	    });
+	   }
 
 
-	}
 }
