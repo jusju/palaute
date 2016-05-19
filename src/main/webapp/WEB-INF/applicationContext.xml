@@ -10,6 +10,7 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
+
 	<!-- SPRING MVC MÄÄRITYKSET -->
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
@@ -121,7 +122,6 @@
 
 	<sec:global-method-security
 		pre-post-annotations="enabled" />
-
-
-
+		
+	
 </beans>

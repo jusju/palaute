@@ -1,5 +1,10 @@
 package fi.palaute.dao;
 
-public class ToteutusDAO {
+import java.util.List;
+import fi.palaute.bean.Toteutus;
+
+public interface ToteutusDAO {
+	
+	public abstract void insertBatch(List<Toteutus> toteutukset);
 
 }

@@ -48,7 +48,7 @@ public String[][] read() throws IOException
             {
             	if(data[4][i].contains("ICT") || data[4][i].contains("SWD")){
 
-            	filtered.add("insert into kurssi(tunnus, nimi, sposti) VALUES("+data[4][i]+","+data[5][i]+","+data[4][i]+"@myy.haaga-helia.fi);");
+            	filtered.add(data[4][i]+", "+data[5][i]+", "+data[9][i]);
             	}
             }
 
@@ -68,7 +68,27 @@ for(int n = 0; n < filtered.size(); n++){
 return data;
 }
 
+/*
+ * ArrayList<Toteutus> filtered = new ArrayList<>();
 
+   // 4 = kurssi tunnus
+   // 9 = opettajan nimi
+   // 5 = kurssin nimi
+
+   for (int i = 0; i < data[4].length; i++) {
+    if (data[4][i] != null && !data[4][i].equals("") && !data[4][i].equals(" ")) {
+
+     Toteutus toteutus = new Toteutus();
+     toteutus.setNimi(data[5][i]);
+     toteutus.setTunnus(data[4][i]);
+     if (data[9][i] != null && !data[9][i].contains("puuttuu")) {
+      toteutus.setOpettaja(data[9][i]);
+     }
+
+     filtered.add(toteutus);
+    }
+   }
+ */
 
 public static void main(String[] args) throws IOException 
 {

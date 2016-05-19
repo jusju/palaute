@@ -36,10 +36,10 @@ public class VastausDAOSpringJdbcImpl implements VastausDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public void talleta(Vastaus v) {
+	public void talleta(List<Vastaus> v) {
 		final String sql = "insert into vastaus(kysymysID,vastausteksti) values(?,?)";
 
-		
+		/*
 		final int kysymysID = v.getKysymysID();
 		final String vastausteksti = v.getVastausteksti();
 
@@ -60,6 +60,6 @@ public class VastausDAOSpringJdbcImpl implements VastausDAO {
 
 
 		v.setVastausID(idHolder.getKey().intValue());
-
+*/
 	}
 }

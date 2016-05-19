@@ -4,6 +4,6 @@ import fi.palaute.bean.Vastaus;
 
 public interface VastausDAO {
 	
-	public abstract void talleta(Vastaus vastaukset);
+	public abstract void talleta(List<Vastaus> vastaukset);
 
 }
