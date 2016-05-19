@@ -5,8 +5,8 @@
 	<artifactId>palaute</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Demo 14</name>
-	<description>Demo 14 (Spring Web MVC)</description>
+	<name>palaute</name>
+	<description>palaute (Spring Web MVC)</description>
 
 
 	<properties>
