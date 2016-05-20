@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Kaikki toteutukset</title>
 </head>
-<body style="background:#F7F7F7;">
+<body>
 <h1>Kaikki toteutukset</h1>
 <br>
 	<table border 1>

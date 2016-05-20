@@ -20,7 +20,7 @@
 <title>Sivua ei löydy</title>
  
 </head>	
-<body style="background:#F7F7F7;">
+<body>
 
     <div id="wrapper">
       <div id="login" class="animate form">
