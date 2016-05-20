@@ -21,10 +21,8 @@ import org.springframework.stereotype.Repository;
 
 
 
-
-
-
 import fi.palaute.bean.Toteutus;
+
 
 
 @Repository
@@ -71,7 +69,17 @@ public class ToteutusDAOSpringJdbcImpl implements ToteutusDAO {
 	    e.printStackTrace();
 	   }
 
-	   }
+	 }
 
 
+	public List<Toteutus> haeKaikki() {
+
+		String sql = "select toteutusID, toteutusTunnus,toteutusNimi,opettajaNimi from toteutus";
+		RowMapper<Toteutus> mapper = new ToteutusRowMapper();
+		List<Toteutus> henkilot = jdbcTemplate.query(sql, mapper);
+
+		return henkilot;
+
+	}
+	
 }

@@ -8,5 +8,7 @@ import fi.palaute.bean.Toteutus;
 public interface ToteutusDAO {
 	
 	public abstract void insertBatch(ArrayList<Toteutus> toteutukset);
+	
+	public abstract List<Toteutus> haeKaikki();
 
 }
