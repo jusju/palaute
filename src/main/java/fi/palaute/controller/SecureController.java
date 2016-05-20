@@ -11,11 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpServletRequest;
 
 import fi.palaute.bean.Kysymys;
+import fi.palaute.bean.PalautteenLinkkiImpl;
 import fi.palaute.bean.Toteutus;
+import fi.palaute.bean.PalautteenLinkki;
 import fi.palaute.dao.KysymysDAO;
+import fi.palaute.dao.PalauteDAO;
 import fi.palaute.dao.ToteutusDAO;
 
 @Controller
@@ -42,6 +46,17 @@ public class SecureController {
 
 	public void setKdao(KysymysDAO kdao) {
 		this.kdao = kdao;
+	}
+	
+	@Inject
+	private PalauteDAO pdao;
+	
+	public PalauteDAO getPdao() {
+		return pdao;
+	}
+
+	public void setPdao(PalauteDAO pdao) {
+		this.pdao = pdao;
 	}
 
 	@RequestMapping(value = "/oma", method = RequestMethod.GET)
@@ -70,10 +85,14 @@ public class SecureController {
 	
 	@RequestMapping(value = "/oma/laheta/{id}", method = RequestMethod.GET)
 	public String linkiLuonti (HttpServletRequest request, @PathVariable Integer id, Model model) {
-
-		Toteutus toteutus = tdao.etsi(id);
-
+		//Generoidaan satunnainen
 		String satunnainen = UUID.randomUUID().toString();
+		//Luodaan linkki palautteeseen
+		PalautteenLinkki pl = new PalautteenLinkkiImpl();
+		pl.setToteutusID(id);
+		pl.setSatunnainen(satunnainen);
+		//Linkki lähtee tietokantaan
+		pdao.talletaLinkki(pl);
 		
 		
 		String url = "http://" + request.getServerName() + ":"
