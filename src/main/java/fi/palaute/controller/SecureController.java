@@ -2,17 +2,20 @@ package fi.palaute.controller;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import javax.servlet.http.HttpServletRequest;
 
+import fi.palaute.bean.Kysymys;
 import fi.palaute.bean.Toteutus;
+import fi.palaute.dao.KysymysDAO;
 import fi.palaute.dao.ToteutusDAO;
 
 @Controller
@@ -22,7 +25,6 @@ public class SecureController {
 	@Inject
 	private ToteutusDAO tdao;
 	
-	
 	public ToteutusDAO getTdao() {
 		return tdao;
 	}
@@ -30,17 +32,57 @@ public class SecureController {
 	public void setTdao(ToteutusDAO tdao) {
 		this.tdao = tdao;
 	}
+	
+	@Inject
+	private KysymysDAO kdao;
+	
+	public KysymysDAO getKdao() {
+		return kdao;
+	}
+
+	public void setKdao(KysymysDAO kdao) {
+		this.kdao = kdao;
+	}
 
 	@RequestMapping(value = "/oma", method = RequestMethod.GET)
-	public String paasivu(Model model) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
+	public String toteutuksetSivu (Model model) {
+
 		List<Toteutus> toteutukset = tdao.haeKaikki();
 		model.addAttribute("toteutukset", toteutukset);
 		
-		
 		return "secure/kayttaja/naytaToteutukset";
+		
+	}
+	
+	@RequestMapping(value = "/oma/luopalaute/{id}", method = RequestMethod.GET)
+	public String palauteLuonti (@PathVariable Integer id, Model model) {
+
+		Toteutus toteutus = tdao.etsi(id);
+		
+		List<Kysymys> kysymykset = kdao.haeKaikki();
+		
+		model.addAttribute("toteutus", toteutus);
+		model.addAttribute("kysymykset", kysymykset);
+		
+		return "secure/kayttaja/luoPalautus";
+		
+	}
+	
+	@RequestMapping(value = "/oma/laheta/{id}", method = RequestMethod.GET)
+	public String linkiLuonti (HttpServletRequest request, @PathVariable Integer id, Model model) {
+
+		Toteutus toteutus = tdao.etsi(id);
+
+		String satunnainen = UUID.randomUUID().toString();
+		
+		
+		String url = "http://" + request.getServerName() + ":"
+				+ request.getServerPort() + request.getContextPath() + "/"
+				 + "palautetoteutukselle/" + satunnainen;
+		System.out.println(url);
+		
+		
+		return "secure/kayttaja/linkkiLahetetty";
 		
 	}
 }

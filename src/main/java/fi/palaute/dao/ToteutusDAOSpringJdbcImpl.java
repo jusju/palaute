@@ -19,11 +19,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-
-
 import fi.palaute.bean.Toteutus;
-
-
 
 @Repository
 
@@ -76,10 +72,26 @@ public class ToteutusDAOSpringJdbcImpl implements ToteutusDAO {
 
 		String sql = "select toteutusID, toteutusTunnus,toteutusNimi,opettajaNimi from toteutus";
 		RowMapper<Toteutus> mapper = new ToteutusRowMapper();
-		List<Toteutus> henkilot = jdbcTemplate.query(sql, mapper);
+		List<Toteutus> toteutukset = jdbcTemplate.query(sql, mapper);
 
-		return henkilot;
+		return toteutukset;
 
 	}
+	
+	public Toteutus etsi(int id) {
+		String sql = "select toteutusID, toteutusTunnus,toteutusNimi,opettajaNimi from toteutus where toteutusID = ?";
+		Object[] parametrit = new Object[] { id };
+		RowMapper<Toteutus> mapper = new ToteutusRowMapper();
+
+		Toteutus t;
+		try {
+			t = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return t;
+
+	}
+	
 	
 }

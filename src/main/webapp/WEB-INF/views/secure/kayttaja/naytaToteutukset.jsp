@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Kaikki toteutukset</title>
 </head>
-<body>
+<body style="background:#F7F7F7;">
 <h1>Kaikki toteutukset</h1>
 <br>
 	<table border 1>
@@ -20,7 +20,7 @@
 		</tr>
 	<c:forEach items="${toteutukset}" var="toteutus">
 		<tr>
-			<td>${toteutus.toteutusTunnus}</td>
+			<td><a href="/palaute/secure/oma/luopalaute/${toteutus.toteutusID}">${toteutus.toteutusTunnus}</a></td>
 			<td>${toteutus.toteutusNimi}</td>
 			<td>${toteutus.opettajaNimi}</td>
 		<tr>

@@ -10,5 +10,7 @@ public interface ToteutusDAO {
 	public abstract void insertBatch(ArrayList<Toteutus> toteutukset);
 	
 	public abstract List<Toteutus> haeKaikki();
+	
+	public abstract Toteutus etsi(int id);
 
 }
