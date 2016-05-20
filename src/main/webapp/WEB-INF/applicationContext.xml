@@ -22,7 +22,7 @@
 	<mvc:annotation-driven />
 
 	<!-- Forwards requests to the "/" resource to the "welcome" view -->
-	<mvc:view-controller path="/" view-name="login" />
+	<mvc:view-controller path="/" view-name="index" />
 
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views 
 		directory -->
@@ -85,10 +85,9 @@
 			torstaina -->
 		<sec:intercept-url pattern="/secure/admin/super/**"
 			access="hasRole('ROLE_ADMIN')" />
-		<sec:intercept-url pattern="/secure/*" access="isAuthenticated()" />
-		<sec:intercept-url pattern="/*" access="permitAll" />
+		<sec:intercept-url pattern="/secure/**" access="hasRole('ROLE_USER')" />
 
-		<sec:form-login login-page="/loginpage"
+		<sec:form-login login-page="/login"
 			default-target-url="/secure/oma" authentication-failure-url="/loginfail" />
 
 		<sec:logout logout-success-url="/logout" />

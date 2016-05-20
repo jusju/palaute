@@ -7,11 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Kaikki toteutukset</title>
+<title>Palaute v0.1</title>
 </head>
 <body>
 <h1>Kaikki toteutukset</h1>
-<a href="/palaute/logout"><button>Kirjaudu ulos</button></a>
 <br>
 	<table border 1>
 		<tr>
@@ -21,7 +20,7 @@
 		</tr>
 	<c:forEach items="${toteutukset}" var="toteutus">
 		<tr>
-			<td><a href="/palaute/secure/oma/luopalaute/${toteutus.toteutusID}">${toteutus.toteutusTunnus}</a></td>
+			<td><a href="/palaute/main/toteutuksenpalautteet/${toteutus.toteutusID}">${toteutus.toteutusTunnus}</a></td>
 			<td>${toteutus.toteutusNimi}</td>
 			<td>${toteutus.opettajaNimi}</td>
 		<tr>
