@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +22,14 @@ import fi.palaute.bean.PalautteenLinkki;
 import fi.palaute.dao.KysymysDAO;
 import fi.palaute.dao.PalauteDAO;
 import fi.palaute.dao.ToteutusDAO;
+import fi.palaute.util.SpostiLahetys;
 
 @Controller
 @RequestMapping(value = "/secure")
 public class SecureController {
+	
+	@Autowired
+	private SpostiLahetys sposti;
 	
 	@Inject
 	private ToteutusDAO tdao;
@@ -85,20 +90,34 @@ public class SecureController {
 	
 	@RequestMapping(value = "/oma/laheta/{id}", method = RequestMethod.GET)
 	public String linkiLuonti (HttpServletRequest request, @PathVariable Integer id, Model model) {
+		//Haetaan toteutus
+		Toteutus toteutus = tdao.etsi(id);
+		
+		//Luodaan saajat linkki
+		String saajat = toteutus.getToteutusTunnus()+"@myy.haaga-helia.fi";
+		
 		//Generoidaan satunnainen
 		String satunnainen = UUID.randomUUID().toString();
+		
 		//Luodaan linkki palautteeseen
 		PalautteenLinkki pl = new PalautteenLinkkiImpl();
 		pl.setToteutusID(id);
 		pl.setSatunnainen(satunnainen);
+		
 		//Linkki lähtee tietokantaan
 		pdao.talletaLinkki(pl);
 		
-		
+		//Lähetetään linkki toteutuksen palautteeseen kaikille osallistujille
 		String url = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + request.getContextPath() + "/"
 				 + "palautetoteutukselle/" + satunnainen;
-		System.out.println(url);
+		
+		String subject = "Anna palautetta toteutukselle "+toteutus.getToteutusTunnus();
+		sposti.sendMail(saajat, subject, url);
+		
+		String ilmoitus = "Linkki toteutuksen palautteeseen lähetetty kurssin osallistujille";
+	
+		model.addAttribute("ilmoitus", ilmoitus);
 		
 		
 		return "secure/kayttaja/linkkiLahetetty";
