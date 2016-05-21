@@ -128,7 +128,9 @@ public class MainController{
 		palaute.setVastaukset(vastaukset);
 		
 		System.out.println(palaute);
-
+		
+		pdao.talleta(palaute);
+		pdao.insertVastaukset(vastaukset);
 		
 		return "redirect:/";
 	
