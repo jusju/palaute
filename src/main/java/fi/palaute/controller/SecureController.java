@@ -109,7 +109,7 @@ public class SecureController {
 		
 		//Lähetetään linkki toteutuksen palautteeseen kaikille osallistujille
 		String url = "http://" + request.getServerName() + ":"
-				+ request.getServerPort() + request.getContextPath() + "/"
+				+ request.getServerPort() + request.getContextPath() + "/main/"
 				 + "palautetoteutukselle/" + satunnainen;
 		
 		String subject = "Anna palautetta toteutukselle "+toteutus.getToteutusTunnus();

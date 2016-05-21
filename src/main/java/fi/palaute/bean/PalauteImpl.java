@@ -1,26 +1,16 @@
 package fi.palaute.bean;
 
-import java.sql.Date;
+import java.util.ArrayList;
+
 
 public class PalauteImpl implements Palaute {
 	
 	private int palauteID, toteutusID;
 	private String vastaaja;
-	private boolean vastattu;
-	private Date timestamp;
-	public PalauteImpl() {
-		super();
-		
-	}
-	public PalauteImpl(int palauteID, int toteutusID, String vastaaja,
-			boolean vastattu, Date timestamp) {
-		super();
-		this.palauteID = palauteID;
-		this.toteutusID = toteutusID;
-		this.vastaaja = vastaaja;
-		this.vastattu = vastattu;
-		this.timestamp = timestamp;
-	}
+	private boolean vahvistettu;
+	private String timestamp;
+	private ArrayList<Vastaus> vastaukset;
+
 	public int getPalauteID() {
 		return palauteID;
 	}
@@ -39,23 +29,30 @@ public class PalauteImpl implements Palaute {
 	public void setVastaaja(String vastaaja) {
 		this.vastaaja = vastaaja;
 	}
-	public boolean isVastattu() {
-		return vastattu;
+	public boolean isVahvistettu() {
+		return vahvistettu;
 	}
-	public void setVastattu(boolean vastattu) {
-		this.vastattu = vastattu;
+	public void setVahvistettu(boolean vahvistettu) {
+		this.vahvistettu = vahvistettu;
 	}
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
+	}
+	public ArrayList<Vastaus> getVastaukset() {
+		return vastaukset;
+	}
+	public void setVastaukset(ArrayList<Vastaus> vastaukset) {
+		this.vastaukset = vastaukset;
 	}
 	@Override
 	public String toString() {
 		return "PalauteImpl [palauteID=" + palauteID + ", toteutusID="
-				+ toteutusID + ", vastaaja=" + vastaaja + ", vastattu="
-				+ vastattu + ", timestamp=" + timestamp + "]";
+				+ toteutusID + ", vastaaja=" + vastaaja + ", vahvistettu="
+				+ vahvistettu + ", timestamp=" + timestamp + ", vastaukset="
+				+ vastaukset + "]";
 	}
 	
 	
