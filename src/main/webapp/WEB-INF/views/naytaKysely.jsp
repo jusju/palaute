@@ -30,14 +30,12 @@
 			<c:forEach items="${kysymykset}" var="k">
 				<tr>
 					<td><c:out value="${k.kysymysteksti}"></c:out></td>
-					<c:forEach items="${vastaukset}" var="v">
 			<spring:bind path="vastaus.kysymysID">
 					<input name="kysymysID" type="hidden" value="${k.kysymysID}"/>
 			</spring:bind>
 			<spring:bind path="vastaus.vastausteksti">
 					<td><textarea name="vastausteksti" rows="5" cols="20" placeholder="Vasta tähän"></textarea></td>
 			</spring:bind>	
-					</c:forEach>
 				</tr>
 			</c:forEach>
 			
