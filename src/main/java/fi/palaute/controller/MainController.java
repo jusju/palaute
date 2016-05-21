@@ -95,9 +95,9 @@ public class MainController{
 		
 		Toteutus toteutus = tdao.etsi(toteutusid);
 		List<Kysymys> kysymykset = kdao.haeKaikki();
-		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
 		Palaute palaute = new PalauteImpl();
 		Vastaus vastaus = new VastausImpl();
+		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
 		
 		model.addAttribute("toteutus", toteutus);
 		model.addAttribute("kysymykset", kysymykset);
@@ -110,9 +110,25 @@ public class MainController{
 	
 	// K�YTT�J�N MUOKKAUS FORMIN TIETOJEN VASTAANOTTO
 	@RequestMapping(value = "palautetoteutukselle/{satunnainen}", method = RequestMethod.POST)
-	public String getPalauteForm(@ModelAttribute(value="palaute")PalauteImpl palaute, @ModelAttribute(value="vastaus") VastausImpl vastaus) {
-
+	public String getPalauteForm(PalauteImpl palaute, VastausImpl vastaus) {
+		
+		String[] values = vastaus.getVastausteksti().split(",");
+		ArrayList<Vastaus> vastaukset = new ArrayList<Vastaus>();
+		int i=1;
+		for(String v : values){
+			Vastaus vast = new VastausImpl();
+			vast.setKysymysID(i++);
+			vast.setVastausteksti(v);
+			vastaukset.add(vast);
+		}
+		
+		for(int in=0;in<vastaukset.size();in++){
+			System.out.println(vastaukset.get(in).getKysymysID() +" - "+vastaukset.get(in).getVastausteksti());
+		}
+		palaute.setVastaukset(vastaukset);
+		
 		System.out.println(palaute);
+
 		
 		return "redirect:/";
 	
