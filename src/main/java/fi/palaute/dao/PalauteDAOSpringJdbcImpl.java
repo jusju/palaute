@@ -11,8 +11,12 @@ import java.util.List;
 
 
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,8 +27,10 @@ import org.springframework.stereotype.Repository;
 import fi.palaute.bean.Palaute;
 import fi.palaute.bean.PalautteenLinkki;
 import fi.palaute.bean.PalautteenVastaukset;
+import fi.palaute.bean.PalautteenVastauksetImpl;
 import fi.palaute.bean.VahvistusLinkki;
 import fi.palaute.bean.Vastaus;
+import fi.palaute.bean.VastausImpl;
 import fi.palaute.dao.HenkiloaEiLoydyPoikkeus;
 
 
@@ -34,6 +40,14 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 	
 	public void talletaLinkki(PalautteenLinkki pl) {
 		final String sql = "insert into palautteen_linkki(toteutusID, satunnainen) values(?,?)";
@@ -95,110 +109,61 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 
 	}
 	
-	public void insertVastaukset(ArrayList<Vastaus> vastaukset) {
-		final String sql = "insert into vastaus(kysymysID, vastausteksti)values(?,?)";
-	    
-	    String username = "root";
-	    String password = "root";
-	    String url = "jdbc:mysql://localhost:3306/palaute";
-	   
-	    Connection yhteys = null;
-	    try {
-	    Class.forName("com.mysql.jdbc.Driver");
+	public void insertVastaukset(List<Vastaus> vastaukset) {
+	    final String sql = "insert into vastaus (kysymysID, vastausteksti) values(?,?)";
+	    getJdbcTemplate().batchUpdate(sql,
+	            new BatchPreparedStatementSetter() {
+	                @Override
+	                public void setValues(PreparedStatement ps, int i)
+	                        throws SQLException {
+	                    Vastaus vastaus = vastaukset.get(i);
+	                    ps.setInt(1, vastaus.getKysymysID());
+	                    ps.setString(2, vastaus.getVastausteksti());
 
-	    yhteys = DriverManager.getConnection(url, username, password);
-	    
-	    System.out.println("Listassa " + vastaukset.size() + " kurssia");
-	    
-	    PreparedStatement ps = yhteys.prepareStatement(sql);
-	    
-	    for (int i = 0; i < vastaukset.size(); i++) {
-	     ps.setInt(1, vastaukset.get(i).getKysymysID());
-	     ps.setString(2, vastaukset.get(i).getVastausteksti());
-	     ps.addBatch();
-	    }
-	    
-	    ps.executeBatch();
-	    
-	    int maxVastausID = 0;
-	    int maxPalautusID = 0;
-        
-        try {
-        	
-            ps = yhteys.prepareStatement("select MAX(vastausID) AS maxV FROM vastaus;");
-         
-            ResultSet rs = ps.executeQuery();
+	                }
 
-            if (rs.next()) {
-                maxVastausID = rs.getInt("maxV");
-                
-            }
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }  
-        
-        try {
-        	
-            ps = yhteys.prepareStatement("select MAX(palauteID) AS maxP FROM palaute;");
-         
-            ResultSet rs = ps.executeQuery();
+	                @Override
+	                public int getBatchSize() {
+	                    return vastaukset.size();
+	                }
+	            });
 
-            if (rs.next()) {
-                maxPalautusID = rs.getInt("maxP");
-                
-            }
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } 
-	    
-        talletaPalautteenVastaukset(maxPalautusID, maxVastausID);
-	    
-
-	   } catch (Exception e) {
-	    // Virheet
-	    System.out.println("Tietokantayhteyden avauksessa tapahtui virhe");
-	    e.printStackTrace();
-	   }
-	    
-}
+	}
 	
-	public void talletaPalautteenVastaukset(int palauteID, int vastausID) {
+	public void talletaPalautteenVastaukset(int palauteID) {
+		
 		final String pv = "insert into palautteen_vastaukset(palauteID, vastausID) values(?,?)";
 		
-	    String username = "root";
-	    String password = "root";
-	    String url = "jdbc:mysql://localhost:3306/palaute";
-	   
-	    Connection yhteys = null;
-	    try {
-	    Class.forName("com.mysql.jdbc.Driver");
-
-	    yhteys = DriverManager.getConnection(url, username, password);
-	    
-	    ArrayList<Integer> vastausIDT = new ArrayList<Integer>();
-	    for(int i=vastausID; i>0;i--){
-	    vastausIDT.add(i);
-	    }
-	    PreparedStatement ps = yhteys.prepareStatement(pv);
-	    
-	    for (int i = 0; i < vastausIDT.size(); i++) {
-	     ps.setInt(1, palauteID);
-	     ps.setInt(2, vastausIDT.get(i).intValue());
-	     ps.addBatch();
-	    }
-	    
-	    ps.executeBatch();
-	    
-	    yhteys.close();
+	    String lastID = "select MAX(vastausID) FROM vastaus";
+	    int lastVastaus = jdbcTemplate.queryForInt(lastID);
+	    System.out.println(palauteID +" "+lastVastaus);
 	    
 
-	   } catch (Exception e) {
-	    // Virheet
-	    System.out.println("Tietokantayhteyden avauksessa tapahtui virhe");
-	    e.printStackTrace();
-	   }
+	    List<PalautteenVastaukset> palvastaukset = new ArrayList<PalautteenVastaukset>();
+	    for(int i=lastVastaus; i>0;i--){
+		PalautteenVastaukset palvast = new PalautteenVastauksetImpl();
+	    palvast.setPalauteID(palauteID);
+	    palvast.setVastausID(i);
+	    palvastaukset.add(palvast);
+	    }
+	    
+	    getJdbcTemplate().batchUpdate(pv,
+	            new BatchPreparedStatementSetter() {
+	                @Override
+	                public void setValues(PreparedStatement ps, int i)
+	                        throws SQLException {
+	                	
+	                    ps.setInt(1, palvastaukset.get(i).getPalauteID());
+	                    ps.setInt(2, palvastaukset.get(i).getVastausID());
+
+	                }
+
+	                @Override
+	                public int getBatchSize() {
+	                    return palvastaukset.size();
+	                }
+	            });
+
 
 	}
 	

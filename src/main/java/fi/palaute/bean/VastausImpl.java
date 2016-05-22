@@ -4,6 +4,22 @@ public class VastausImpl implements Vastaus {
 	
 	private int vastausID,kysymysID;
 	private String vastausteksti;
+	
+
+	public VastausImpl() {
+
+	}
+	
+	
+	
+	public VastausImpl(int vastausID, int kysymysID, String vastausteksti) {
+		super();
+		this.vastausID = vastausID;
+		this.kysymysID = kysymysID;
+		this.vastausteksti = vastausteksti;
+	}
+
+
 
 	public int getVastausID() {
 		return vastausID;

@@ -43,6 +43,8 @@ public class MainController{
 	@Autowired
 	private SpostiLahetys sposti;
 	
+	@Autowired PalauteDAO pdao;
+	
 	@Inject
 	private ToteutusDAO tdao;
 	
@@ -65,16 +67,6 @@ public class MainController{
 		this.vdao = vdao;
 	}
 	
-	@Inject
-	private PalauteDAO pdao;
-	
-	public PalauteDAO getPdao() {
-		return pdao;
-	}
-
-	public void setPdao(PalauteDAO pdao) {
-		this.pdao = pdao;
-	}
 	
 	@Inject
 	private KysymysDAO kdao;
@@ -137,7 +129,7 @@ public class MainController{
 	public String getPalauteForm(HttpServletRequest request, PalauteImpl palaute, VastausImpl vastaus, Model model) {
 		
 		String[] values = vastaus.getVastausteksti().split(",");
-		ArrayList<Vastaus> vastaukset = new ArrayList<Vastaus>();
+		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
 		int i=1;
 		for(String v : values){
 			Vastaus vast = new VastausImpl();
@@ -151,7 +143,6 @@ public class MainController{
 		}
 		palaute.setVastaukset(vastaukset);
 		
-		System.out.println(palaute);
 		
 		pdao.talleta(palaute);
 		
@@ -187,6 +178,8 @@ public class MainController{
 		String ilmoitus = "Palautteen vahvistuslinkki lähetetty opiskelijalle"+palaute.getVastaaja();
 		
 		pdao.insertVastaukset(vastaukset);
+		
+		pdao.talletaPalautteenVastaukset(palaute.getPalauteID());
 	
 		model.addAttribute("ilmoitus", ilmoitus);
 		

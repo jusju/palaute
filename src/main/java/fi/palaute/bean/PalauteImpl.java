@@ -1,6 +1,7 @@
 package fi.palaute.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PalauteImpl implements Palaute {
@@ -9,7 +10,7 @@ public class PalauteImpl implements Palaute {
 	private String vastaaja;
 	private boolean vahvistettu;
 	private String timestamp;
-	private ArrayList<Vastaus> vastaukset;
+	private List<Vastaus> vastaukset;
 
 	public int getPalauteID() {
 		return palauteID;
@@ -41,10 +42,10 @@ public class PalauteImpl implements Palaute {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
-	public ArrayList<Vastaus> getVastaukset() {
+	public List<Vastaus> getVastaukset() {
 		return vastaukset;
 	}
-	public void setVastaukset(ArrayList<Vastaus> vastaukset) {
+	public void setVastaukset(List<Vastaus> vastaukset) {
 		this.vastaukset = vastaukset;
 	}
 	@Override

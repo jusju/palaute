@@ -1,6 +1,7 @@
 package fi.palaute.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Palaute {
 	
@@ -24,9 +25,9 @@ public interface Palaute {
 
 	public abstract void setTimestamp(String timestamp);
 	
-	public abstract ArrayList<Vastaus> getVastaukset();
+	public abstract List<Vastaus> getVastaukset();
 	
-	public abstract void setVastaukset(ArrayList<Vastaus> vastaukset);
+	public abstract void setVastaukset(List<Vastaus> vastaukset);
 
 
 }

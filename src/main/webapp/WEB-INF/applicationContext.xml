@@ -10,7 +10,6 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
-
 	<!-- SPRING MVC MÄÄRITYKSET -->
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
@@ -65,8 +64,7 @@
 	</bean>
 
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
