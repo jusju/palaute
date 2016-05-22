@@ -5,6 +5,7 @@ import java.util.List;
 
 import fi.palaute.bean.Palaute;
 import fi.palaute.bean.PalautteenLinkki;
+import fi.palaute.bean.PalautteenVastaukset;
 import fi.palaute.bean.VahvistusLinkki;
 import fi.palaute.bean.Vastaus;
 
@@ -22,7 +23,7 @@ public interface PalauteDAO {
 	
 	public void talletaPalautteenVastaukset(int palauteID, int vastausID);
 	
-	public List<Palaute> haeVahvitetut();
+	public List<Palaute> haeVahvistetut();
 	
 	public void setVahvistus(Palaute p);
 	
@@ -31,5 +32,7 @@ public interface PalauteDAO {
 	public List<VahvistusLinkki> haeKaikkiVahvistukset();
 	
 	public void poistaVahvistus(String satunnainen);
+	
+	public List<PalautteenVastaukset> haeKaikkiPalautteenVastaukset();
 
 }

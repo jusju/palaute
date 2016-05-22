@@ -23,6 +23,7 @@ import fi.palaute.bean.Palaute;
 import fi.palaute.bean.PalauteImpl;
 import fi.palaute.bean.PalautteenLinkki;
 import fi.palaute.bean.PalautteenLinkkiImpl;
+import fi.palaute.bean.PalautteenVastaukset;
 import fi.palaute.bean.Toteutus;
 import fi.palaute.bean.VahvistusLinkki;
 import fi.palaute.bean.VahvistusLinkkiImpl;
@@ -31,7 +32,9 @@ import fi.palaute.bean.VastausImpl;
 import fi.palaute.dao.KysymysDAO;
 import fi.palaute.dao.PalauteDAO;
 import fi.palaute.dao.ToteutusDAO;
+import fi.palaute.dao.VastausDAO;
 import fi.palaute.util.SpostiLahetys;
+
 
 @Controller
 @RequestMapping (value="/main")
@@ -49,6 +52,17 @@ public class MainController{
 
 	public void setTdao(ToteutusDAO tdao) {
 		this.tdao = tdao;
+	}
+	
+	@Inject
+	private VastausDAO vdao;
+	
+	public VastausDAO getvdao() {
+		return vdao;
+	}
+
+	public void setVdao(VastausDAO vdao) {
+		this.vdao = vdao;
 	}
 	
 	@Inject
@@ -145,6 +159,7 @@ public class MainController{
 		
 		//Luodaan vahvistus linkki
 		String saaja = palaute.getVastaaja()+"@myy.haaga-helia.fi";
+		System.out.println(saaja);
 		
 		//Generoidaan satunnainen
 		String satunnainen = UUID.randomUUID().toString();
@@ -156,7 +171,7 @@ public class MainController{
 		
 		//Kaikki lähtee tietokantaan
 		pdao.talleta(palaute);
-		pdao.insertVastaukset(vastaukset);
+		//paikka varattu
 		pdao.talletaVahvistusLinkki(vl);
 		
 		//Lähetetään linkki toteutuksen palautteeseen kaikille osallistujille
@@ -168,6 +183,8 @@ public class MainController{
 		sposti.sendMail(saaja, subject, url);
 		
 		String ilmoitus = "Palautteen vahvistuslinkki lähetetty opiskelijalle"+palaute.getVastaaja();
+		
+		pdao.insertVastaukset(vastaukset);
 	
 		model.addAttribute("ilmoitus", ilmoitus);
 		
@@ -203,6 +220,31 @@ public class MainController{
 			}
 			return "kiitos";
 
+		}
+		
+		@RequestMapping(value = "/toteutuksenpalautteet/{id}", method = RequestMethod.GET)
+		public String getTunti(@PathVariable Integer id, Model model) {
+			List<Palaute> palautteet = new ArrayList<Palaute>();
+			palautteet = pdao.haeVahvistetut();
+			
+			List<Vastaus> vastaukset = new ArrayList<Vastaus>();
+			vastaukset = vdao.haeKaikkiVastaukset();
+			
+			List<Kysymys> kysymykset = new ArrayList<Kysymys>();
+			kysymykset = kdao.haeKaikki();
+			
+			List<PalautteenVastaukset> pv = new ArrayList<PalautteenVastaukset>();
+			pv = pdao.haeKaikkiPalautteenVastaukset();
+			
+			Toteutus toteutus = tdao.etsi(id);
+			
+			model.addAttribute("palautteet", palautteet);
+			model.addAttribute("vastaukset", vastaukset);
+			model.addAttribute("kysymykset", kysymykset);
+			model.addAttribute("pvastaukset", pv);
+			model.addAttribute("toteutus", toteutus);
+
+			return "palautteet";
 		}
 	
 	

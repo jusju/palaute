@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import fi.palaute.bean.Toteutus;
 import fi.palaute.bean.Vastaus;
 
 
@@ -36,30 +37,14 @@ public class VastausDAOSpringJdbcImpl implements VastausDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public void talleta(List<Vastaus> v) {
-		final String sql = "insert into vastaus(kysymysID,vastausteksti) values(?,?)";
 
-		/*
-		final int kysymysID = v.getKysymysID();
-		final String vastausteksti = v.getVastausteksti();
+	public List<Vastaus> haeKaikkiVastaukset() {
 
-		
-		KeyHolder idHolder = new GeneratedKeyHolder();
+		String sql = "select vastausID, kysymysID,vastausteksti from vastaus";
+		RowMapper<Vastaus> mapper = new VastausRowMapper();
+		List<Vastaus> vastaukset = jdbcTemplate.query(sql, mapper);
 
-		
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection.prepareStatement(sql,
-						new String[] { "id" });
-				ps.setInt(1, kysymysID);
-				ps.setString(2, vastausteksti);
-				return ps;
-			}
-		}, idHolder);
+		return vastaukset;
 
-
-		v.setVastausID(idHolder.getKey().intValue());
-*/
 	}
 }

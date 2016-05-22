@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Repository;
 
 import fi.palaute.bean.Palaute;
 import fi.palaute.bean.PalautteenLinkki;
+import fi.palaute.bean.PalautteenVastaukset;
 import fi.palaute.bean.VahvistusLinkki;
 import fi.palaute.bean.Vastaus;
 import fi.palaute.dao.HenkiloaEiLoydyPoikkeus;
@@ -215,8 +217,8 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 
 	}
 	
-	public List<Palaute> haeVahvitetut() {
-		String sql = "select palauteID,toteutusID,vastaaja,vahvistus,timestamp from palaute where toteutusID=? and vahvistus=1";
+	public List<Palaute> haeVahvistetut() {
+		String sql = "select palauteID,toteutusID,vastaaja,vahvistus,timestamp from palaute where vahvistus=1";
 		RowMapper<Palaute> mapper = new PalauteRowMapper();
 		List<Palaute> palautteet = jdbcTemplate.query(sql, mapper);
 		return palautteet;
@@ -283,6 +285,16 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 			throw new HenkiloaEiLoydyPoikkeus(e);
 		}
 		
+	}
+	
+	public List<PalautteenVastaukset> haeKaikkiPalautteenVastaukset() {
+
+		String sql = "select palauteID, vastausID from palautteen_vastaukset";
+		RowMapper<PalautteenVastaukset> mapper = new PalautteenVastauksetRowMapper();
+		List<PalautteenVastaukset> pv = jdbcTemplate.query(sql, mapper);
+
+		return pv;
+
 	}
 
 }
