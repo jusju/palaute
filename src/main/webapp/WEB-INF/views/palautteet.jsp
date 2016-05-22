@@ -24,8 +24,15 @@
 	<c:forEach items="${palautteet}" var="palaute">
 		<c:if test="${palaute.toteutusID == toteutus.toteutusID}">
 			<tr>
-				<td>Anonymous</td>
-				<td>${palaute.timestamp}</td>
+			<td>Anonymous</td>
+			<c:forEach items="${vastaukset}" var="vastaukset">
+			<c:forEach items="${pvastaukset}" var="pvast">
+				<c:if test="${vastaukset.vastausID == pvast.vastausID}">
+				<td>${vastaukset.vastausteksti}</td>
+				</c:if>
+			</c:forEach>
+			</c:forEach>
+			<td>${palaute.timestamp}</td>
 			<tr>
 		</c:if>
 
