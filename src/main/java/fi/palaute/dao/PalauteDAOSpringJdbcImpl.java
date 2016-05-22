@@ -140,7 +140,7 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 	    
 
 	    List<PalautteenVastaukset> palvastaukset = new ArrayList<PalautteenVastaukset>();
-	    for(int i=lastVastaus; i>0;i--){
+	    for(int i=lastVastaus; i>lastVastaus-5;i--){
 		PalautteenVastaukset palvast = new PalautteenVastauksetImpl();
 	    palvast.setPalauteID(palauteID);
 	    palvast.setVastausID(i);
