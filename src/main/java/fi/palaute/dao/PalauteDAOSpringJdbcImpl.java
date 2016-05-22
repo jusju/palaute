@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,8 +21,9 @@ import org.springframework.stereotype.Repository;
 
 import fi.palaute.bean.Palaute;
 import fi.palaute.bean.PalautteenLinkki;
-import fi.palaute.bean.Toteutus;
+import fi.palaute.bean.VahvistusLinkki;
 import fi.palaute.bean.Vastaus;
+import fi.palaute.dao.HenkiloaEiLoydyPoikkeus;
 
 
 
@@ -66,10 +70,7 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 	
 	public void talleta(Palaute palaute) {
 		final String p = "insert into palaute(toteutusID, vastaaja) values(?,?)";
-		final String v = "insert into vastaus(kysymysID, vastausteksti)values(?,?)";
-		final String pv = "insert into palautteen_vastaukset(palauteID, vastausID) values(?,?)";
 
-		
 		final int toteutusID = palaute.getToteutusID();
 		final String vastaaja = palaute.getVastaaja();
 	
@@ -197,6 +198,91 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 	    e.printStackTrace();
 	   }
 
+	}
+	
+	public Palaute etsiPalaute(int id) {
+		String sql = "select palauteID,toteutusID,vastaaja,vahvistus,timestamp from palaute where palauteID = ?";
+		Object[] parametrit = new Object[] { id };
+		RowMapper<Palaute> mapper = new PalauteRowMapper();
+
+		Palaute p;
+		try {
+			p = jdbcTemplate.queryForObject(sql, parametrit, mapper);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		return p;
+
+	}
+	
+	public List<Palaute> haeVahvitetut() {
+		String sql = "select palauteID,toteutusID,vastaaja,vahvistus,timestamp from palaute where toteutusID=? and vahvistus=1";
+		RowMapper<Palaute> mapper = new PalauteRowMapper();
+		List<Palaute> palautteet = jdbcTemplate.query(sql, mapper);
+		return palautteet;
+
+	}
+	
+	public void setVahvistus(Palaute p) {
+		final String sql = "update palaute set vahvistus=1 where kaytID=?";
+		//Ei mitään parametria päivitetä vahvistu 1 on kovasti kodattu
+		final int id = p.getPalauteID();
+
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(sql,
+						new String[] { "id" });
+				ps.setInt(1, id);
+				return ps;
+			}
+		});
+	}
+	
+	public void talletaVahvistusLinkki(VahvistusLinkki vl) {
+		final String sql = "insert into vahvistus_linkki(palauteID, satunnainen) values(?,?)";
+
+		
+		final int palauteID = vl.getPalauteID();
+		final String satunnainen = vl.getSatunnainen();
+	
+		KeyHolder idHolder = new GeneratedKeyHolder();
+
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(sql,
+						new String[] { "id" });
+				ps.setInt(1, palauteID);
+				ps.setString(2, satunnainen);
+				return ps;
+			}
+		}, idHolder);
+
+
+		vl.setVahvistusID(idHolder.getKey().intValue());
+
+	}
+	
+	public List<VahvistusLinkki> haeKaikkiVahvistukset() {
+
+		String sql = "select vahvistusID, palauteID, satunnainen from vahvistus_linkki";
+		RowMapper<VahvistusLinkki> mapper = new VahvistusLinkkiRowMapper();
+		List<VahvistusLinkki> vl = jdbcTemplate.query(sql, mapper);
+
+		return vl;
+
+	}
+	
+	public void poistaVahvistus(String satunnainen){
+		final String sql = "DELETE FROM vahvistus_linkki WHERE satunnainen = ?";
+
+		try {
+		jdbcTemplate.update(sql, satunnainen);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			throw new HenkiloaEiLoydyPoikkeus(e);
+		}
+		
 	}
 
 }
