@@ -10,6 +10,7 @@
 <title>Palaute v0.1</title>
 </head>
 <body>
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
 <h1>Kaikki toteutukset</h1>
 <br>
 	<table border 1>

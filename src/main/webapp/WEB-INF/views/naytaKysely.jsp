@@ -9,41 +9,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Kyselylomake</title>
+<title>Palautelomake</title>
 </head>
 <body>
-<h1>Palaute toteutukselle ${toteutus.toteutusTunnus}</h1>
-<h2>${toteutus.toteutusNimi}</h2>
-<h2>${toteutus.opettajaNimi}</h2>
-	<table border 1>
-		<tr>
-			<th>Kysymys</th>
-			<th>Vastaus</th>
-		</tr>
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
+<h1>Opintojaksopalaute</h1>
+<p style="font-weight:bold">Opintojakso:</p>
+<p>${toteutus.toteutusNimi} (${toteutus.toteutusTunnus})</p>
+<p style="font-weight:bold">Opettaja(t):</p>
+<p>${toteutus.opettajaNimi}</p>
+<hr style="width:370px; margin-left:0">
+
 		<form method="post">
 					<input type="hidden" name="toteutusID" value="${toteutus.toteutusID}"/>
 					<input type="hidden" name="vahvistettu" value="0"/>
 			
 			<c:forEach items="${kysymykset}" var="k">
 				<tr>
-					<td><c:out value="${k.kysymysteksti}"></c:out></td>
+					<p><c:out value="${k.kysymysteksti}"></c:out></p>
 
 					<input name="kysymysID" type="hidden" value="${k.kysymysID}"/>
 
-					<td><textarea name="vastausteksti" rows="5" cols="20" placeholder="Vasta tähän"></textarea></td>
+					<textarea name="vastausteksti" rows="5" cols="40" placeholder="Vasta tähän"></textarea>
 
 				</tr>
 
 			</c:forEach>
 			
-			<tr>
-				<td><label>Anna oikea opiskelijatunnus muodossa a1234567<br> palautteen vahvistuslinkin lähettämistä varten.</label></td>
-				<td><input type="text" name="vastaaja" style="width:90%" placeholder="Opiskelijatunnus muodossa a1234567"/></td>
-			</tr>
-			<tr>
-				<td><button type="submit">Lähetä palautetta</button></td>
-				<td></td>
-			<tr>
+			<br><p>Anna oikea opiskelijatunnus muodossa a1234567<br> palautteen vahvistuslinkin lähettämistä varten.</p>
+			<textarea rows="1" cols="40" name="vastaaja" placeholder="Opiskelijatunnus muodossa a1234567"></textarea>
+			<br>
+			<button type="submit" style="margin-top:10px">Lähetä palautetta</button>
+			
 			
 		</form>
 	</table>

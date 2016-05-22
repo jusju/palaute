@@ -19,7 +19,8 @@
   <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <title>Sivua ei löydy</title>
  
-</head>	
+</head>
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
 <body>
 
     <div id="wrapper">

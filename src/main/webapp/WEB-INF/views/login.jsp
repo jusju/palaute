@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
  
     <div id="wrapper">
       <div id="login" class="animate form">

@@ -10,16 +10,15 @@
 <title>Palaute v0.1</title>
 </head>
 <body>
-<h1>Toteutuksen palautteet</h1>
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
+<p style="font-size: 20px">Toteutuksen <span style="text-decoration:underline"> ${toteutus.toteutusTunnus}</span> palautteet</p>
 <br>
 	<table border 1>
 		<tr>
 			<th>Vastaaja</th>
-			<th>Kysymys 1</th>
-			<th>Kysymys 2</th>
-			<th>Kysymys 3</th>
-			<th>Kysymys 4</th>
-			<th>Kysymys 5</th>
+		<c:forEach items="${kysymykset}" var="kysymys">
+			<th>${kysymys.kysymysteksti}</th>
+		</c:forEach>
 			<th>Pvm</th>
 		</tr>
 	<c:forEach items="${palautteet}" var="palaute">
