@@ -226,7 +226,7 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 	}
 	
 	public void setVahvistus(Palaute p) {
-		final String sql = "update palaute set vahvistus=1 where kaytID=?";
+		final String sql = "update palaute set vahvistus=1 where palauteID=?";
 		//Ei mitään parametria päivitetä vahvistu 1 on kovasti kodattu
 		final int id = p.getPalauteID();
 

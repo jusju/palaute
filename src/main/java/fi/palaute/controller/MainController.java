@@ -153,6 +153,8 @@ public class MainController{
 		
 		System.out.println(palaute);
 		
+		pdao.talleta(palaute);
+		
 		Toteutus toteutus = tdao.etsi(palaute.getToteutusID());
 		
 		//----------------
@@ -170,14 +172,14 @@ public class MainController{
 		vl.setSatunnainen(satunnainen);
 		
 		//Kaikki lähtee tietokantaan
-		pdao.talleta(palaute);
+
 		//paikka varattu
 		pdao.talletaVahvistusLinkki(vl);
 		
 		//Lähetetään linkki toteutuksen palautteeseen kaikille osallistujille
 		String url = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + request.getContextPath() + "/main/"
-				 + "palautetoteutukselle/" + satunnainen;
+				 + "vahvistus/" + satunnainen;
 		
 		String subject = "Vahvista annettu palaute toteutukselle "+toteutus.getToteutusTunnus();
 		sposti.sendMail(saaja, subject, url);
