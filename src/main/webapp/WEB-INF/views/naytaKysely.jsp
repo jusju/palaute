@@ -20,20 +20,19 @@
 <p>${toteutus.opettajaNimi}</p>
 <hr style="width:370px; margin-left:0">
 
-		<form method="post">
+		<form:form method="post" modelAttribute="VastausWrapper">
 					<input type="hidden" name="toteutusID" value="${toteutus.toteutusID}"/>
 					<input type="hidden" name="vahvistettu" value="0"/>
 			
-			<c:forEach items="${kysymykset}" var="k">
+			<c:forEach items="${kysymykset}" var="k" varStatus="us">
+			
 				<tr>
 					<p><c:out value="${k.kysymysteksti}"></c:out></p>
 
-					<input name="kysymysID" type="hidden" value="${k.kysymysID}"/>
-
-					<textarea name="vastausteksti" rows="5" cols="40" placeholder="Vasta tähän"></textarea>
+					<form:textarea path="vastList" rows="5" cols="40" placeholder="Vasta tähän"></form:textarea>
 
 				</tr>
-
+			
 			</c:forEach>
 			
 			<br><p>Anna oikea opiskelijatunnus muodossa a1234567<br> palautteen vahvistuslinkin lähettämistä varten.</p>
@@ -42,7 +41,7 @@
 			<button type="submit" style="margin-top:10px">Lähetä palautetta</button>
 			
 			
-		</form>
+		</form:form>
 	</table>
 
 </body>

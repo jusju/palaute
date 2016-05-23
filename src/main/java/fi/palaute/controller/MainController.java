@@ -29,6 +29,7 @@ import fi.palaute.bean.VahvistusLinkki;
 import fi.palaute.bean.VahvistusLinkkiImpl;
 import fi.palaute.bean.Vastaus;
 import fi.palaute.bean.VastausImpl;
+import fi.palaute.bean.VastausWrapper;
 import fi.palaute.dao.KysymysDAO;
 import fi.palaute.dao.PalauteDAO;
 import fi.palaute.dao.ToteutusDAO;
@@ -91,7 +92,7 @@ public class MainController{
 	
 	//Palautteen linkin tarkastus
 	@RequestMapping(value = "palautetoteutukselle/{satunnainen}", method = RequestMethod.GET)
-	public String createPalauteForm(@PathVariable String satunnainen, Model model) {
+	public String createPalauteForm(@ModelAttribute("VastausWrapper") VastausWrapper wrapper, @PathVariable String satunnainen, Model model) {
 		//Haetaan kaikki linkit tietokannasta
 		List<PalautteenLinkki> pl = pdao.haeKaikkiLinkit();
 		//Vertailu ja toteutuksen id etsiminen
@@ -113,34 +114,33 @@ public class MainController{
 		List<Kysymys> kysymykset = kdao.haeKaikki();
 		Palaute palaute = new PalauteImpl();
 		Vastaus vastaus = new VastausImpl();
-		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
 		
 		model.addAttribute("toteutus", toteutus);
 		model.addAttribute("kysymykset", kysymykset);
 		model.addAttribute("palaute", palaute);
 		model.addAttribute("vastaus", vastaus);
-		model.addAttribute("vastaukset", vastaukset);
+		model.addAttribute("VastausWrapper", new VastausWrapper());
 
 		return "naytaKysely";
 	}
 	
 	// Palautteen tietojen vastaanotta ja vahvistuslinkin generointi ja lähetys
 	@RequestMapping(value = "palautetoteutukselle/{satunnainen}", method = RequestMethod.POST)
-	public String getPalauteForm(HttpServletRequest request, PalauteImpl palaute, VastausImpl vastaus, Model model) {
+	public String getPalauteForm(HttpServletRequest request, PalauteImpl palaute, @ModelAttribute(value="vastList") VastausWrapper wrapper,  Model model, BindingResult bindResult) {
 		
-		String[] values = vastaus.getVastausteksti().split(",");
 		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
-		int i=1;
-		for(String v : values){
-			Vastaus vast = new VastausImpl();
-			vast.setKysymysID(i++);
-			vast.setVastausteksti(v);
-			vastaukset.add(vast);
+		for(int i=1;i<wrapper.getVastList().size();i++){
+			Vastaus vastaus = new VastausImpl();
+			vastaus.setKysymysID(i);
+			vastaus.setVastausteksti(wrapper.getVastList().get(i).substring(3));
+			vastaukset.add(vastaus);
 		}
+
 		
 		for(int in=0;in<vastaukset.size();in++){
 			System.out.println(vastaukset.get(in).getKysymysID() +" - "+vastaukset.get(in).getVastausteksti());
 		}
+		
 		palaute.setVastaukset(vastaukset);
 		
 		
