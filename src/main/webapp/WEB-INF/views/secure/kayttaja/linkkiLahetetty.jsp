@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
-<p stype="font-size:20px">${ilmoitus}</p>
-<a href="<c:out value="/palaute/secure/oma"/>">Takaisin</a>
+<img src="/palaute/resources/kuvat/haaga-helia.png"/>
+<p style="font-size:20px">${ilmoitus}</p>
+<a href="/palaute/secure/oma">Takaisin</a>
 </body>
 </html>
