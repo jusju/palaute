@@ -27,8 +27,10 @@
 			<td>Anonymous</td>
 			<c:forEach items="${vastaukset}" var="vastaukset">
 			<c:forEach items="${pvastaukset}" var="pvast">
+				<c:if test="${palaute.palauteID == pvast.palauteID}">
 				<c:if test="${vastaukset.vastausID == pvast.vastausID}">
 				<td>${vastaukset.vastausteksti}</td>
+				</c:if>
 				</c:if>
 			</c:forEach>
 			</c:forEach>
