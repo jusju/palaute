@@ -246,7 +246,6 @@ public class MainController{
 			System.out.println("testaus");
 			String ilmoitus = "Kiitos palautteen antaamisesta. Palautteen vahvistuslinkki lähetetty osoitteeseen "+saaja+"@myy.haaga-helia.fi";
 			model.addAttribute("ilmoitus", ilmoitus);
-			
 			return "kiitosPalautteesta";
 		}
 }
