@@ -10,6 +10,7 @@
 <title>Kaikki toteutukset</title>
 </head>
 <body>
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
 <h1>Kaikki toteutukset</h1>
 <a href="/palaute/logout"><button>Kirjaudu ulos</button></a>
 <br>

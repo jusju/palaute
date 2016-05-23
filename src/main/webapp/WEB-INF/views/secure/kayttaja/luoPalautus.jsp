@@ -10,6 +10,8 @@
 <title>Palautuksen luonti</title>
 </head>
 <body>
+<img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
+<br>
 <a href="/palaute/logout"><button>Kirjaudu ulos</button></a>
 	<h3>Luo palautus toteutukselle </h3><h1>${toteutus.toteutusTunnus}</h1>
 	<h2>${toteutus.toteutusNimi}</h2>

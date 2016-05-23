@@ -129,10 +129,10 @@ public class MainController{
 	public String getPalauteForm(HttpServletRequest request, PalauteImpl palaute, @ModelAttribute(value="vastList") VastausWrapper wrapper,  Model model, BindingResult bindResult) {
 		
 		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
-		for(int i=1;i<wrapper.getVastList().size();i++){
+		for(int i=0;i<wrapper.getVastList().size();i++){
 			Vastaus vastaus = new VastausImpl();
-			vastaus.setKysymysID(i);
-			vastaus.setVastausteksti(wrapper.getVastList().get(i).substring(3));
+			vastaus.setKysymysID(i+1);
+			vastaus.setVastausteksti(wrapper.getVastList().get(i));
 			vastaukset.add(vastaus);
 		}
 
