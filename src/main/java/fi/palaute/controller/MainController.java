@@ -90,6 +90,7 @@ public class MainController{
 		
 	}
 	
+	
 	//Palautteen linkin tarkastus
 	@RequestMapping(value = "palautetoteutukselle/{satunnainen}", method = RequestMethod.GET)
 	public String createPalauteForm(@ModelAttribute("VastausWrapper") VastausWrapper wrapper, @PathVariable String satunnainen, Model model) {
@@ -175,15 +176,11 @@ public class MainController{
 		String subject = "Vahvista annettu palaute toteutukselle "+toteutus.getToteutusTunnus();
 		sposti.sendMail(saaja, subject, url);
 		
-		String ilmoitus = "Palautteen vahvistuslinkki lähetetty opiskelijalle"+palaute.getVastaaja();
-		
 		pdao.insertVastaukset(vastaukset);
 		
 		pdao.talletaPalautteenVastaukset(palaute.getPalauteID());
-	
-		model.addAttribute("ilmoitus", ilmoitus);
 		
-		return "redirect:/";
+		return "redirect:/main/kiitos/"+palaute.getVastaaja();
 	
 	}
 	
@@ -243,4 +240,13 @@ public class MainController{
 		}
 	
 	
+		//Kiitos palautteen antaamisesta
+		@RequestMapping(value = "/kiitos/{saaja}", method = RequestMethod.GET)
+		public String kiitos(Model model, @PathVariable String saaja) {
+			System.out.println("testaus");
+			String ilmoitus = "Kiitos palautteen antaamisesta. Palautteen vahvistuslinkki lähetetty osoitteeseen "+saaja+"@myy.haaga-helia.fi";
+			model.addAttribute("ilmoitus", ilmoitus);
+			
+			return "kiitosPalautteesta";
+		}
 }
