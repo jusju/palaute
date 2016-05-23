@@ -9,20 +9,15 @@ INSERT INTO `authority` (`id`, `role`) VALUES
 (2, 'ROLE_ADMIN');
 
 
-
 CREATE TABLE `kayttaja` (
   `kaytID` int(20) NOT NULL,
   `sahkoposti` varchar(50) NOT NULL,
   `salasana` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
-
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `kayttaja` (`kaytID`, `sahkoposti`, `salasana`) VALUES
 (1, 'admin@admini.fi', '2238f0492eadf9d6c43ca832ec370e4196e9c592caee2cf40eaeab792706a58f3790d6739b04aa99'),
-(3, 'a1402952', '007de03422bdc7f055c796b220eca3af325af24233034b4b6b661c5fb7868dc59fa9928ab67dc54d'),
-(4, 'a1234567', '416964d4697b22ee46b2527bc9e38cdd4546533b2f4297bba43478ef507e9c90e0c65213f5f691f4');
-
+(2, 'jukka.juslin', 'e6cf8e5bc910d27e89d93f3a95ff4ebe285e5df9c3a95e44ea73e21208579042bb4ede9606f6e276');
 
 CREATE TABLE `kayttajan_authority` (
   `kayttaja_id` int(11) NOT NULL,
@@ -30,27 +25,24 @@ CREATE TABLE `kayttajan_authority` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 INSERT INTO `kayttajan_authority` (`kayttaja_id`, `authority_id`) VALUES
-(3, 1),
-(4, 1),
+(2, 1),
 (1, 2);
-
 
 
 CREATE TABLE `kysymys` (
   `kysymysID` int(20) NOT NULL,
   `kysymysteksti` text
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 
 INSERT INTO `kysymys` (`kysymysID`, `kysymysteksti`) VALUES
-(1, 'Minkä ikäinen olet?'),
-(2, 'Mitä sinulle kuuluu?'),
-(3, 'Mitä harrastat?'),
-(4, 'Juotko alkoholia?'),
-(5, 'Jos et, niin miksi?');
-
+(1, 'Oman oppimisen arviointi. Oma toimintani oli:'),
+(2, 'Mainitse 1-3 tärkeintä asiaa, jotka opit:'),
+(3, 'Opintojaksopalaute 1/3. Opettajien/ohjaajien toiminta oli:'),
+(4, 'Opintojaksopalaute 2/3. Oppimateriaali oli:'),
+(5, 'Opintojaksopalaute 3/3. Opintojakson kokonaisarvio on:'),
+(6, 'Avoin palaute:');
 
 
 CREATE TABLE `palaute` (
@@ -59,7 +51,7 @@ CREATE TABLE `palaute` (
   `vastaaja` varchar(50) DEFAULT NULL,
   `vahvistus` tinyint(1) NOT NULL DEFAULT '0',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `palautteen_linkki` (
@@ -67,19 +59,7 @@ CREATE TABLE `palautteen_linkki` (
   `toteutusID` int(20) NOT NULL,
   `satunnainen` varchar(50) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
-
-
-INSERT INTO `palautteen_linkki` (`linkkiID`, `toteutusID`, `satunnainen`, `timestamp`) VALUES
-(1, 369, 'b32a9f42-e6ac-438e-93e4-421ef5b4f280', '2016-05-20 10:29:24'),
-(2, 277, '392e43a2-73b5-415a-aa88-0cd0a9a083de', '2016-05-20 10:52:05'),
-(3, 277, '43a1cf7f-bdcc-416b-beec-7714db4ec27c', '2016-05-20 10:52:12'),
-(4, 277, 'fda3a948-0a83-4e21-952e-d672296c9714', '2016-05-20 11:30:12'),
-(5, 277, '56621ec8-9820-428d-b8fb-84a0b29936aa', '2016-05-20 11:30:48'),
-(6, 369, '7bbe6753-0634-4812-b2c4-ec8549469291', '2016-05-20 12:30:59'),
-(7, 369, '8fbd3655-5e3e-4d3d-9784-c1bec9363adb', '2016-05-21 08:26:40');
-
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `palautteen_vastaukset` (
@@ -88,13 +68,12 @@ CREATE TABLE `palautteen_vastaukset` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 CREATE TABLE `toteutus` (
   `toteutusID` int(20) NOT NULL,
   `toteutusTunnus` varchar(100) DEFAULT NULL,
   `toteutusNimi` varchar(100) DEFAULT NULL,
   `opettajaNimi` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=370 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
 
 
 INSERT INTO `toteutus` (`toteutusID`, `toteutusTunnus`, `toteutusNimi`, `opettajaNimi`) VALUES
@@ -190,111 +169,97 @@ INSERT INTO `toteutus` (`toteutusID`, `toteutusTunnus`, `toteutusNimi`, `opettaj
 (366, 'SWD4TN014-12', 'Intranet- ja dokumentinhallintaratkaisut, SharePoint 2010', 'Elina Ulpovaara'),
 (367, 'SWD4TN015-10', 'Hypermedia', 'Mirja Jaakkola'),
 (368, 'SWD8TF808-1', 'Python programming', 'Juha Hinkula'),
-(369, 'a1402952', 'Demo toteutus', 'Evgeny Oborotistov');
+(369, 'a1402952', 'Demo toteutus', 'Evgeny Oborotistov'),
+(370, 'jukka.juslin', 'DemoToteutus2', 'Jukka Juslin');
 
 
 CREATE TABLE `vahvistus_linkki` (
   `vahvistusID` int(20) NOT NULL,
   `palauteID` int(20) NOT NULL,
   `satunnainen` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `vastaus` (
   `vastausID` int(20) NOT NULL,
   `kysymysID` int(20) DEFAULT NULL,
   `vastausteksti` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 ALTER TABLE `authority`
   ADD PRIMARY KEY (`id`);
 
-
 ALTER TABLE `kayttaja`
   ADD PRIMARY KEY (`kaytID`);
 
-  
 ALTER TABLE `kayttajan_authority`
   ADD PRIMARY KEY (`kayttaja_id`),
   ADD KEY `authority_id` (`authority_id`);
 
-
 ALTER TABLE `kysymys`
   ADD PRIMARY KEY (`kysymysID`);
-
 
 ALTER TABLE `palaute`
   ADD PRIMARY KEY (`palauteID`),
   ADD KEY `toteutusID` (`toteutusID`);
 
-
 ALTER TABLE `palautteen_linkki`
   ADD PRIMARY KEY (`linkkiID`),
   ADD KEY `toteutusID` (`toteutusID`);
-
 
 ALTER TABLE `palautteen_vastaukset`
   ADD KEY `palauteID` (`palauteID`),
   ADD KEY `vastausID` (`vastausID`);
 
-
 ALTER TABLE `toteutus`
   ADD PRIMARY KEY (`toteutusID`);
-
 
 ALTER TABLE `vahvistus_linkki`
   ADD PRIMARY KEY (`vahvistusID`),
   ADD KEY `palauteID` (`palauteID`);
 
-
 ALTER TABLE `vastaus`
   ADD PRIMARY KEY (`vastausID`),
   ADD KEY `kysymysID` (`kysymysID`);
 
-
 ALTER TABLE `kayttaja`
-  MODIFY `kaytID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `kaytID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 
 ALTER TABLE `kysymys`
-  MODIFY `kysymysID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `kysymysID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 
 ALTER TABLE `palaute`
-  MODIFY `palauteID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `palauteID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
 
 ALTER TABLE `palautteen_linkki`
-  MODIFY `linkkiID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `linkkiID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
 
 ALTER TABLE `toteutus`
-  MODIFY `toteutusID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=370;
+  MODIFY `toteutusID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=371;
 
 ALTER TABLE `vahvistus_linkki`
-  MODIFY `vahvistusID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `vahvistusID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
 
 ALTER TABLE `vastaus`
-  MODIFY `vastausID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `vastausID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=279;
 
 ALTER TABLE `kayttajan_authority`
   ADD CONSTRAINT `kayttajan_authority_ibfk_1` FOREIGN KEY (`kayttaja_id`) REFERENCES `kayttaja` (`kaytID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `kayttajan_authority_ibfk_2` FOREIGN KEY (`authority_id`) REFERENCES `authority` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-
 ALTER TABLE `palaute`
   ADD CONSTRAINT `palaute_ibfk_1` FOREIGN KEY (`toteutusID`) REFERENCES `toteutus` (`toteutusID`);
 
-
 ALTER TABLE `palautteen_linkki`
   ADD CONSTRAINT `palautteen_linkki_ibfk_1` FOREIGN KEY (`toteutusID`) REFERENCES `toteutus` (`toteutusID`);
-
 
 ALTER TABLE `palautteen_vastaukset`
   ADD CONSTRAINT `palautteen_vastaukset_ibfk_1` FOREIGN KEY (`palauteID`) REFERENCES `palaute` (`palauteID`),
   ADD CONSTRAINT `palautteen_vastaukset_ibfk_2` FOREIGN KEY (`vastausID`) REFERENCES `vastaus` (`vastausID`);
 
-
 ALTER TABLE `vahvistus_linkki`
   ADD CONSTRAINT `vahvistus_linkki_ibfk_1` FOREIGN KEY (`palauteID`) REFERENCES `palaute` (`palauteID`);
-
 
 ALTER TABLE `vastaus`
   ADD CONSTRAINT `vastaus_ibfk_1` FOREIGN KEY (`kysymysID`) REFERENCES `kysymys` (`kysymysID`);
