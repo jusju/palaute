@@ -13,6 +13,7 @@
 <img src="<c:url value="/resources/kuvat/haaga-helia.png"/>">
 <p style="font-size: 20px">Toteutuksen <span style="text-decoration:underline"> ${toteutus.toteutusTunnus}</span> palautteet</p>
 <br>
+<a href="<c:out value="/palaute/secure/oma"/>">Takaisin</a>
 	<table border 1>
 		<tr>
 			<th>Vastaaja</th>
