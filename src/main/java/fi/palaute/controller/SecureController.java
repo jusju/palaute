@@ -99,7 +99,7 @@ public class SecureController {
 		//Generoidaan satunnainen
 		String satunnainen = UUID.randomUUID().toString();
 		
-		//Luodaan linkki palautteeseen
+		//Luodaan "linkki" palautteeseen
 		PalautteenLinkki pl = new PalautteenLinkkiImpl();
 		pl.setToteutusID(id);
 		pl.setSatunnainen(satunnainen);
@@ -107,13 +107,31 @@ public class SecureController {
 		//Linkki lähtee tietokantaan
 		pdao.talletaLinkki(pl);
 		
-		//Lähetetään linkki toteutuksen palautteeseen kaikille osallistujille
+		//Luodaan linkki toteutuksen palautteeseen kaikille osallistujille
 		String url = "http://" + request.getServerName() + ":"
 				+ request.getServerPort() + request.getContextPath() + "/main/"
 				 + "palautetoteutukselle/" + satunnainen;
+		//Luodaan viesti, jonka lähetetään linkin kanssa
+		String message = "Hei,\n\n"
+				+ "Lähestymme sinua kyselyllä, jolla on potentiaalisesti erittäin suuri merkitys tulevaisuutta ajatellen.\n\n"
+				+ "Kaikilta opiskelijoiltahan pyydetään palaute kurssin lopuksi, mutta nykyisessä järjestelmässä on\n"
+				+ "vakavia puutteita ja ehkä muutenkin prosessissa. Opettaja voi esimerkiksi itse muuttaa saamiaan\n"
+				+ "palautteita (arvosana 1 opettajan toiminnasta -> arvosanaksi 5).\n\n"
+				+ "Tiedän, että kaikenlaisia kyselyitä tulee enemmän kuin kukaan kestää, mutta haluan korostaa,\n"
+				+ "että tässä on tehty kaikkemme, jotta opiskelijoiden palautteet saadaan anonyymisti julkaistua\n"
+				+ "sisäverkkoon. Olen seurannut Haaga-Helian toimintaa 12 vuotta opettajan näkökulmasta ja\n"
+				+ "huomannut, että jos opiskelijat edes ihan vähän pystyisivät keräämään yhteisöllistä henkeä, sillä\n"
+				+ "voisi olla suuri merkitys. Itse kun opiskelin aikoinaan Aallossa teimme niin, että kurssipalaute\n"
+				+ "meni anonyyminä ja täysin sensuroimattomana internetiin. Kyseessähän on veronmaksojen rahat.\n"
+				+ "Tässä kokeilussa palautteet julkaistaan vain Haaga-Helian sisäverkkoon, mutta periaatteet\n"
+				+ "anonyyymiydestä ja sensuroimattomuudesta on tarkoitus säilyttää ja ne säilytetään.\n\n\n"
+				+ "Ei ole kiva katsella samojen virheiden toistumista vuodesta tai lukukaudesta toiseen.\n\n"
+				+ "Käy antamassa palaute linkistä: "+url+"\n\n"
+				+ "Ystävällisin terveisin,\n\n"
+				+ "Jukka Juslin\n\n";
 		
-		String subject = "Anna palautetta toteutukselle "+toteutus.getToteutusTunnus();
-		sposti.sendMail(saajat, subject, url);
+		String subject = "Haaga-Helia kurssipalaute "+toteutus.getToteutusTunnus();
+		sposti.sendMail(saajat, subject, message);
 		
 		String ilmoitus = "Linkki toteutuksen palautteeseen lähetetty kurssin osallistujille";
 	

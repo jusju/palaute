@@ -18,7 +18,7 @@
 	<h3>Luo palautus toteutukselle </h3><h1>${toteutus.toteutusTunnus}</h1>
 	<h2>${toteutus.toteutusNimi}</h2>
 	<br>
-	<h3>Opettaja/t </h3><p>${toteutus.opettajaNimi}</p>
+	<h3>Opettaja(t) </h3><p>${toteutus.opettajaNimi}</p>
 	<br>
 	<h2>Kysymykset</h2>
 	<table border 1>

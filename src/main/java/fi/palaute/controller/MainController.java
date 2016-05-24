@@ -85,7 +85,7 @@ public class MainController{
 
 		List<Toteutus> toteutukset = tdao.haeKaikki();
 		List<Palaute> palautteet = pdao.haeVahvistetut();
-		
+
 		model.addAttribute("toteutukset", toteutukset);
 		model.addAttribute("palautteet", palautteet);
 		
