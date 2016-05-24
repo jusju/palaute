@@ -1,3 +1,25 @@
+CREATE TABLE `kayttaja` (
+  `kaytID` int(20) NOT NULL AUTO_INCREMENT,
+  `etunimi` varchar(50) NOT NULL,
+  `sukunimi` varchar(50) NOT NULL,
+  `sahkoposti` varchar(50) NOT NULL,
+  `salasana` varchar(255) NOT NULL,
+  PRIMARY KEY (kaytID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `authority` (
+  `id` int(11) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `kayttajan_authority` (
+  `kayttaja_id` int(11) NOT NULL,
+  `authority_id` int(11) NOT NULL,
+  PRIMARY KEY (kayttaja_id),
+  FOREIGN KEY (kayttaja_id) REFERENCES kayttaja(kaytID) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (authority_id) REFERENCES authority(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `toteutus` (
   `toteutusID` int(20) NOT NULL AUTO_INCREMENT,
@@ -26,23 +48,24 @@ CREATE TABLE `palaute` (
   `palauteID` int(20) NOT NULL AUTO_INCREMENT,
   `toteutusID` int(20) NOT NULL,
   `vastaaja` varchar(50) DEFAULT NULL,
-  `vastattu` boolean DEFAULT 0 NOT NULL,
-  `timestamp` datetime default CURRENT_TIMESTAMP,
+  `vahvistus` boolean DEFAULT 0 NOT NULL,
+  `timestamp` timestamp default CURRENT_TIMESTAMP,
   PRIMARY KEY (palauteID),
   FOREIGN KEY (toteutusID) REFERENCES toteutus(toteutusID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `palautteen_vastaukset` (
   `palauteID` int(20) NOT NULL AUTO_INCREMENT,
-  `toteutusID` int(20) NOT NULL,
+  `vastausID` int(20) NOT NULL,
   PRIMARY KEY (palauteID),
-  FOREIGN KEY (toteutusID) REFERENCES toteutus(toteutusID)
+  FOREIGN KEY (vastausID) REFERENCES vastaus(vastausID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `palautteen_linkki` (
   `linkkiID` int(20) NOT NULL AUTO_INCREMENT,
   `toteutusID` int(20) NOT NULL,
   `satunnainen` varchar(50) NOT NULL,
+  `timestamp` timestamp default CURRENT_TIMESTAMP,
   PRIMARY KEY (linkkiID),
   FOREIGN KEY (toteutusID) REFERENCES toteutus(toteutusID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
