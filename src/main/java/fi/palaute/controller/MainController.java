@@ -84,7 +84,10 @@ public class MainController{
 	public String toteutuksetSivu (Model model) {
 
 		List<Toteutus> toteutukset = tdao.haeKaikki();
+		List<Palaute> palautteet = pdao.haeVahvistetut();
+		
 		model.addAttribute("toteutukset", toteutukset);
+		model.addAttribute("palautteet", palautteet);
 		
 		return "toteutukset";
 		
@@ -243,7 +246,6 @@ public class MainController{
 		//Kiitos palautteen antaamisesta
 		@RequestMapping(value = "/kiitos/{saaja}", method = RequestMethod.GET)
 		public String kiitos(Model model, @PathVariable String saaja) {
-			System.out.println("testaus");
 			String ilmoitus = "Kiitos palautteen antaamisesta. Palautteen vahvistuslinkki lähetetty osoitteeseen "+saaja+"@myy.haaga-helia.fi";
 			model.addAttribute("ilmoitus", ilmoitus);
 			return "kiitosPalautteesta";

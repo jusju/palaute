@@ -18,13 +18,25 @@
 			<th>Toteutus tunnus</th>
 			<th>Toteutus nimi</th>
 			<th>Toteutus opettaja</th>
+			<th>Palautteiden määrä</th>
 		</tr>
 	<c:forEach items="${toteutukset}" var="toteutus">
 		<tr>
 			<td><a href="/palaute/main/toteutuksenpalautteet/${toteutus.toteutusID}">${toteutus.toteutusTunnus}</a></td>
 			<td>${toteutus.toteutusNimi}</td>
 			<td>${toteutus.opettajaNimi}</td>
-		<tr>
+			<td>
+				<c:set var="nrOfFeedbacks" value="0" scope="page"/>
+					<c:forEach items="${palautteet}" var="palaute" varStatus="count">
+						<c:if test="${toteutus.toteutusID == palaute.toteutusID }">
+							<c:set var="nrOfFeedbacks" value="${nrOfFeedbacks + 1}" scope="page"/>
+						</c:if>
+					</c:forEach>
+				${nrOfFeedbacks}
+			</td>
+		</tr>
+	
+	
 	</c:forEach>
 	</table>
 </body>

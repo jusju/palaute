@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
-
 
 import fi.palaute.bean.Toteutus;
 import fi.palaute.bean.ToteutusImpl;
@@ -27,7 +27,7 @@ public class readExcel {
 		
 		HSSFSheet sheet = wb.getSheetAt(0);
 		
-		ArrayList<Toteutus> toteutukset = new ArrayList<Toteutus>();
+		List<Toteutus> toteutukset = new ArrayList<Toteutus>();
 		
 		for(Row row : sheet){
 			Toteutus toteutus = new ToteutusImpl();

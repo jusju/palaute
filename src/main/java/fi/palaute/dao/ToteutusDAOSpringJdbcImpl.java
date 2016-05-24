@@ -1,13 +1,8 @@
 package fi.palaute.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -27,43 +22,35 @@ public class ToteutusDAOSpringJdbcImpl implements ToteutusDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 
-	public void insertBatch(ArrayList<Toteutus> toteutukset) {
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	public void insertBatch(List<Toteutus> toteutukset) {
 		final String sql = "insert into toteutus(toteutusTunnus, toteutusNimi, opettajaNimi) values(?,?,?)";
-	    
-	    String username = "root";
-	    String password = "root";
-	    String url = "jdbc:mysql://localhost:3306/palaute";
-	   
-	    Connection yhteys = null;
-	    try {
-	    Class.forName("com.mysql.jdbc.Driver");
+		
+	    getJdbcTemplate().batchUpdate(sql,
+	            new BatchPreparedStatementSetter() {
+	                @Override
+	                public void setValues(PreparedStatement ps, int i)
+	                        throws SQLException {
+	                    Toteutus toteutus = toteutukset.get(i);
+	                    ps.setString(1, toteutus.getToteutusTunnus());
+	                    ps.setString(2, toteutus.getToteutusNimi());
+	                    ps.setString(3, toteutus.getOpettajaNimi());
 
-	    yhteys = DriverManager.getConnection(url, username, password);
-	    
-	    System.out.println("Listassa " + toteutukset.size() + " kurssia");
-	    
-	    PreparedStatement ps = yhteys.prepareStatement(sql);
-	    
-	    for (int i = 0; i < toteutukset.size(); i++) {
-	     ps.setString(1, toteutukset.get(i).getToteutusTunnus());
-	     ps.setString(2, toteutukset.get(i).getToteutusNimi());
-	     ps.setString(3, toteutukset.get(i).getOpettajaNimi());
-	     ps.addBatch();
-	    }
-	    
-	    ps.executeBatch();
-	    
-	    yhteys.commit();
-	    
-	    yhteys.close();
-	    
+	                }
 
-	   } catch (Exception e) {
-	    // Virheet
-	    System.out.println("Tietokantayhteyden avauksessa tapahtui virhe");
-	    e.printStackTrace();
-	   }
+	                @Override
+	                public int getBatchSize() {
+	                    return toteutukset.size();
+	                }
+	            });
 
 	 }
 
