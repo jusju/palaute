@@ -21,7 +21,7 @@ public interface PalauteDAO {
 	
 	public void insertVastaukset(List<Vastaus> vastaukset);
 	
-	public void talletaPalautteenVastaukset(int palauteID);
+	public void talletaPalautteenVastaukset(int palauteID, int vastMaara);
 	
 	public List<Palaute> haeVahvistetut();
 	

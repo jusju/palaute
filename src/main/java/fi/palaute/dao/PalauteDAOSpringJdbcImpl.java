@@ -130,7 +130,7 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 
 	}
 	
-	public void talletaPalautteenVastaukset(int palauteID) {
+	public void talletaPalautteenVastaukset(int palauteID, int vastMaara) {
 		
 		final String pv = "insert into palautteen_vastaukset(palauteID, vastausID) values(?,?)";
 		
@@ -140,7 +140,7 @@ public class PalauteDAOSpringJdbcImpl implements PalauteDAO {
 	    
 
 	    List<PalautteenVastaukset> palvastaukset = new ArrayList<PalautteenVastaukset>();
-	    for(int i=lastVastaus; i>lastVastaus-6;i--){
+	    for(int i=lastVastaus; i>lastVastaus-vastMaara;i--){
 		PalautteenVastaukset palvast = new PalautteenVastauksetImpl();
 	    palvast.setPalauteID(palauteID);
 	    palvast.setVastausID(i);

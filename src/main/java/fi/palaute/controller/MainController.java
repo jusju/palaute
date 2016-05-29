@@ -131,11 +131,12 @@ public class MainController{
 	// Palautteen tietojen vastaanotta ja vahvistuslinkin generointi ja lähetys
 	@RequestMapping(value = "palautetoteutukselle/{satunnainen}", method = RequestMethod.POST)
 	public String getPalauteForm(HttpServletRequest request, PalauteImpl palaute, @ModelAttribute(value="vastList") VastausWrapper wrapper,  Model model, BindingResult bindResult) {
-		
+		//Taika kysymyksen iden löyttämisessä
+		List<Kysymys> kysymykset = kdao.haeKaikki();
 		List<Vastaus> vastaukset = new ArrayList<Vastaus>();
 		for(int i=0;i<wrapper.getVastList().size();i++){
 			Vastaus vastaus = new VastausImpl();
-			vastaus.setKysymysID(i+1);
+			vastaus.setKysymysID(kysymykset.get(i).getKysymysID());
 			vastaus.setVastausteksti(wrapper.getVastList().get(i));
 			vastaukset.add(vastaus);
 		}
@@ -144,7 +145,7 @@ public class MainController{
 		for(int in=0;in<vastaukset.size();in++){
 			System.out.println(vastaukset.get(in).getKysymysID() +" - "+vastaukset.get(in).getVastausteksti());
 		}
-		
+
 		palaute.setVastaukset(vastaukset);
 		
 		
@@ -181,7 +182,7 @@ public class MainController{
 		
 		pdao.insertVastaukset(vastaukset);
 		
-		pdao.talletaPalautteenVastaukset(palaute.getPalauteID());
+		pdao.talletaPalautteenVastaukset(palaute.getPalauteID(), kysymykset.size());
 		
 		return "redirect:/main/kiitos/"+palaute.getVastaaja();
 	
