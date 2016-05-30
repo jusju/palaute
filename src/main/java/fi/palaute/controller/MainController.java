@@ -117,13 +117,20 @@ public class MainController{
 		Toteutus toteutus = tdao.etsi(toteutusid);
 		List<Kysymys> kysymykset = kdao.haeKaikki();
 		Palaute palaute = new PalauteImpl();
-		Vastaus vastaus = new VastausImpl();
+		//Lista vaihtoehtoja radiobuttons
+		List<String> vaihtoehdot = new ArrayList<String>();
+		vaihtoehdot.add("heikkoa");
+		vaihtoehdot.add("välttävää");
+		vaihtoehdot.add("tyydyttävää");
+		vaihtoehdot.add("hyvää");
+		vaihtoehdot.add("kiitettävää");
+		
 		
 		model.addAttribute("toteutus", toteutus);
 		model.addAttribute("kysymykset", kysymykset);
 		model.addAttribute("palaute", palaute);
-		model.addAttribute("vastaus", vastaus);
 		model.addAttribute("VastausWrapper", new VastausWrapper());
+		model.addAttribute("vaihtoehdot", vaihtoehdot);
 
 		return "naytaKysely";
 	}

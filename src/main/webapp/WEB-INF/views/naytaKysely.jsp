@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
 <title>Palautelomake</title>
 </head>
 <body>
@@ -24,13 +25,23 @@
 					<input type="hidden" name="toteutusID" value="${toteutus.toteutusID}"/>
 					<input type="hidden" name="vahvistettu" value="0"/>
 			
-			<c:forEach items="${kysymykset}" var="k" varStatus="us">
+			<c:forEach items="${kysymykset}" var="k" varStatus="count">
 			
 				<tr>
 					<p><c:out value="${k.kysymysteksti}"></c:out></p>
-
+					<c:choose>
+						<c:when test="${k.kysymysID !='2' && k.kysymysID !='6'}">
+					<form:checkboxes path="vastList" items="${vaihtoehdot}" class="${count.index}"/>
+					<script>
+						$('.${count.index}').on('change', function(){
+							$('.${count.index}').not(this).prop('checked', false);
+						});
+					</script>
+						</c:when>
+						<c:otherwise>
 					<form:textarea path="vastList" rows="5" cols="40" placeholder="Vasta tähän"></form:textarea>
-
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			
 			</c:forEach>
@@ -42,7 +53,6 @@
 			
 			
 		</form:form>
-	</table>
 
 </body>
 </html>
