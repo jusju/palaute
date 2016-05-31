@@ -31,7 +31,7 @@
 					<p><c:out value="${k.kysymysteksti}"></c:out></p>
 					<c:choose>
 						<c:when test="${k.kysymysID !='2' && k.kysymysID !='6'}">
-					<form:checkboxes path="vastList" items="${vaihtoehdot}" class="${count.index}"/>
+					<form:checkboxes path="vastList" items="${vaihtoehdot}" class="${count.index}" element="div"/>
 					<script>
 						$('.${count.index}').on('change', function(){
 							$('.${count.index}').not(this).prop('checked', false);
