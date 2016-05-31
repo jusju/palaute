@@ -39,7 +39,7 @@
 					</script>
 						</c:when>
 						<c:otherwise>
-					<form:textarea path="vastList" rows="5" cols="40" placeholder="Vasta tähän"></form:textarea>
+					<form:textarea path="vastList" rows="5" style="width:280px" placeholder="Vasta tähän"></form:textarea>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -47,7 +47,7 @@
 			</c:forEach>
 			
 			<br><p>Anna oikea opiskelijatunnus muodossa a1234567<br> palautteen vahvistuslinkin lähettämistä varten.</p>
-			<textarea rows="1" cols="40" name="vastaaja" placeholder="Opiskelijatunnus muodossa a1234567"></textarea>
+			<input type="text" name="vastaaja" placeholder="Opiskelijatunnus muodossa a1234567" style="width:283px;border-right-color:#999999;border-bottom-color:#999999;border-width:1px;padding:1px"/>
 			<br>
 			<button type="submit" style="margin-top:10px">Lähetä palautetta</button>
 			
